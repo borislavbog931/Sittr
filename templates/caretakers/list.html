@@ -1,0 +1,87 @@
+{% extends "common/base.html" %}
+
+{% block title %}Caretakers | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="sittr-page-header">
+    <h1 class="h3 mb-1">Caretakers</h1>
+    <div class="text-muted">Browse by city, services, pet types, and price.</div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  {% if caretakers %}
+    <div class="row g-3">
+      {% for caretaker in caretakers %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card sittr-card h-100">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-start justify-content-between gap-2">
+                <div>
+                  <h2 class="h6 mb-1">{{ caretaker.name }}</h2>
+                  <div class="text-muted small">
+                    <i class="bi bi-geo-alt"></i> {{ caretaker.city }}
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-semibold">${{ caretaker.price_per_hour }}</div>
+                  <div class="text-muted small">per hour</div>
+                </div>
+              </div>
+
+              {% if caretaker.bio %}
+                <p class="text-muted small mt-3 mb-3">
+                  {{ caretaker.bio|truncatechars:110 }}
+                </p>
+              {% else %}
+                <p class="text-muted small mt-3 mb-3">
+                  No bio provided yet.
+                </p>
+              {% endif %}
+
+              <div class="d-flex flex-wrap gap-1 mb-3">
+                {% for service in caretaker.services.all %}
+                  <span class="badge text-bg-light border">{{ service.name }}</span>
+                {% empty %}
+                  <span class="badge text-bg-light border">No services listed</span>
+                {% endfor %}
+              </div>
+
+              <div class="d-flex flex-wrap gap-1 mb-3">
+                {% for pet in caretaker.pet_types.all %}
+                  <span class="badge text-bg-light border">{{ pet.name }}</span>
+                {% empty %}
+                  <span class="badge text-bg-light border">No pet types listed</span>
+                {% endfor %}
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="text-muted small">
+                  {% with avg=caretaker.average_rating %}
+                    {% if avg %}
+                      <i class="bi bi-star-fill"></i> {{ avg|floatformat:1 }}/10
+                    {% else %}
+                      <i class="bi bi-star"></i> No reviews
+                    {% endif %}
+                  {% endwith %}
+                </div>
+
+                <a class="btn btn-sm btn-sittr" href="{% url 'caretaker_detail' caretaker.slug %}">
+                  View
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card sittr-card">
+      <div class="card-body p-4">
+        <div class="fw-semibold mb-1">No caretakers yet</div>
+        <div class="text-muted">Add caretakers from the admin panel to see them here.</div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

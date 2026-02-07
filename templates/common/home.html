@@ -1,0 +1,121 @@
+{% extends "common/base.html" %}
+
+{% block title %}Home | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="mb-4">
+    <h1 class="h3 mb-1">Dashboard</h1>
+    <div class="text-muted">Find caretakers you can trust.</div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="card sittr-card mb-4">
+    <div class="card-body p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h1 class="display-6 mb-2">Find a trusted caretaker for your best friend</h1>
+          <p class="lead text-muted mb-4">
+            Browse caretakers by city, pet type, and services — then send a hire request in minutes.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/caretakers/" class="btn btn-sittr btn-lg">
+              <i class="bi bi-people me-2"></i> Browse caretakers
+            </a>
+            <a href="/services/" class="btn btn-outline-secondary btn-lg">
+              <i class="bi bi-briefcase me-2"></i> Explore services
+            </a>
+          </div>
+
+          <div class="text-muted small mt-3">
+            No account needed • Reviews and ratings • Clear pricing per caretaker
+          </div>
+
+          <div class="row g-2 mt-4">
+            <div class="col-sm-4">
+              <div class="bg-light border rounded-4 p-3 h-100">
+                <div class="fw-semibold"><i class="bi bi-funnel"></i> Filter</div>
+                <div class="text-muted small">City, pet type, service, price.</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="bg-light border rounded-4 p-3 h-100">
+                <div class="fw-semibold"><i class="bi bi-star"></i> Compare</div>
+                <div class="text-muted small">Ratings & reviews (1–10).</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="bg-light border rounded-4 p-3 h-100">
+                <div class="fw-semibold"><i class="bi bi-envelope-paper"></i> Request</div>
+                <div class="text-muted small">Send a hire request fast.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="bg-light border rounded-4 p-3">
+            <div class="fw-semibold mb-2">Quick steps</div>
+            <ol class="mb-0 text-muted small">
+              <li>Filter caretakers by your needs</li>
+              <li>Check services + pet types</li>
+              <li>Read reviews & rating</li>
+              <li>Send a hire request</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card sittr-card h-100">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-funnel fs-4"></i>
+            <h2 class="h6 mb-0">Smart filtering</h2>
+          </div>
+          <p class="text-muted mb-0">Choose city, pet type, service, and price range.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card sittr-card h-100">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-star fs-4"></i>
+            <h2 class="h6 mb-0">Reviews you can trust</h2>
+          </div>
+          <p class="text-muted mb-0">Ratings are 1–10 and will be visualized with stars.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card sittr-card h-100">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-lightning-charge fs-4"></i>
+            <h2 class="h6 mb-0">Fast requests</h2>
+          </div>
+          <p class="text-muted mb-0">Send a hire request without creating an account.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="h5 mt-4 mb-3">Featured caretakers</h2>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card sittr-card h-100">
+        <div class="card-body p-4">
+          <div class="fw-semibold">Coming soon</div>
+          <div class="text-muted small">This will show top-rated caretakers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

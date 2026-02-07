@@ -1,0 +1,52 @@
+<div class="mb-3">
+  <div class="d-flex align-items-center gap-2">
+    <div class="bg-white text-dark rounded-4 d-flex align-items-center justify-content-center"
+         style="width: 40px; height: 40px;">
+      <i class="bi bi-paw-fill"></i>
+    </div>
+    <div class="lh-sm">
+      <div class="fw-semibold">Sittr</div>
+      <small class="text-white-50">Caretakers you can trust</small>
+    </div>
+  </div>
+</div>
+
+<hr class="border-secondary my-3">
+
+<nav class="sittr-nav nav nav-pills flex-column gap-1">
+  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'home' %}">
+    <i class="bi bi-house-door"></i> Home
+  </a>
+
+  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'about' %}">
+    <i class="bi bi-info-circle"></i> About
+  </a>
+
+  <div class="text-white-50 small mt-3 mb-1">Browse</div>
+
+  <!-- placeholders for later -->
+  <a class="nav-link d-flex align-items-center gap-2" href="/caretakers/">
+    <i class="bi bi-people"></i> Caretakers
+  </a>
+
+  <a class="nav-link d-flex align-items-center gap-2" href="/services/">
+    <i class="bi bi-briefcase"></i> Services
+  </a>
+
+  <a class="nav-link d-flex align-items-center gap-2" href="/requests/">
+    <i class="bi bi-envelope-paper"></i> Requests
+  </a>
+
+  <a class="nav-link d-flex align-items-center gap-2" href="/reviews/">
+    <i class="bi bi-star"></i> Reviews
+  </a>
+</nav>
+
+<hr class="border-secondary my-3">
+
+<div class="bg-white bg-opacity-10 rounded-4 p-3">
+  <div class="fw-semibold small mb-1"><i class="bi bi-lightbulb"></i> Tip</div>
+  <div class="text-white-50 small">
+    Start with <span class="text-white">Caretakers</span>, then filter by service, pet type and price.
+  </div>
+</div>
