@@ -3,6 +3,17 @@
 {% block title %}Caretakers | Sittr{% endblock %}
 
 {% block page_header %}
+  <div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h1 class="h3 mb-1">Caretakers</h1>
+        <div class="text-muted">Browse by city, services, pet types, and price.</div>
+    </div>
+
+    <a class="btn btn-sittr" href="{% url 'caretaker_create' %}">
+        <i class="bi bi-plus-circle me-2"></i> Add caretaker
+    </a>
+  </div>
+  
   <div class="sittr-page-header">
     <h1 class="h3 mb-1">Caretakers</h1>
     <div class="text-muted">Browse by city, services, pet types, and price.</div>
@@ -10,6 +21,76 @@
 {% endblock %}
 
 {% block content %}
+      <div class="card sittr-card mb-4">
+        <div class="card-body p-4">
+          <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+              <label class="form-label">City</label>
+              <input
+                type="text"
+                name="city"
+                value="{{ filters.city }}"
+                class="form-control"
+                placeholder="e.g. Sofia"
+              >
+            </div>
+    
+            <div class="col-md-3">
+              <label class="form-label">Service</label>
+              <select name="service" class="form-select">
+                <option value="">All</option>
+                {% for s in services %}
+                  <option value="{{ s.id }}" {% if filters.service == s.id|stringformat:"s" %}selected{% endif %}>
+                    {{ s.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+    
+            <div class="col-md-3">
+              <label class="form-label">Pet type</label>
+              <select name="pet_type" class="form-select">
+                <option value="">All</option>
+                {% for p in pet_types %}
+                  <option value="{{ p.id }}" {% if filters.pet_type == p.id|stringformat:"s" %}selected{% endif %}>
+                    {{ p.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+    
+            <div class="col-md-2">
+              <label class="form-label">Max price</label>
+              <input
+                type="number"
+                name="max_price"
+                value="{{ filters.max_price }}"
+                class="form-control"
+                step="0.01"
+                min="0"
+                placeholder="e.g. 25"
+              >
+            </div>
+    
+            <div class="col-12 d-flex gap-2">
+              <button class="btn btn-sittr" type="submit">
+                <i class="bi bi-funnel me-2"></i> Filter
+              </button>
+    
+              <a class="btn btn-outline-secondary" href="{% url 'caretaker_list' %}">
+                Reset
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="text-muted small">
+        Found <strong>{{ caretakers|length }}</strong> caretaker{{ caretakers|length|pluralize }}
+    </div>
+  </div>
+  
   {% if caretakers %}
     <div class="row g-3">
       {% for caretaker in caretakers %}

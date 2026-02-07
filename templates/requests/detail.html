@@ -1,0 +1,61 @@
+{% extends "common/base.html" %}
+
+{% block title %}Request #{{ hire_request.pk }} | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="sittr-page-header">
+    <h1 class="h3 mb-1">Request #{{ hire_request.pk }}</h1>
+    <div class="text-muted">
+      For
+      <a href="{% url 'caretaker_detail' hire_request.caretaker.slug %}" class="text-decoration-none">
+        {{ hire_request.caretaker.name }}
+      </a>
+      • {{ hire_request.caretaker.city }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card sittr-card">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="h5 mb-3">Client</h2>
+          <div class="mb-2"><span class="fw-semibold">Name:</span> {{ hire_request.client_name }}</div>
+          <div class="mb-2"><span class="fw-semibold">Email:</span> {{ hire_request.client_email }}</div>
+          <div class="mb-0"><span class="fw-semibold">Phone:</span> {{ hire_request.client_phone }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card sittr-card">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="h5 mb-3">Request details</h2>
+          <div class="mb-2"><span class="fw-semibold">Pet type:</span> {{ hire_request.pet_type.name }}</div>
+          <div class="mb-2"><span class="fw-semibold">Service:</span> {{ hire_request.service.name }}</div>
+          <div class="mb-0"><span class="fw-semibold">Dates:</span> {{ hire_request.start_date }} → {{ hire_request.end_date }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card sittr-card">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="h5 mb-3">Notes</h2>
+          {% if hire_request.notes %}
+            <p class="text-muted mb-0">{{ hire_request.notes }}</p>
+          {% else %}
+            <p class="text-muted mb-0">No notes.</p>
+          {% endif %}
+
+          <hr class="my-4">
+
+          <a class="btn btn-outline-secondary" href="{% url 'hire_request_list' %}">
+            Back to requests
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

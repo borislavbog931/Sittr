@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('common.urls')),
     path('caretakers/', include('caretakers.urls')),
     path('requests/', include('requests.urls')),
+    path('services/', include('services.urls')),
+    path("reviews/", include("reviews.urls")),
 ]
 
 handler404 = "common.views.custom_404"

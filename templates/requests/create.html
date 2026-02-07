@@ -16,7 +16,12 @@
         {% csrf_token %}
 
         {{ form.non_field_errors }}
-
+        
+        <div>
+            <label class="form-label">{{ form.caretaker_display.label }}</label>
+            {{ form.caretaker_display }}
+        </div>  
+          
         <div>
           <label class="form-label">Your name</label>
           {{ form.client_name }}

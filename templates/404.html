@@ -2,10 +2,95 @@
 
 {% block title %}Page not found | Sittr{% endblock %}
 
+{% block page_header %}
+  <div class="sittr-page-header">
+    <h1 class="h3 mb-1">404 — Page not found</h1>
+    <div class="text-muted">We couldn’t find what you were looking for.</div>
+  </div>
+{% endblock %}
+
 {% block content %}
-  <div class="text-center py-5">
-    <h1 class="display-6">404</h1>
-    <p class="lead">Sorry, we can’t find that page.</p>
-    <a class="btn btn-dark" href="{% url 'home' %}">Back to Home</a>
+  <div class="card sittr-card">
+    <div class="card-body p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="mb-2 text-muted">Error code</div>
+
+          <div class="display-4 fw-semibold mb-3" style="letter-spacing: 1px;">
+            404
+          </div>
+
+          <p class="lead text-muted mb-4">
+            The link may be broken, the page may have moved, or it might never have existed.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-sittr btn-lg" href="{% url 'home' %}">
+              <i class="bi bi-house-door me-2"></i> Go home
+            </a>
+            <a class="btn btn-outline-secondary btn-lg" href="{% url 'caretaker_list' %}">
+              <i class="bi bi-people me-2"></i> Browse caretakers
+            </a>
+            <a class="btn btn-outline-secondary btn-lg" href="{% url 'service_list' %}">
+              <i class="bi bi-briefcase me-2"></i> Services
+            </a>
+          </div>
+
+          <div class="text-muted small mt-3">
+            Tip: Use the left menu to navigate back to safety.
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="rounded-4 p-4 text-white"
+               style="background: linear-gradient(135deg, #5b5fc7 0%, #3b82f6 100%); box-shadow: 0 10px 30px rgba(18,18,50,.15);">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="rounded-circle d-flex align-items-center justify-content-center"
+                   style="width: 52px; height: 52px; background: rgba(255,255,255,.18);">
+                <i class="bi bi-compass fs-3"></i>
+              </div>
+              <div>
+                <div class="fw-semibold">Lost?</div>
+                <div class="small" style="opacity:.9;">Try one of these popular pages</div>
+              </div>
+            </div>
+
+            <div class="vstack gap-2">
+              <a class="text-white text-decoration-none d-flex align-items-center justify-content-between rounded-3 px-3 py-2"
+                 style="background: rgba(255,255,255,.14);"
+                 href="{% url 'caretaker_list' %}">
+                <span><i class="bi bi-people me-2"></i> Caretakers</span>
+                <i class="bi bi-chevron-right"></i>
+              </a>
+
+              <a class="text-white text-decoration-none d-flex align-items-center justify-content-between rounded-3 px-3 py-2"
+                 style="background: rgba(255,255,255,.14);"
+                 href="{% url 'hire_request_list' %}">
+                <span><i class="bi bi-envelope-paper me-2"></i> Requests</span>
+                <i class="bi bi-chevron-right"></i>
+              </a>
+
+              <a class="text-white text-decoration-none d-flex align-items-center justify-content-between rounded-3 px-3 py-2"
+                 style="background: rgba(255,255,255,.14);"
+                 href="{% url 'review_list' %}">
+                <span><i class="bi bi-star me-2"></i> Reviews</span>
+                <i class="bi bi-chevron-right"></i>
+              </a>
+
+              <a class="text-white text-decoration-none d-flex align-items-center justify-content-between rounded-3 px-3 py-2"
+                 style="background: rgba(255,255,255,.14);"
+                 href="{% url 'about' %}">
+                <span><i class="bi bi-info-circle me-2"></i> About</span>
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </div>
+
+            <div class="small mt-3" style="opacity:.9;">
+              If you believe this is a bug, double-check the URL.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}

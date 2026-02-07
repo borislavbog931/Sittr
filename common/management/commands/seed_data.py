@@ -46,12 +46,31 @@ class Command(BaseCommand):
         num_caretakers = 10
         for _ in range(num_caretakers):
             name = fake.name()
+            intro_sentences = [
+                "A lifelong animal lover, I've been caring for pets for over 10 years.",
+                "Passionate about paws and purrs, I offer dedicated and loving pet care.",
+                "Your furry, feathered, or scaled friends are in safe hands with me!",
+                "Experienced and reliable, I provide top-notch care for all types of pets.",
+                "I believe every pet deserves the best, and I strive to provide just that.",
+            ]
+            outro_sentences = [
+                "I look forward to meeting your beloved companions!",
+                "References available upon request.",
+                "Let's chat about how I can help care for your pets.",
+                "Dedicated to providing peace of mind for pet parents.",
+                "Committed to the well-being and happiness of your pets.",
+            ]
+            
+            bio_intro = random.choice(intro_sentences)
+            bio_main = fake.paragraph(nb_sentences=3, variable_nb_sentences=True)
+            bio_outro = random.choice(outro_sentences)
+            
             caretaker = Caretaker.objects.create(
                 name=name,
                 email=fake.email(),
                 phone_number=fake.phone_number(),
                 city=fake.city(),
-                bio=fake.paragraph(nb_sentences=5, variable_nb_sentences=True),
+                bio=f"{bio_intro} {bio_main} {bio_outro}",
                 price_per_hour=Decimal(random.randint(20, 50)),
                 active=fake.boolean(chance_of_getting_true=80)
             )
@@ -94,13 +113,50 @@ class Command(BaseCommand):
         num_reviews = 25
         for _ in range(num_reviews):
             caretaker = random.choice(all_caretakers)
+            
+            positive_comments = [
+                "Absolutely wonderful! Our pet loved their time with {caretaker_name}.",
+                "Highly recommend! {caretaker_name} was punctual and very caring.",
+                "Fantastic service. {caretaker_name} went above and beyond.",
+                "Our pet was so happy and well-cared for. Thank you, {caretaker_name}!",
+                "Excellent communication and reliable. Will definitely rebook with {caretaker_name}.",
+                "Professional and kind. {caretaker_name} made us feel at ease.",
+                "The best pet sitter we've ever had! {caretaker_name} is truly amazing.",
+                "Very attentive and our pet felt comfortable right away with {caretaker_name}.",
+            ]
+
+            neutral_comments = [
+                "Good service overall. {caretaker_name} did what was expected.",
+                "Reliable, no major issues. {caretaker_name} took care of things.",
+                "Competent and efficient. {caretaker_name} got the job done.",
+            ]
+
+            critical_comments = [
+                "Service was okay, but communication could be improved with {caretaker_name}.",
+                "Our pet was fine, but felt {caretaker_name} could have been more engaging.",
+                "Some minor issues, but {caretaker_name} addressed them eventually.",
+            ]
+
+            comment_type = random.choices(['positive', 'neutral', 'critical'], weights=[0.7, 0.2, 0.1], k=1)[0]
+            
+            if comment_type == 'positive':
+                comment_template = random.choice(positive_comments)
+                rating = random.randint(8, 10)
+            elif comment_type == 'neutral':
+                comment_template = random.choice(neutral_comments)
+                rating = random.randint(6, 7)
+            else: # critical
+                comment_template = random.choice(critical_comments)
+                rating = random.randint(4, 6)
+
+            comment_text = comment_template.format(caretaker_name=caretaker.name) + " " + fake.sentence(nb_words=10)
+            
             Review.objects.create(
                 caretaker=caretaker,
                 reviewer_name=fake.name(),
-                rating=random.randint(7, 10),
-                comment=fake.paragraph(nb_sentences=3, variable_nb_sentences=True)
+                rating=rating,
+                comment=comment_text
             )
-        self.stdout.write(f'{num_reviews} Reviews created.')
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded the database.'))
 

@@ -4,6 +4,11 @@ from .models import HireRequest
 
 
 class HireRequestForm(forms.ModelForm):
+    caretaker_display = forms.CharField(
+        label="Caretaker",
+        required=False,
+        disabled=True
+    )
     class Meta:
         model = HireRequest
         fields = [

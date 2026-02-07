@@ -1,0 +1,70 @@
+{% extends "common/base.html" %}
+
+{% block title %}Requests | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="sittr-page-header">
+    <h1 class="h3 mb-1">Hire requests</h1>
+    <div class="text-muted">All submitted requests</div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  {% if hire_requests %}
+    <div class="card sittr-card">
+      <div class="card-body p-4">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Caretaker</th>
+                <th>Pet type</th>
+                <th>Service</th>
+                <th>Dates</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in hire_requests %}
+                <tr>
+                  <td>
+                    <div class="fw-semibold">{{ r.client_name }}</div>
+                    <div class="text-muted small">{{ r.client_email }}</div>
+                  </td>
+
+                  <td>
+                    <a href="{% url 'caretaker_detail' r.caretaker.slug %}" class="text-decoration-none">
+                      {{ r.caretaker.name }}
+                    </a>
+                    <div class="text-muted small">{{ r.caretaker.city }}</div>
+                  </td>
+
+                  <td>{{ r.pet_type.name }}</td>
+                  <td>{{ r.service.name }}</td>
+
+                  <td class="text-muted small">
+                    {{ r.start_date }} → {{ r.end_date }}
+                  </td>
+
+                  <td class="text-end">
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'hire_request_detail' r.pk %}">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="card sittr-card">
+      <div class="card-body p-4">
+        <div class="fw-semibold mb-1">No requests yet</div>
+        <div class="text-muted">Requests will appear here after users submit them.</div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

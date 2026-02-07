@@ -1,0 +1,52 @@
+{% extends "common/base.html" %}
+
+{% block title %}Services | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="d-flex justify-content-between align-items-start">
+    <div>
+        <h1 class="h3 mb-1">Services</h1>
+        <div class="text-muted">Explore what caretakers can offer.</div>
+    </div>
+
+    <a class="btn btn-sittr" href="{% url 'service_create' %}">
+        <i class="bi bi-plus-circle me-2"></i> Add service
+    </a>
+  </div>
+    
+{% endblock %}
+
+{% block content %}
+  {% if services %}
+    <div class="row g-3">
+      {% for service in services %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card sittr-card h-100">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-start gap-2">
+                <h2 class="h6 mb-1">{{ service.name }}</h2>
+                <a class="btn btn-sm btn-outline-secondary"
+                   href="{% url 'service_detail' service.pk %}">
+                  View
+                </a>
+              </div>
+
+              {% if service.description %}
+                <p class="text-muted small mb-0">{{ service.description|truncatechars:120 }}</p>
+              {% else %}
+                <p class="text-muted small mb-0">No description.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card sittr-card">
+      <div class="card-body p-4">
+        <div class="fw-semibold mb-1">No services yet</div>
+        <div class="text-muted">Add services in the admin panel to see them here.</div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

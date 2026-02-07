@@ -24,20 +24,40 @@
 
   <div class="text-white-50 small mt-3 mb-1">Browse</div>
 
-  <!-- placeholders for later -->
-  <a class="nav-link d-flex align-items-center gap-2" href="/caretakers/">
+
+  <div class="dropdown">
+  <a class="nav-link d-flex align-items-center gap-2 dropdown-toggle"
+     href="{% url 'caretaker_list' %}"
+     role="button"
+     data-bs-toggle="dropdown"
+     aria-expanded="false">
     <i class="bi bi-people"></i> Caretakers
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="/services/">
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" href="{% url 'caretaker_list' %}">
+        <i class="bi bi-list-ul me-2"></i> Browse caretakers
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'caretaker_create' %}">
+        <i class="bi bi-plus-circle me-2"></i> Add caretaker
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'service_list' %}">
     <i class="bi bi-briefcase"></i> Services
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="/requests/">
+  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'hire_request_list' %}">
     <i class="bi bi-envelope-paper"></i> Requests
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="/reviews/">
+  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'review_list' %}">
     <i class="bi bi-star"></i> Reviews
   </a>
 </nav>
