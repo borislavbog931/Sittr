@@ -1,10 +1,12 @@
 import random
+from datetime import timedelta
 from django.core.management.base import BaseCommand
 from services.models import Service, PetType
 from caretakers.models import Caretaker
 from requests.models import HireRequest
 from reviews.models import Review
 from decimal import Decimal
+from faker import Faker
 
 class Command(BaseCommand):
     help = 'Seeds the database with realistic data.'
@@ -14,75 +16,91 @@ class Command(BaseCommand):
         self.clear_data()
 
         self.stdout.write('Creating new data...')
-        
+        fake = Faker()
+
         # Create PetTypes
-        pet_types = [
-            PetType.objects.create(name='Dog'),
-            PetType.objects.create(name='Cat'),
-            PetType.objects.create(name='Bird'),
-        ]
-        self.stdout.write('Pet types created.')
+        pet_type_names = ['Dog', 'Cat', 'Bird', 'Rabbit', 'Hamster', 'Fish', 'Reptile', 'Guinea Pig']
+        pet_types = []
+        for name in pet_type_names:
+            pet_types.append(PetType.objects.create(name=name))
+        self.stdout.write(f'{len(pet_types)} Pet types created.')
 
         # Create Services
-        services = [
-            Service.objects.create(name='Dog Walking', description='A walk in the park.', price=Decimal('25.00')),
-            Service.objects.create(name='Pet Sitting', description='Full day pet sitting.', price=Decimal('100.00')),
-            Service.objects.create(name='Grooming', description='Full grooming service.', price=Decimal('50.00')),
+        service_data = [
+            ('Dog Walking', 'A refreshing walk in the park or neighborhood.'),
+            ('Pet Sitting (Daily)', 'Full day pet sitting at your home or ours.'),
+            ('Grooming (Basic)', 'Basic grooming including bath, brush, and nail trim.'),
+            ('Overnight Care', 'Overnight stay at your home for extended care.'),
+            ('Vet Visit Transport', 'Safe and reliable transport to and from vet appointments.'),
+            ('Basic Training', 'Introduction to basic commands and good behavior.'),
+            ('Fish Feeding', 'Daily feeding and tank check for aquatic pets.'),
+            ('Puppy Socialization', 'Help your puppy learn to interact with other dogs and people.'),
         ]
-        self.stdout.write('Services created.')
+        services = []
+        for name, desc in service_data:
+            services.append(Service.objects.create(name=name, description=desc))
+        self.stdout.write(f'{len(services)} Services created.')
 
         # Create Caretakers
-        caretaker1 = Caretaker.objects.create(
-            name='Liam Garcia',
-            email='liam.garcia@example.com',
-            phone_number='123-456-7890',
-            city='New York',
-            bio='I love animals and have been a caretaker for 5 years.',
-            price_per_hour=Decimal('30.00'),
-        )
-        caretaker1.pet_types.add(pet_types[0], pet_types[1]) # Dogs and Cats
-        caretaker1.services.add(services[0], services[1]) # Dog Walking and Pet Sitting
-        self.stdout.write('Caretaker 1 created.')
+        all_caretakers = []
+        num_caretakers = 10
+        for _ in range(num_caretakers):
+            name = fake.name()
+            caretaker = Caretaker.objects.create(
+                name=name,
+                email=fake.email(),
+                phone_number=fake.phone_number(),
+                city=fake.city(),
+                bio=fake.paragraph(nb_sentences=5, variable_nb_sentences=True),
+                price_per_hour=Decimal(random.randint(20, 50)),
+                active=fake.boolean(chance_of_getting_true=80)
+            )
+            # Assign random pet types
+            num_pet_types = random.randint(1, len(pet_types))
+            caretaker.pet_types.add(*random.sample(pet_types, num_pet_types))
+            
+            # Assign random services
+            num_services = random.randint(1, len(services))
+            caretaker.services.add(*random.sample(services, num_services))
+            all_caretakers.append(caretaker)
+        self.stdout.write(f'{num_caretakers} Caretakers created.')
 
-        caretaker2 = Caretaker.objects.create(
-            name='Olivia Martinez',
-            email='olivia.martinez@example.com',
-            phone_number='098-765-4321',
-            city='Los Angeles',
-            bio='Experienced with all kinds of birds.',
-            price_per_hour=Decimal('40.00'),
-        )
-        caretaker2.pet_types.add(pet_types[2]) # Birds
-        caretaker2.services.add(services[1], services[2]) # Pet Sitting and Grooming
-        self.stdout.write('Caretaker 2 created.')
+        # Create HireRequests - keeping initial two for now, as per instruction to skip expanding this point
+        if all_caretakers and pet_types and services:
+            HireRequest.objects.create(
+                caretaker=all_caretakers[0],
+                client_name=fake.name(),
+                pet_type=random.choice(pet_types),
+                service=random.choice(services),
+                start_date=fake.date_between(start_date='+5d', end_date='+10d'),
+                end_date=fake.date_between(start_date='+11d', end_date='+15d'),
+                status='new',
+            )
+            HireRequest.objects.create(
+                caretaker=all_caretakers[1],
+                client_name=fake.name(),
+                pet_type=random.choice(pet_types),
+                service=random.choice(services),
+                start_date=fake.date_between(start_date='+15d', end_date='+20d'),
+                end_date=fake.date_between(start_date='+21d', end_date='+25d'),
+                status='accepted',
+            )
+            self.stdout.write('Initial Hire requests created.')
+        else:
+            self.stdout.write('Not enough data to create initial hire requests.')
 
-        # Create HireRequests
-        HireRequest.objects.create(
-            caretaker=caretaker1,
-            client_name='Alice',
-            pet_type=pet_types[0],
-            service=services[0],
-            start_date='2026-03-01',
-            end_date='2026-03-05',
-            status='new',
-        )
-        HireRequest.objects.create(
-            caretaker=caretaker2,
-            client_name='Bob',
-            pet_type=pet_types[2],
-            service=services[2],
-            start_date='2026-03-10',
-            end_date='2026-03-11',
-            status='accepted',
-        )
-        self.stdout.write('Hire requests created.')
 
         # Create Reviews
-        Review.objects.create(caretaker=caretaker1, reviewer_name='Charlie', rating=9, comment='Liam was great with my dog!')
-        Review.objects.create(caretaker=caretaker1, reviewer_name='Diana', rating=10, comment='Excellent service.')
-        Review.objects.create(caretaker=caretaker2, reviewer_name='Eve', rating=8, comment='Olivia took good care of my parrot.')
-        Review.objects.create(caretaker=caretaker2, reviewer_name='Frank', rating=9, comment='Very professional and friendly.')
-        self.stdout.write('Reviews created.')
+        num_reviews = 25
+        for _ in range(num_reviews):
+            caretaker = random.choice(all_caretakers)
+            Review.objects.create(
+                caretaker=caretaker,
+                reviewer_name=fake.name(),
+                rating=random.randint(7, 10),
+                comment=fake.paragraph(nb_sentences=3, variable_nb_sentences=True)
+            )
+        self.stdout.write(f'{num_reviews} Reviews created.')
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded the database.'))
 
