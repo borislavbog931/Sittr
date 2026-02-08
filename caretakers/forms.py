@@ -46,7 +46,7 @@ class CaretakerForm(forms.ModelForm):
         )
         price_input = "w-full bg-transparent p-0 text-sm text-slate-900 focus:outline-none focus:ring-0"
 
-        # Basic placeholders (optional)
+
         self.fields["name"].widget.attrs.setdefault("placeholder", "e.g. Maria Ivanova")
         self.fields["city"].widget.attrs.setdefault("placeholder", "e.g. Sofia")
         self.fields["email"].widget.attrs.setdefault("placeholder", "name@example.com")
@@ -55,32 +55,32 @@ class CaretakerForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             widget = field.widget
 
-            # Checkbox lists: add class to the *container* (<ul>), not the inputs
+
             if isinstance(widget, forms.CheckboxSelectMultiple):
                 existing = widget.attrs.get("class", "")
                 widget.attrs["class"] = f"{existing} sittr-checklist".strip()
                 continue
 
-            # Single checkbox (active)
+
             if isinstance(widget, forms.CheckboxInput):
                 widget.attrs.setdefault("class", base_checkbox)
                 continue
 
-            # File input
+
             if isinstance(widget, forms.ClearableFileInput):
                 widget.attrs.setdefault("class", base_file)
                 continue
 
-            # Textarea
+
             if isinstance(widget, forms.Textarea):
                 widget.attrs.setdefault("class", base_textarea)
                 continue
 
-            # Price number input (optional)
+
             if field_name == "price_per_hour":
                 widget.attrs.setdefault("class", price_input)
                 widget.attrs.setdefault("inputmode", "decimal")
                 continue
 
-            # Default
+
             widget.attrs.setdefault("class", base_input)
