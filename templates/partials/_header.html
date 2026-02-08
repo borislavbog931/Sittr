@@ -1,17 +1,55 @@
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-  <div class="flex items-center justify-between gap-4">
-    <div>
-      <div class="flex items-center gap-3">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 text-white shadow">
-          <i class="bi bi-paw-fill"></i>
-        </span>
-        <div class="font-semibold">Sittr</div>
-      </div>
-      <div class="text-xs text-slate-500">Find caretakers you can trust</div>
-    </div>
+{% load static %}
+{% with url_name=request.resolver_match.url_name %}
 
-    <div class="flex items-center gap-2">
-      <div class="hidden md:flex items-center gap-2 text-xs text-slate-500">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+  <div class="flex items-center gap-6">
+
+    <!-- Brand (left) -->
+    <a href="{% url 'home' %}" class="flex items-center gap-3 text-decoration-none">
+      <span class="h-9 w-9 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
+        <img
+          src="{% static 'images/logo.png' %}"
+          alt="Sittr"
+          class="h-8 w-8 rounded-full object-cover"
+        />
+      </span>
+      <span class="text-lg font-semibold tracking-tight text-slate-900">Sittr</span>
+    </a>
+
+    <!-- Spacer pushes everything else to the far right -->
+    <div class="flex-1"></div>
+
+    <!-- Right side: nav + pills + mobile -->
+    <div class="flex items-center gap-3">
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="{% url 'home' %}"
+           class="{% if url_name == 'home' %}text-slate-900{% else %}hover:text-slate-900{% endif %}">
+          Home
+        </a>
+
+        <a href="{% url 'caretaker_list' %}"
+           class="{% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' %}text-slate-900{% else %}hover:text-slate-900{% endif %}">
+          Caretakers
+        </a>
+
+        <a href="{% url 'service_list' %}"
+           class="{% if url_name == 'service_list' or url_name == 'service_detail' %}text-slate-900{% else %}hover:text-slate-900{% endif %}">
+          Services
+        </a>
+
+        <a href="{% url 'review_list' %}"
+           class="{% if url_name == 'review_list' or url_name == 'review_detail' %}text-slate-900{% else %}hover:text-slate-900{% endif %}">
+          Reviews
+        </a>
+
+        <a href="{% url 'about' %}"
+           class="{% if url_name == 'about' %}text-slate-900{% else %}hover:text-slate-900{% endif %}">
+          About
+        </a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-2 text-xs text-slate-500">
         <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1">
           <i class="bi bi-shield-check text-teal-600"></i> Verified reviews
         </span>
@@ -19,10 +57,19 @@
           <i class="bi bi-lightning-charge text-teal-600"></i> No account
         </span>
       </div>
-      <button class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-700 md:hidden"
-              type="button" data-bs-toggle="offcanvas" data-bs-target="#sittrSidebar" aria-controls="sittrSidebar">
+
+      <button
+        class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-700 md:hidden"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#sittrSidebar"
+        aria-controls="sittrSidebar"
+      >
         <i class="bi bi-list"></i>
       </button>
+
     </div>
   </div>
 </div>
+
+{% endwith %}
