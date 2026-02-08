@@ -1,0 +1,8 @@
+/* Tell Tailwind where to scan for class names */
+@source "../../templates/**/*.html";
+@source "../../**/templates/**/*.html";
+@source "../../**/*.py";
+
+/* Tailwind entry */
+@import "tailwindcss";
+

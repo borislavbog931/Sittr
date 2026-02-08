@@ -31,8 +31,6 @@ PROJECT_APPS = ['common', 'caretakers', 'requests', 'reviews', 'services']
 # Application definition
 
 INSTALLED_APPS = [
-    'tailwind',
-    'theme',
     'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_tailwind_cli',
 ] + PROJECT_APPS
-TAILWIND_APP_NAME = "theme"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

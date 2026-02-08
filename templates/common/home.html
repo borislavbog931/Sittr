@@ -3,120 +3,127 @@
 {% block title %}Home | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-4">
-    <h1 class="h3 mb-1">Dashboard</h1>
-    <div class="text-muted">Find caretakers you can trust.</div>
+  <div class="mb-6">
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <h1 class="text-2xl font-semibold text-slate-900">Dashboard</h1>
+        <div class="text-sm text-slate-500">Find caretakers you can trust.</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs text-teal-700">
+          <i class="bi bi-star-fill"></i> 1-10 ratings
+        </span>
+        <span class="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-xs text-teal-700">
+          <i class="bi bi-lightning-charge"></i> Instant requests
+        </span>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
 {% block content %}
+  <section class="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+    <div class="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div class="p-6 sm:p-8">
+        <div class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
+          <span class="h-2 w-2 rounded-full bg-teal-500"></span> Trusted care, fast
+        </div>
+        <h2 class="mt-4 text-3xl font-semibold text-slate-900">
+          Find a trusted caretaker for your best friend
+        </h2>
+        <p class="mt-3 text-slate-600">
+          Browse caretakers by city, pet type, and services. Compare ratings and send a hire request in minutes.
+        </p>
 
-  <div class="card sittr-card mb-4">
-    <div class="card-body p-4 p-md-5">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-8">
-          <h1 class="display-6 mb-2">Find a trusted caretaker for your best friend</h1>
-          <p class="lead text-muted mb-4">
-            Browse caretakers by city, pet type, and services - then send a hire request in minutes.
-          </p>
-
-          <div class="d-flex flex-wrap gap-2">
-            <a href="/caretakers/" class="btn btn-sittr btn-lg">
-              <i class="bi bi-people me-2"></i> Browse caretakers
-            </a>
-            <a href="/services/" class="btn btn-outline-secondary btn-lg">
-              <i class="bi bi-briefcase me-2"></i> Explore services
-            </a>
-          </div>
-
-          <div class="text-muted small mt-3">
-            No account needed - Reviews and ratings - Clear pricing per caretaker
-          </div>
-
-          <div class="row g-2 mt-4">
-            <div class="col-sm-4">
-              <div class="bg-light border rounded-4 p-3 h-100">
-                <div class="fw-semibold"><i class="bi bi-funnel"></i> Filter</div>
-                <div class="text-muted small">City, pet type, service, price.</div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="bg-light border rounded-4 p-3 h-100">
-                <div class="fw-semibold"><i class="bi bi-star"></i> Compare</div>
-                <div class="text-muted small">Ratings & reviews (1-10).</div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="bg-light border rounded-4 p-3 h-100">
-                <div class="fw-semibold"><i class="bi bi-envelope-paper"></i> Request</div>
-                <div class="text-muted small">Send a hire request fast.</div>
-              </div>
-            </div>
-          </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/caretakers/"
+             class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-white shadow hover:brightness-110">
+            <i class="bi bi-people"></i> Browse caretakers
+          </a>
+          <a href="/services/"
+             class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700">
+            <i class="bi bi-briefcase"></i> Explore services
+          </a>
         </div>
 
-        <div class="col-lg-4">
-          <div class="bg-light border rounded-4 p-3">
-            <div class="fw-semibold mb-2">Quick steps</div>
-            <ol class="mb-0 text-muted small">
-              <li>Filter caretakers by your needs</li>
-              <li>Check services + pet types</li>
-              <li>Read reviews & rating</li>
-              <li>Send a hire request</li>
-            </ol>
+        <div class="mt-6 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+            <div class="text-sm font-semibold text-slate-900"><i class="bi bi-funnel"></i> Filter</div>
+            <div class="text-xs text-slate-500">City, pet type, service, price.</div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+            <div class="text-sm font-semibold text-slate-900"><i class="bi bi-star"></i> Compare</div>
+            <div class="text-xs text-slate-500">Ratings & reviews (1-10).</div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+            <div class="text-sm font-semibold text-slate-900"><i class="bi bi-envelope-paper"></i> Request</div>
+            <div class="text-xs text-slate-500">Send a hire request fast.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-teal-600 to-cyan-700 p-6 sm:p-8 text-white">
+        <div class="text-sm font-semibold">Quick steps</div>
+        <ol class="mt-3 space-y-2 text-sm text-white/80">
+          <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-white/80"></span> Filter caretakers by your needs</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-white/80"></span> Check services + pet types</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-white/80"></span> Read reviews & rating</li>
+          <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-white/80"></span> Send a hire request</li>
+        </ol>
+
+        <div class="mt-6 rounded-2xl border border-white/20 bg-white/10 p-4">
+          <div class="text-sm font-semibold">No account needed</div>
+          <div class="mt-1 text-xs text-white/70">
+            Browse and request without signing up. Keep things fast and frictionless.
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="card sittr-card h-100">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <i class="bi bi-funnel fs-4"></i>
-            <h2 class="h6 mb-0">Smart filtering</h2>
-          </div>
-          <p class="text-muted mb-0">Choose city, pet type, service, and price range.</p>
+  <section class="mt-8 grid gap-4 md:grid-cols-3">
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center gap-3">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
+          <i class="bi bi-funnel"></i>
+        </span>
+        <div>
+          <div class="text-sm font-semibold text-slate-900">Smart filtering</div>
+          <div class="text-xs text-slate-500">Choose city, pet type, service, and price range.</div>
         </div>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="card sittr-card h-100">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <i class="bi bi-star fs-4"></i>
-            <h2 class="h6 mb-0">Reviews you can trust</h2>
-          </div>
-          <p class="text-muted mb-0">Ratings are 1-10 and will be visualized with stars.</p>
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center gap-3">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
+          <i class="bi bi-star"></i>
+        </span>
+        <div>
+          <div class="text-sm font-semibold text-slate-900">Reviews you can trust</div>
+          <div class="text-xs text-slate-500">Ratings are 1-10 and shown clearly.</div>
         </div>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="card sittr-card h-100">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <i class="bi bi-lightning-charge fs-4"></i>
-            <h2 class="h6 mb-0">Fast requests</h2>
-          </div>
-          <p class="text-muted mb-0">Send a hire request without creating an account.</p>
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div class="flex items-center gap-3">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
+          <i class="bi bi-lightning-charge"></i>
+        </span>
+        <div>
+          <div class="text-sm font-semibold text-slate-900">Fast requests</div>
+          <div class="text-xs text-slate-500">Send a hire request without an account.</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <h2 class="h5 mt-4 mb-3">Featured caretakers</h2>
-  <div class="row g-3">
-    <div class="col-md-4">
-      <div class="card sittr-card h-100">
-        <div class="card-body p-4">
-          <div class="fw-semibold">Coming soon</div>
-          <div class="text-muted small">This will show top-rated caretakers.</div>
-        </div>
-      </div>
+  <section class="mt-8">
+    <div class="flex items-center justify-between gap-3">
+      <h2 class="text-lg font-semibold text-slate-900">Featured caretakers</h2>
+      <a href="/caretakers/" class="text-sm font-semibold text-teal-600 hover:text-teal-700">View all</a>
     </div>
-  </div>
+    <div class="mt-3 rounded-2xl border border-dashed border-teal-200 bg-teal-50/60 p-6 text-sm text-teal-700">
+      Coming soon: top-rated caretakers will be featured here.
+    </div>
+  </section>
 {% endblock %}

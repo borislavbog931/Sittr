@@ -3,34 +3,79 @@
 {% block title %}{{ service.name }} | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="sittr-page-header">
-    <h1 class="h3 mb-1">{{ service.name }}</h1>
-    <div class="text-muted">Service details</div>
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-slate-900">{{ service.name }}</h1>
+    <div class="text-sm text-slate-500">Service details</div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <div class="card sittr-card">
-    <div class="card-body p-4 p-md-5">
+  <section class="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+    <p class="text-sm text-slate-600">
       {% if service.description %}
-        <p class="text-muted mb-0">{{ service.description }}</p>
+        {{ service.description }}
       {% else %}
-        <p class="text-muted mb-0">No description provided.</p>
+        No description provided.
       {% endif %}
+    </p>
 
-      <hr class="my-4">
-
-      <div class="d-flex gap-2">
-        <a class="btn btn-sittr" href="{% url 'service_edit' service.pk %}">
-          <i class="bi bi-pencil-square me-2"></i> Edit
-        </a>
-        <a class="btn btn-outline-danger" href="{% url 'service_delete' service.pk %}">
-            <i class="bi bi-trash me-2"></i> Delete
-        </a>
-        <a class="btn btn-outline-secondary" href="{% url 'service_list' %}">
-          Back to services
-        </a>
-      </div>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <a class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+         href="{% url 'service_edit' service.pk %}">
+        <i class="bi bi-pencil-square"></i> Edit
+      </a>
+      <a class="inline-flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-100"
+         href="{% url 'service_delete' service.pk %}">
+        <i class="bi bi-trash"></i> Delete
+      </a>
+      <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
+         href="{% url 'service_list' %}">
+        Back to services
+      </a>
     </div>
+  </section>
+<hr class="my-4">
+
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+  <h2 class="h5 m-0">Caretakers offering this service</h2>
+  <span class="text-muted small">{{ caretakers|length }} found</span>
+</div>
+
+{% if caretakers %}
+  <div class="list-group">
+    {% for caretaker in caretakers %}
+      <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+         href="{% url 'caretaker_detail' caretaker.slug %}">
+        <div class="d-flex align-items-center gap-3">
+          {# Optional avatar if you have caretaker.profile_pic #}
+          {% if caretaker.profile_pic %}
+            <img src="{{ caretaker.profile_pic.url }}"
+                 alt="{{ caretaker.name }}"
+                 class="rounded-circle border"
+                 style="width:44px;height:44px;object-fit:cover;">
+          {% else %}
+            <div class="rounded-circle bg-light border"
+                 style="width:44px;height:44px;display:grid;place-items:center;">
+              <i class="bi bi-person"></i>
+            </div>
+          {% endif %}
+
+          <div>
+            <div class="fw-semibold">{{ caretaker.name }}</div>
+            <div class="text-muted small">
+              {{ caretaker.city }} · €{{ caretaker.price_per_hour }}/hr
+            </div>
+          </div>
+        </div>
+
+        <i class="bi bi-chevron-right text-muted"></i>
+      </a>
+    {% endfor %}
   </div>
+{% else %}
+  <div class="alert alert-light border">
+    No caretakers currently offer this service.
+  </div>
+{% endif %}
+    
 {% endblock %}

@@ -3,54 +3,50 @@
 {% block title %}Services | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="d-flex justify-content-between align-items-start">
+  <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
     <div>
-        <h1 class="h3 mb-1">Services</h1>
-        <div class="text-muted">Explore what caretakers can offer.</div>
+      <h1 class="text-2xl font-semibold text-slate-900">Services</h1>
+      <div class="text-sm text-slate-500">Explore what caretakers can offer.</div>
     </div>
-
-    <a class="btn btn-sittr" href="{% url 'service_create' %}">
-        <i class="bi bi-plus-circle me-2"></i> Add service
+    <a class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow hover:brightness-110"
+       href="{% url 'service_create' %}">
+      <i class="bi bi-plus-circle"></i> Add service
     </a>
   </div>
-    
 {% endblock %}
 
 {% block content %}
   {% if services %}
-    <div class="row g-3">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {% for service in services %}
-        <div class="col-md-6 col-lg-4">
-          <div class="card sittr-card h-100">
-            <div class="card-body p-4">
-              <div class="d-flex justify-content-between align-items-start gap-2">
-                <h2 class="h6 mb-1">{{ service.name }}</h2>
-                <a class="btn btn-sm btn-outline-secondary"
-                   href="{% url 'service_detail' service.pk %}">
-                  View
-                </a>
-              </div>
-
-              {% if service.description %}
-                <p class="text-muted small mb-0">{{ service.description|truncatechars:120 }}</p>
-              {% else %}
-                <p class="text-muted small mb-0">No description.</p>
-              {% endif %}
-            </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex items-start justify-between gap-2">
+            <h2 class="text-sm font-semibold text-slate-900">{{ service.name }}</h2>
+            <a class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
+               href="{% url 'service_detail' service.pk %}">
+              View
+            </a>
           </div>
+
+          <p class="mt-3 text-xs text-slate-500">
+            {% if service.description %}
+              {{ service.description|truncatechars:120 }}
+            {% else %}
+              No description.
+            {% endif %}
+          </p>
         </div>
       {% endfor %}
     </div>
   {% else %}
-    <div class="card sittr-card">
-      <div class="card-body p-4">
-        <div class="fw-semibold mb-1">No services yet</div>
-        <div class="text-muted">Add services in the admin panel to see them here.</div>
-        <div class="mt-3">
-          <a class="btn btn-sittr" href="{% url 'service_create' %}">
-            <i class="bi bi-plus-circle me-2"></i> Add service
-          </a>
-        </div>
+    <div class="rounded-3xl border border-dashed border-teal-200 bg-teal-50/60 p-6 text-sm text-teal-700">
+      <div class="font-semibold">No services yet</div>
+      <div class="mt-1">Add services in the admin panel to see them here.</div>
+      <div class="mt-4">
+        <a class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+           href="{% url 'service_create' %}">
+          <i class="bi bi-plus-circle"></i> Add service
+        </a>
       </div>
     </div>
   {% endif %}

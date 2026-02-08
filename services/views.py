@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from caretakers.models import Caretaker
 from services.forms import ServiceForm
 from services.models import Service
 
@@ -11,7 +12,10 @@ def service_list(request):
 
 def service_detail(request,pk):
     service = get_object_or_404(Service, pk=pk)
-    return render(request, "services/detail.html", {"service": service})
+    caretakers =(
+        Caretaker.objects.filter(services=service, active=True).distinct().order_by("name")
+    )
+    return render(request, "services/detail.html", {"service": service, "caretakers": caretakers})
 
 
 def service_create(request):

@@ -1,80 +1,102 @@
 {% with url_name=request.resolver_match.url_name %}
-<div class="mb-3">
-  <div class="d-flex align-items-center gap-2">
-    <div class="bg-white text-dark rounded-4 d-flex align-items-center justify-content-center"
-         style="width: 40px; height: 40px;">
-      <i class="bi bi-paw-fill"></i>
-    </div>
-    <div class="lh-sm">
-      <div class="fw-semibold">Sittr</div>
-      <small class="text-white-50">Caretakers you can trust</small>
-    </div>
+<div class="flex items-center gap-3">
+  <div class="h-10 w-10 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
+    <i class="bi bi-paw-fill text-lg"></i>
+  </div>
+  <div class="leading-tight">
+    <div class="font-semibold">Sittr</div>
+    <div class="text-xs text-white/70">Caretakers you can trust</div>
   </div>
 </div>
 
-<hr class="border-secondary my-3">
+<div class="my-5 h-px bg-white/10"></div>
 
-<nav class="sittr-nav nav nav-pills flex-column gap-1">
-  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'home' %}active{% endif %}"
+<nav class="space-y-1 text-sm">
+  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
+            {% if url_name == 'home' %}bg-white/15 text-white{% else %}text-white/80 hover:bg-white/10 hover:text-white{% endif %}"
      href="{% url 'home' %}">
     <i class="bi bi-house-door"></i> Home
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'about' %}active{% endif %}"
+  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
+            {% if url_name == 'about' %}bg-white/15 text-white{% else %}text-white/80 hover:bg-white/10 hover:text-white{% endif %}"
      href="{% url 'about' %}">
     <i class="bi bi-info-circle"></i> About
   </a>
 
-  <div class="text-white-50 small mt-3 mb-1">Browse</div>
+  <div class="pt-4 text-xs uppercase tracking-[0.2em] text-white/50">Browse</div>
 
-
+  {# CARETAKERS DROPDOWN (click) #}
   <div class="dropdown">
-  <a class="nav-link d-flex align-items-center gap-2 dropdown-toggle {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' or url_name == 'caretaker_edit' or url_name == 'caretaker_delete' %}active{% endif %}"
-     href="{% url 'caretaker_list' %}"
-     role="button"
-     data-bs-toggle="dropdown"
-     aria-expanded="false">
-    <i class="bi bi-people"></i> Caretakers
-  </a>
+    <button
+      type="button"
+      class="w-100 text-start flex items-center justify-between gap-3 rounded-xl px-3 py-2 transition border-0 bg-transparent
+             {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' %}
+               bg-white/15 text-white
+             {% else %}
+               text-white/80 hover:bg-white/10 hover:text-white
+             {% endif %}"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <span class="flex items-center gap-3">
+        <i class="bi bi-people"></i> Caretakers
+      </span>
+      <i class="bi bi-chevron-down text-xs opacity-75"></i>
+    </button>
 
-  <ul class="dropdown-menu">
-    <li>
-      <a class="dropdown-item {% if url_name == 'caretaker_list' %}active{% endif %}"
-         href="{% url 'caretaker_list' %}">
-        <i class="bi bi-list-ul me-2"></i> Browse caretakers
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item {% if url_name == 'caretaker_create' %}active{% endif %}"
-         href="{% url 'caretaker_create' %}">
-        <i class="bi bi-plus-circle me-2"></i> Add caretaker
-      </a>
-    </li>
-  </ul>
-</div>
+    <ul class="dropdown-menu w-100 rounded-2xl border border-white/10 bg-[#121238] shadow-lg p-1">
+      <li>
+        <a class="dropdown-item rounded-xl px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition"
+           href="{% url 'caretaker_list' %}">
+          <i class="bi bi-list me-2"></i> All caretakers
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item rounded-xl px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition"
+           href="{% url 'caretaker_create' %}">
+          <i class="bi bi-plus-circle me-2"></i> Add caretaker
+        </a>
+      </li>
+    </ul>
+  </div>
 
-
-  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}active{% endif %}"
+  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
+            {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}
+              bg-white/15 text-white
+            {% else %}
+              text-white/80 hover:bg-white/10 hover:text-white
+            {% endif %}"
      href="{% url 'service_list' %}">
     <i class="bi bi-briefcase"></i> Services
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' %}active{% endif %}"
+  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
+            {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' %}
+              bg-white/15 text-white
+            {% else %}
+              text-white/80 hover:bg-white/10 hover:text-white
+            {% endif %}"
      href="{% url 'hire_request_list' %}">
     <i class="bi bi-envelope-paper"></i> Requests
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' %}active{% endif %}"
+  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
+            {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' %}
+              bg-white/15 text-white
+            {% else %}
+              text-white/80 hover:bg-white/10 hover:text-white
+            {% endif %}"
      href="{% url 'review_list' %}">
     <i class="bi bi-star"></i> Reviews
   </a>
 </nav>
 
-<hr class="border-secondary my-3">
+<div class="my-5 h-px bg-white/10"></div>
 
-<div class="bg-white bg-opacity-10 rounded-4 p-3">
-  <div class="fw-semibold small mb-1"><i class="bi bi-lightbulb"></i> Tip</div>
-  <div class="text-white-50 small">
+<div class="rounded-2xl bg-white/10 p-4 text-sm">
+  <div class="font-semibold text-white"><i class="bi bi-lightbulb"></i> Tip</div>
+  <div class="mt-2 text-white/70">
     Start with <span class="text-white">Caretakers</span>, then filter by service, pet type and price.
   </div>
 </div>

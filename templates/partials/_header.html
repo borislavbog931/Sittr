@@ -1,26 +1,28 @@
-<div class="container py-3 d-flex align-items-center justify-content-between">
-  <div>
-    <div class="d-flex align-items-center gap-2">
-      <span class="badge rounded-pill" style="background: linear-gradient(90deg, #5b5fc7, #3b82f6);">
-        <i class="bi bi-paw-fill"></i>
-      </span>
-      <h6 class="mb-0">Sittr</h6>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 text-white shadow">
+          <i class="bi bi-paw-fill"></i>
+        </span>
+        <div class="font-semibold">Sittr</div>
+      </div>
+      <div class="text-xs text-slate-500">Find caretakers you can trust</div>
     </div>
-    <small class="text-muted">Find caretakers you can trust</small>
-  </div>
 
-  <div class="d-flex align-items-center gap-2">
-    <div class="d-none d-md-flex align-items-center gap-2">
-      <span class="badge text-bg-light border">
-        <i class="bi bi-shield-check"></i> Verified reviews
-      </span>
-      <span class="badge text-bg-light border">
-        <i class="bi bi-lightning-charge"></i> No account
-      </span>
+    <div class="flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-2 text-xs text-slate-500">
+        <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1">
+          <i class="bi bi-shield-check text-teal-600"></i> Verified reviews
+        </span>
+        <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1">
+          <i class="bi bi-lightning-charge text-teal-600"></i> No account
+        </span>
+      </div>
+      <button class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-700 md:hidden"
+              type="button" data-bs-toggle="offcanvas" data-bs-target="#sittrSidebar" aria-controls="sittrSidebar">
+        <i class="bi bi-list"></i>
+      </button>
     </div>
-    <button class="btn btn-outline-secondary d-md-none" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#sittrSidebar" aria-controls="sittrSidebar">
-      <i class="bi bi-list"></i>
-    </button>
   </div>
 </div>

@@ -1,2 +1,7 @@
 .env
 .idea
+
+.django_tailwind_cli/
+
+
+media/
