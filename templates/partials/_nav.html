@@ -1,13 +1,19 @@
+{% load static %}
 {% with url_name=request.resolver_match.url_name %}
-<div class="flex items-center gap-3">
-  <div class="h-10 w-10 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
-    <i class="bi bi-paw-fill text-lg"></i>
+<a href="{% url 'home' %}" class="flex items-center gap-3 text-decoration-none">
+  <div class="h-12 w-12 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
+    <img
+      src="{% static 'images/logo.png' %}"
+      alt="Sittr"
+      class="h-12 w-12 rounded-xl object-cover"
+    />
   </div>
+
   <div class="leading-tight">
-    <div class="font-semibold">Sittr</div>
+    <div class="font-semibold text-white">Sittr</div>
     <div class="text-xs text-white/70">Caretakers you can trust</div>
   </div>
-</div>
+</a>
 
 <div class="my-5 h-px bg-white/10"></div>
 

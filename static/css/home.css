@@ -1,0 +1,40 @@
+/* static/css/home.css */
+.home-landing img { max-width: 100%; height: auto; }
+
+/* Ensure hero image panels keep their height */
+.home-landing .hero-media { position: relative; min-height: 420px; }
+.home-landing .hero-media > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Make the pill consistent regardless of Bootstrap/Tailwind */
+.home-landing .pill {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  background: rgba(255,255,255,.95);
+}
+
+.home-landing .pill input,
+.home-landing .pill select,
+.home-landing .pill button {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.home-landing .pill input,
+.home-landing .pill select {
+  height: 44px;
+  padding: 0 14px;
+  background: transparent;
+}
+
+.home-landing .pill button {
+  height: 44px;
+  padding: 0 20px;
+}
