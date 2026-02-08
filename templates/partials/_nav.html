@@ -1,3 +1,4 @@
+{% with url_name=request.resolver_match.url_name %}
 <div class="mb-3">
   <div class="d-flex align-items-center gap-2">
     <div class="bg-white text-dark rounded-4 d-flex align-items-center justify-content-center"
@@ -14,11 +15,13 @@
 <hr class="border-secondary my-3">
 
 <nav class="sittr-nav nav nav-pills flex-column gap-1">
-  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'home' %}">
+  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'home' %}active{% endif %}"
+     href="{% url 'home' %}">
     <i class="bi bi-house-door"></i> Home
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'about' %}">
+  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'about' %}active{% endif %}"
+     href="{% url 'about' %}">
     <i class="bi bi-info-circle"></i> About
   </a>
 
@@ -26,7 +29,7 @@
 
 
   <div class="dropdown">
-  <a class="nav-link d-flex align-items-center gap-2 dropdown-toggle"
+  <a class="nav-link d-flex align-items-center gap-2 dropdown-toggle {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' or url_name == 'caretaker_edit' or url_name == 'caretaker_delete' %}active{% endif %}"
      href="{% url 'caretaker_list' %}"
      role="button"
      data-bs-toggle="dropdown"
@@ -36,12 +39,14 @@
 
   <ul class="dropdown-menu">
     <li>
-      <a class="dropdown-item" href="{% url 'caretaker_list' %}">
+      <a class="dropdown-item {% if url_name == 'caretaker_list' %}active{% endif %}"
+         href="{% url 'caretaker_list' %}">
         <i class="bi bi-list-ul me-2"></i> Browse caretakers
       </a>
     </li>
     <li>
-      <a class="dropdown-item" href="{% url 'caretaker_create' %}">
+      <a class="dropdown-item {% if url_name == 'caretaker_create' %}active{% endif %}"
+         href="{% url 'caretaker_create' %}">
         <i class="bi bi-plus-circle me-2"></i> Add caretaker
       </a>
     </li>
@@ -49,15 +54,18 @@
 </div>
 
 
-  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'service_list' %}">
+  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}active{% endif %}"
+     href="{% url 'service_list' %}">
     <i class="bi bi-briefcase"></i> Services
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'hire_request_list' %}">
+  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' %}active{% endif %}"
+     href="{% url 'hire_request_list' %}">
     <i class="bi bi-envelope-paper"></i> Requests
   </a>
 
-  <a class="nav-link d-flex align-items-center gap-2" href="{% url 'review_list' %}">
+  <a class="nav-link d-flex align-items-center gap-2 {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' %}active{% endif %}"
+     href="{% url 'review_list' %}">
     <i class="bi bi-star"></i> Reviews
   </a>
 </nav>
@@ -70,3 +78,4 @@
     Start with <span class="text-white">Caretakers</span>, then filter by service, pet type and price.
   </div>
 </div>
+{% endwith %}

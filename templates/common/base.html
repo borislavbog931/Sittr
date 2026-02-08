@@ -1,15 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
+  {% load static %}
+  {% load tailwind_tags %}
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Sittr{% endblock %}</title>
 
+  <!-- Optional: load Poppins from Google Fonts since hero.css references it -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
+  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+
+  {% tailwind_css %}
+
+  <!-- Your custom CSS (after Bootstrap so it can override) -->
+  <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
   <style>
     :root{
@@ -20,7 +35,6 @@
 
     body { background: var(--sittr-bg); }
 
-
     .sittr-sidebar {
       background: linear-gradient(180deg, #1f1b3a 0%, #2b2b6b 40%, #3b2d7a 100%);
     }
@@ -28,9 +42,9 @@
     .sittr-sidebar .dropdown:hover > .dropdown-menu{
         display:block;
     }
-    /* Sidebar dropdown bubble styling */
+
     .sittr-sidebar .dropdown-menu {
-      background: rgba(255, 255, 255, 0.08); /* blue-ish glass */
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 14px;
       padding: 0.35rem;
@@ -39,24 +53,20 @@
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
     }
 
-    /* dropdown item text */
     .sittr-sidebar .dropdown-menu .dropdown-item {
       color: rgba(255, 255, 255, 0.92);
       border-radius: 10px;
       padding: 0.55rem 0.75rem;
     }
 
-    /* hover */
     .sittr-sidebar .dropdown-menu .dropdown-item:hover {
-      background: rgba(91, 95, 199, 0.28); /* sittr purple-blue */
+      background: rgba(91, 95, 199, 0.28);
       color: #fff;
     }
 
-    /* remove default bootstrap caret underline feel */
     .sittr-sidebar .dropdown-toggle::after {
       opacity: 0.75;
     }
-
 
     .sittr-nav .nav-link {
       color: rgba(255,255,255,0.85);
@@ -72,7 +82,6 @@
       color: #fff;
     }
 
-    /* Accent button */
     .btn-sittr {
       background: linear-gradient(90deg, var(--sittr-primary), var(--sittr-primary-2));
       border: none;
@@ -80,7 +89,6 @@
     }
     .btn-sittr:hover { filter: brightness(0.95); color: #fff; }
 
-    /* Cards */
     .card.sittr-card {
       border: 0;
       box-shadow: 0 8px 24px rgba(18, 18, 50, 0.08);
@@ -92,42 +100,49 @@
 <body>
   <div class="d-flex">
 
-
-    <aside class="sittr-sidebar text-white p-3 d-flex flex-column"
+    <aside class="sittr-sidebar text-white p-3 d-none d-md-flex flex-column"
            style="width: 260px; min-height: 100vh;">
       {% include "partials/_nav.html" %}
     </aside>
 
-    <!-- Main column -->
     <div class="flex-grow-1 d-flex flex-column" style="min-height: 100vh;">
 
-      <!-- Top header -->
       <header class="bg-white border-bottom sticky-top">
         {% include "partials/_header.html" %}
       </header>
 
+      <div class="offcanvas offcanvas-start sittr-sidebar text-white d-md-none" tabindex="-1" id="sittrSidebar"
+           aria-labelledby="sittrSidebarLabel">
+        <div class="offcanvas-header">
+          <div class="fw-semibold" id="sittrSidebarLabel">Menu</div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                  aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+          {% include "partials/_nav.html" %}
+        </div>
+      </div>
+
       <main class="container py-4 flex-grow-1">
         {% if messages %}
-            <div class="mb-3">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
+          <div class="mb-3">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
         {% endif %}
 
         {% block page_header %}{% endblock %}
-
         {% block content %}{% endblock %}
       </main>
-
 
       <footer class="bg-white border-top">
         {% include "partials/_footer.html" %}
       </footer>
-    </div>
 
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

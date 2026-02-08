@@ -1,0 +1,40 @@
+/* Checkbox lists rendered by Django CheckboxSelectMultiple */
+.sittr-checklist {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .5rem;
+}
+
+/* each item */
+.sittr-checklist li {
+  margin: 0;
+}
+
+/* label wraps input + text in Django's default renderer */
+.sittr-checklist li label {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+
+  padding: .55rem .75rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.6);
+}
+
+/* checkbox itself */
+.sittr-checklist input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+}
+
+/* hover */
+.sittr-checklist li label:hover {
+  background: rgba(91, 95, 199, 0.08); /* matches Sittr vibe */
+  border-color: rgba(91, 95, 199, 0.35);
+}

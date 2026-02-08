@@ -46,6 +46,11 @@
       <div class="card-body p-4">
         <div class="fw-semibold mb-1">No services yet</div>
         <div class="text-muted">Add services in the admin panel to see them here.</div>
+        <div class="mt-3">
+          <a class="btn btn-sittr" href="{% url 'service_create' %}">
+            <i class="bi bi-plus-circle me-2"></i> Add service
+          </a>
+        </div>
       </div>
     </div>
   {% endif %}

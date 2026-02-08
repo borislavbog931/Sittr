@@ -14,10 +14,7 @@
     </a>
   </div>
   
-  <div class="sittr-page-header">
-    <h1 class="h3 mb-1">Caretakers</h1>
-    <div class="text-muted">Browse by city, services, pet types, and price.</div>
-  </div>
+  
 {% endblock %}
 
 {% block content %}
@@ -162,6 +159,11 @@
       <div class="card-body p-4">
         <div class="fw-semibold mb-1">No caretakers yet</div>
         <div class="text-muted">Add caretakers from the admin panel to see them here.</div>
+        <div class="mt-3">
+          <a class="btn btn-sittr" href="{% url 'caretaker_create' %}">
+            <i class="bi bi-plus-circle me-2"></i> Add caretaker
+          </a>
+        </div>
       </div>
     </div>
   {% endif %}

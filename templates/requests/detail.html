@@ -10,7 +10,7 @@
       <a href="{% url 'caretaker_detail' hire_request.caretaker.slug %}" class="text-decoration-none">
         {{ hire_request.caretaker.name }}
       </a>
-      • {{ hire_request.caretaker.city }}
+      - {{ hire_request.caretaker.city }}
     </div>
   </div>
 {% endblock %}
@@ -34,7 +34,7 @@
           <h2 class="h5 mb-3">Request details</h2>
           <div class="mb-2"><span class="fw-semibold">Pet type:</span> {{ hire_request.pet_type.name }}</div>
           <div class="mb-2"><span class="fw-semibold">Service:</span> {{ hire_request.service.name }}</div>
-          <div class="mb-0"><span class="fw-semibold">Dates:</span> {{ hire_request.start_date }} → {{ hire_request.end_date }}</div>
+          <div class="mb-0"><span class="fw-semibold">Dates:</span> {{ hire_request.start_date }} -> {{ hire_request.end_date }}</div>
         </div>
       </div>
     </div>

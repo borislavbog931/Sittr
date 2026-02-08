@@ -4,89 +4,220 @@
 
 {% block page_header %}
   <div class="sittr-page-header">
-    <h1 class="h3 mb-1">Create caretaker</h1>
-    <div class="text-muted">Add a caretaker profile.</div>
+    <div class="d-flex align-items-start justify-content-between gap-3 flex-wrap">
+      <div>
+        <h1 class="h3 mb-1">Create caretaker</h1>
+        <div class="text-muted">Add a caretaker profile.</div>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
 {% block content %}
   <div class="card sittr-card">
-    <div class="card-body p-4 p-md-5">
-      <form method="post" enctype="multipart/form-data" class="vstack gap-3">
+    <div class="card-body p-4 p-lg-5">
+
+      {# Top error summary (non-field errors) #}
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger mb-4" role="alert">
+          <div class="fw-semibold mb-1">Please fix the errors below.</div>
+          <div>{{ form.non_field_errors }}</div>
+        </div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
 
-        {{ form.non_field_errors }}
-
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Name</label>
-            {{ form.name }}
-            <div class="text-danger small">{{ form.name.errors }}</div>
+        {# SECTION: Basics #}
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="rounded-circle bg-light border" style="width: 34px; height: 34px; display:grid; place-items:center;">
+              <i class="bi bi-person"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Basics</div>
+              <div class="text-muted small">Public info shown on the caretaker profile.</div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">City</label>
-            {{ form.city }}
-            <div class="text-danger small">{{ form.city.errors }}</div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.name.id_for_label }}">Name</label>
+              {{ form.name }}
+              {% if form.name.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.name.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.city.id_for_label }}">City</label>
+              {{ form.city }}
+              {% if form.city.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.city.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="{{ form.bio.id_for_label }}">Bio</label>
+              {{ form.bio }}
+              <div class="form-text">A short intro helps owners decide faster (experience, availability, preferences).</div>
+              {% if form.bio.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.bio.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
           </div>
         </div>
 
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Email</label>
-            {{ form.email }}
-            <div class="text-danger small">{{ form.email.errors }}</div>
+        <hr class="my-4">
+
+        {# SECTION: Contact #}
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="rounded-circle bg-light border" style="width: 34px; height: 34px; display:grid; place-items:center;">
+              <i class="bi bi-envelope"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Contact</div>
+              <div class="text-muted small">Used for booking and communication.</div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">Phone</label>
-            {{ form.phone_number }}
-            <div class="text-danger small">{{ form.phone_number.errors }}</div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+              {{ form.email }}
+              {% if form.email.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.email.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.phone_number.id_for_label }}">Phone</label>
+              {{ form.phone_number }}
+              {% if form.phone_number.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.phone_number.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
           </div>
         </div>
 
-        <div>
-          <label class="form-label">Bio</label>
-          {{ form.bio }}
-          <div class="text-danger small">{{ form.bio.errors }}</div>
-        </div>
+        <hr class="my-4">
 
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Price per hour</label>
-            {{ form.price_per_hour }}
-            <div class="text-danger small">{{ form.price_per_hour.errors }}</div>
+        {# SECTION: Pricing + Photo #}
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="rounded-circle bg-light border" style="width: 34px; height: 34px; display:grid; place-items:center;">
+              <i class="bi bi-wallet2"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Pricing & profile photo</div>
+              <div class="text-muted small">Set your hourly rate and a friendly picture.</div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">Profile picture</label>
-            {{ form.profile_pic }}
-            <div class="text-danger small">{{ form.profile_pic.errors }}</div>
+
+          <div class="row g-3 align-items-end">
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.price_per_hour.id_for_label }}">Price per hour</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                {{ form.price_per_hour }}
+              </div>
+              {% if form.price_per_hour.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.price_per_hour.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="{{ form.profile_pic.id_for_label }}">Profile picture</label>
+              {{ form.profile_pic }}
+              <div class="form-text">JPG/PNG works best. Keep it clear and friendly.</div>
+              {% if form.profile_pic.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.profile_pic.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
           </div>
         </div>
 
-        <div>
-          <label class="form-label">Services</label>
-          <div class="border rounded-4 p-3">
-            {{ form.services }}
+        <hr class="my-4">
+
+        {# SECTION: Preferences #}
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="rounded-circle bg-light border" style="width: 34px; height: 34px; display:grid; place-items:center;">
+              <i class="bi bi-heart"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Services & pet types</div>
+              <div class="text-muted small">Pick what you offer and what pets you work with.</div>
+            </div>
           </div>
-          <div class="text-danger small">{{ form.services.errors }}</div>
-        </div>
 
-        <div>
-          <label class="form-label">Pet types</label>
-          <div class="border rounded-4 p-3">
-            {{ form.pet_types }}
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <label class="form-label" for="{{ form.services.id_for_label }}">Services</label>
+              <div class="p-3 rounded-4 border bg-light">
+                {{ form.services }}
+              </div>
+              {% if form.services.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.services.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-lg-6">
+              <label class="form-label" for="{{ form.pet_types.id_for_label }}">Pet types</label>
+              <div class="p-3 rounded-4 border bg-light">
+                {{ form.pet_types }}
+              </div>
+              {% if form.pet_types.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ form.pet_types.errors|striptags }}
+                </div>
+              {% endif %}
+            </div>
           </div>
-          <div class="text-danger small">{{ form.pet_types.errors }}</div>
         </div>
 
-        <div class="form-check">
-          {{ form.active }}
-          <label class="form-check-label">Active</label>
-          <div class="text-danger small">{{ form.active.errors }}</div>
-        </div>
+        <hr class="my-4">
 
-        <div class="d-flex gap-2">
-          <button class="btn btn-sittr" type="submit">Create</button>
-          <a class="btn btn-outline-secondary" href="{% url 'caretaker_list' %}">Cancel</a>
+        {# SECTION: Status + Actions #}
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+          <div class="form-check m-0">
+            {{ form.active }}
+            <label class="form-check-label" for="{{ form.active.id_for_label }}">
+              Active
+            </label>
+            {% if form.active.errors %}
+              <div class="invalid-feedback d-block">
+                {{ form.active.errors|striptags }}
+              </div>
+            {% endif %}
+            <div class="form-text">Inactive profiles won't show up in search.</div>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-sittr px-4" type="submit">
+              <i class="bi bi-check2-circle me-1"></i> Create
+            </button>
+            <a class="btn btn-outline-secondary px-4" href="{% url 'caretaker_list' %}">
+              Cancel
+            </a>
+          </div>
         </div>
       </form>
     </div>
