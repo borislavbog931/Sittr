@@ -144,3 +144,55 @@ Open in browser:
 http://127.0.0.1:8000/
 
 ---
+## 📂 Project Structure
+
+```
+Sittr/
+│
+├── common/        # Home, About, 404
+├── caretakers/    # Caretaker model, filtering, detail
+├── services/      # Services and Pet Types
+├── reviews/       # Review system
+├── requests/      # Hire request functionality
+│
+├── static/
+│   ├── css/
+│   └── images/
+│
+├── templates/
+└── media/
+```
+
+---
+
+## 📊 Core Logic Overview
+
+### Homepage
+
+Displays top 3 caretakers ordered by:
+
+- Highest average rating  
+- Highest review count  
+- Active status only  
+
+### Filtering System
+
+Supports:
+
+- City  
+- Service  
+- Pet type  
+- Maximum price  
+
+Uses `.distinct()` to prevent duplicate query results.
+
+---
+
+## 🧪 Future Improvements
+
+- Authentication system  
+- Caretaker dashboard  
+- Messaging system  
+- Booking calendar  
+- Docker deployment  
+- Production WSGI/ASGI configuration  
