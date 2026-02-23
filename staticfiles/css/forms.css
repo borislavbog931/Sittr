@@ -21,9 +21,9 @@
   gap: .6rem;
 
   padding: .55rem .75rem;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid rgba(20, 184, 166, 0.25);
   border-radius: 12px;
-  background: rgba(255,255,255,.6);
+  background: rgba(248, 250, 252, 0.9);
 }
 
 /* checkbox itself */
@@ -35,6 +35,6 @@
 
 /* hover */
 .sittr-checklist li label:hover {
-  background: rgba(91, 95, 199, 0.08); /* matches Sittr vibe */
-  border-color: rgba(91, 95, 199, 0.35);
+  background: rgba(20, 184, 166, 0.10);
+  border-color: rgba(20, 184, 166, 0.5);
 }

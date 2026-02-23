@@ -25,13 +25,28 @@ def review_create(request, caretaker_slug):
     caretaker = get_object_or_404(Caretaker, slug=caretaker_slug)
     if request.method == "POST":
         form = ReviewForm(request.POST)
-        form.fields["caretaker_display"].initial = f"{caretaker.name} ({caretaker.city})"
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.caretaker = caretaker
-            review.save()
-            return redirect('caretaker_detail', slug=caretaker.slug)
     else:
         form = ReviewForm()
-        form.fields["caretaker_display"].initial = f"{caretaker.name} ({caretaker.city})"
+
+    form.fields["caretaker"].initial = caretaker
+    form.fields["caretaker"].disabled = True
+
+    if request.method == "POST" and form.is_valid():
+        review = form.save(commit=False)
+        review.caretaker = caretaker
+        review.save()
+        return redirect('caretaker_detail', slug=caretaker.slug)
+
     return render(request, "reviews/create.html", {"form": form, "caretaker": caretaker})
+
+
+def review_create_general(request):
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save()
+            return redirect("review_detail", pk=review.pk)
+    else:
+        form = ReviewForm()
+
+    return render(request, "reviews/create.html", {"form": form})

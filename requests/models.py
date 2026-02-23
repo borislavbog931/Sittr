@@ -1,8 +1,8 @@
-from django.core.validators import MinLengthValidator
 from django.db import models
 
 from caretakers.models import Caretaker
 from services.models import Service, PetType
+from .validators import start_date_not_past
 
 
 class HireRequest(models.Model):
@@ -43,7 +43,7 @@ class HireRequest(models.Model):
         related_name="hire_requests",
     )
 
-    start_date = models.DateField()
+    start_date = models.DateField(validators=[start_date_not_past])
     end_date = models.DateField()
 
     notes = models.TextField(blank=True)

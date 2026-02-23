@@ -9,12 +9,10 @@
   object-fit: cover;
 }
 
-/* Make the pill consistent */
+/* Make the pill consistent regardless of Bootstrap/Tailwind */
 .home-landing .pill {
   display: flex;
   align-items: stretch;
-  flex-wrap: wrap;
-  gap: 8px;
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
@@ -39,20 +37,6 @@
 .home-landing .pill button {
   height: 44px;
   padding: 0 20px;
-}
-
-@media (max-width: 640px) {
-  .home-landing .pill {
-    padding: 8px;
-  }
-
-  .home-landing .pill > * {
-    flex: 1 1 100%;
-  }
-
-  .home-landing .pill button {
-    width: 100%;
-  }
 }
 /*!* Ensure the right hero image always fills its column *!*/
 /*.home-landing .hero-media {*/

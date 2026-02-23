@@ -1,4 +1,5 @@
 from django import forms
+from common.form_styles import BASE_CHECKBOX, BASE_INPUT, BASE_TEXTAREA
 from .models import Service
 
 class ServiceForm(forms.ModelForm):
@@ -12,24 +13,17 @@ class ServiceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        base_input = (
-            "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm "
-            "text-slate-900 placeholder:text-slate-400 focus:border-teal-400 "
-            "focus:outline-none focus:ring-2 focus:ring-teal-200"
-        )
-        base_textarea = base_input
-        base_checkbox = "h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-300"
-
         for field_name, field in self.fields.items():
             widget = field.widget
 
             if isinstance(widget, forms.Textarea):
-                widget.attrs.setdefault("class", base_textarea)
+                widget.attrs.setdefault("class", BASE_TEXTAREA)
                 continue
 
             if isinstance(widget, forms.CheckboxInput):
-                widget.attrs.setdefault("class", base_checkbox)
+                widget.attrs.setdefault("class", BASE_CHECKBOX)
                 continue
 
-            widget.attrs.setdefault("class", base_input)
+            widget.attrs.setdefault("class", BASE_INPUT)
+
 

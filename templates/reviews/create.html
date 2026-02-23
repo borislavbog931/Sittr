@@ -5,7 +5,11 @@
 {% block page_header %}
   <div class="mb-6">
     <h1 class="text-2xl font-semibold text-slate-900">Leave a review</h1>
-    <div class="text-sm text-slate-500">For {{ caretaker.name }} - {{ caretaker.city }}</div>
+    {% if caretaker %}
+      <div class="text-sm text-slate-500">For {{ caretaker.name }} - {{ caretaker.city }}</div>
+    {% else %}
+      <div class="text-sm text-slate-500">Share feedback about a caretaker</div>
+    {% endif %}
   </div>
 {% endblock %}
 
@@ -24,24 +28,31 @@
       <div class="space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-person"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Caretaker</div>
-            <div class="text-xs text-slate-500">You're reviewing the caretaker below.</div>
+            {% if caretaker %}
+              <div class="text-xs text-slate-500">You're reviewing the caretaker below.</div>
+            {% else %}
+              <div class="text-xs text-slate-500">Choose the caretaker you want to review.</div>
+            {% endif %}
           </div>
         </div>
 
         <div>
-          <label class="text-xs font-semibold text-slate-600" for="{{ form.caretaker_display.id_for_label }}">{{ form.caretaker_display.label }}</label>
-          <div class="mt-2">{{ form.caretaker_display }}</div>
+          <label class="text-xs font-semibold text-slate-600" for="{{ form.caretaker.id_for_label }}">Caretaker</label>
+          <div class="mt-2">{{ form.caretaker }}</div>
+          {% if form.caretaker.errors %}
+            <div class="mt-1 text-xs text-rose-600">{{ form.caretaker.errors|striptags }}</div>
+          {% endif %}
         </div>
       </div>
 
       <div class="border-t border-slate-100 pt-6 space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-star"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Your review</div>
@@ -79,12 +90,19 @@
       <div class="flex flex-wrap gap-2">
         <button class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700"
                 type="submit">
-          <i class="bi bi-check2-circle"></i> Submit review
+          <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Submit review
         </button>
-        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-           href="{% url 'caretaker_detail' caretaker.slug %}">
-          Cancel
-        </a>
+        {% if caretaker %}
+          <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
+             href="{% url 'caretaker_detail' caretaker.slug %}">
+            Cancel
+          </a>
+        {% else %}
+          <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
+             href="{% url 'review_list' %}">
+            Cancel
+          </a>
+        {% endif %}
       </div>
     </form>
   </section>

@@ -24,7 +24,7 @@
       <div class="space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-person"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Basics</div>
@@ -65,7 +65,7 @@
       <div class="border-t border-slate-100 pt-6 space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-envelope"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-envelope"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Contact</div>
@@ -95,7 +95,7 @@
       <div class="border-t border-slate-100 pt-6 space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-wallet2"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-wallet2"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Pricing & profile photo</div>
@@ -129,7 +129,7 @@
       <div class="border-t border-slate-100 pt-6 space-y-4">
         <div class="flex items-center gap-3">
           <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <i class="bi bi-heart"></i>
+            <svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg>
           </span>
           <div>
             <div class="text-sm font-semibold text-slate-900">Services & pet types</div>
@@ -175,7 +175,7 @@
         <div class="flex flex-wrap gap-2">
           <button class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700"
                   type="submit">
-            <i class="bi bi-check2-circle"></i> Create
+            <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Create
           </button>
           <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
              href="{% url 'caretaker_list' %}">
@@ -185,4 +185,4 @@
       </div>
     </form>
   </section>
-{% endblock %}
+  {% endblock %}

@@ -12,21 +12,37 @@ def hire_request_create(request, caretaker_slug):
 
     if request.method == "POST":
         form = HireRequestForm(request.POST)
-        if form.is_valid():
-            hire_request = form.save(commit=False)
-            hire_request.caretaker = caretaker
-            hire_request.save()
-            messages.success(request, "Request sent successfully! The caretaker will contact you soon.")
-            return redirect("caretaker_detail", slug=caretaker.slug)
     else:
         form = HireRequestForm()
-    form.fields['caretaker_display'].initial = f'{caretaker.name} ({caretaker.city})'
+
+    form.fields["caretaker"].initial = caretaker
+    form.fields["caretaker"].disabled = True
+
+    if request.method == "POST" and form.is_valid():
+        hire_request = form.save(commit=False)
+        hire_request.caretaker = caretaker
+        hire_request.save()
+        messages.success(request, "Request sent successfully! The caretaker will contact you soon.")
+        return redirect("caretaker_detail", slug=caretaker.slug)
 
     context = {
         "caretaker": caretaker,
         "form": form,
     }
     return render(request, "requests/create.html", context)
+
+
+def hire_request_create_general(request):
+    if request.method == "POST":
+        form = HireRequestForm(request.POST)
+        if form.is_valid():
+            hire_request = form.save()
+            messages.success(request, "Request submitted successfully.")
+            return redirect("hire_request_detail", pk=hire_request.pk)
+    else:
+        form = HireRequestForm()
+
+    return render(request, "requests/create.html", {"form": form})
 
 
 def hire_request_list(request):

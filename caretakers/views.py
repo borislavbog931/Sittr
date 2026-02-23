@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 
 from caretakers.forms import CaretakerForm
 from caretakers.models import Caretaker
@@ -11,13 +12,20 @@ from services.models import Service, PetType
 #     return render(request, "caretakers/list.html", context)
 
 def caretaker_detail(request, slug):
-    caretaker = get_object_or_404(Caretaker.objects.prefetch_related("reviews"), slug=slug, active=True)
+    caretaker = get_object_or_404(
+        Caretaker.objects.filter(active=True)
+        .prefetch_related("reviews", "services", "pet_types"),
+        slug=slug,
+    )
     context = {'caretaker': caretaker}
     return render(request, "caretakers/detail.html", context)
 
 
 def caretaker_list(request):
-    caretakers = Caretaker.objects.filter(active=True)
+    caretakers = (
+        Caretaker.objects.filter(active=True)
+        .prefetch_related("services", "pet_types")
+    )
 
     city = (request.GET.get("city") or "").strip()
     service_id = request.GET.get("service") or ""
@@ -59,6 +67,7 @@ def caretaker_create(request):
         form = CaretakerForm(request.POST, request.FILES)
         if form.is_valid():
             caretaker = form.save()
+            messages.success(request, "Caretaker created successfully.")
             return redirect('caretaker_detail', slug = caretaker.slug)
     else:
         form = CaretakerForm()
@@ -70,6 +79,7 @@ def caretaker_edit(request, slug):
         form = CaretakerForm(request.POST, request.FILES, instance=caretaker)
         if form.is_valid():
             caretaker = form.save()
+            messages.success(request, "Caretaker updated successfully.")
             return redirect('caretaker_detail', slug=caretaker.slug)
     else:
         form = CaretakerForm(instance=caretaker)

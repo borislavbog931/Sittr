@@ -19,7 +19,7 @@
       {% csrf_token %}
       <button class="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-5 py-2 text-sm font-semibold text-white hover:bg-rose-700"
               type="submit">
-        <i class="bi bi-trash"></i> Delete
+        <svg class="icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete
       </button>
       <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
          href="{% url 'caretaker_detail' caretaker.slug %}">

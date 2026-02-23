@@ -36,10 +36,10 @@ def service_edit(request, pk):
         if form.is_valid():
             service = form.save()
             return redirect("service_detail", pk=service.pk)
-        else:
-            form = ServiceForm(instance=service)
-        context = {"form": form, "service": service}
-        return render(request, "services/edit.html", context)
+    else:
+        form = ServiceForm(instance=service)
+    context = {"form": form, "service": service}
+    return render(request, "services/edit.html", context)
 
 def service_delete(request, pk):
     service = get_object_or_404(Service, pk=pk)

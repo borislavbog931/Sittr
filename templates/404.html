@@ -21,15 +21,15 @@
       <div class="mt-6 flex flex-wrap gap-2">
         <a class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700"
            href="{% url 'home' %}">
-          <i class="bi bi-house-door"></i> Go home
+          <svg class="icon" aria-hidden="true"><use href="#icon-house-door"></use></svg> Go home
         </a>
         <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
            href="{% url 'caretaker_list' %}">
-          <i class="bi bi-people"></i> Browse caretakers
+          <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Browse caretakers
         </a>
         <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
            href="{% url 'service_list' %}">
-          <i class="bi bi-briefcase"></i> Services
+          <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> Services
         </a>
       </div>
 
@@ -41,7 +41,7 @@
     <aside class="rounded-3xl bg-gradient-to-br from-teal-600 to-cyan-700 p-6 text-white shadow">
       <div class="flex items-center gap-3">
         <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
-          <i class="bi bi-compass text-2xl"></i>
+          <svg class="icon text-2xl" aria-hidden="true"><use href="#icon-compass"></use></svg>
         </span>
         <div>
           <div class="text-sm font-semibold">Lost?</div>
@@ -52,23 +52,23 @@
       <div class="mt-5 space-y-2 text-sm">
         <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
            href="{% url 'caretaker_list' %}">
-          <span><i class="bi bi-people"></i> Caretakers</span>
-          <i class="bi bi-chevron-right"></i>
+          <span><svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
         </a>
         <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
            href="{% url 'hire_request_list' %}">
-          <span><i class="bi bi-envelope-paper"></i> Requests</span>
-          <i class="bi bi-chevron-right"></i>
+          <span><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Requests</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
         </a>
         <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
            href="{% url 'review_list' %}">
-          <span><i class="bi bi-star"></i> Reviews</span>
-          <i class="bi bi-chevron-right"></i>
+          <span><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
         </a>
         <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
            href="{% url 'about' %}">
-          <span><i class="bi bi-info-circle"></i> About</span>
-          <i class="bi bi-chevron-right"></i>
+          <span><svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
         </a>
       </div>
 

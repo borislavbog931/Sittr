@@ -1,4 +1,4 @@
-{# templates/caretakers/caretaker_list.html #}
+
 {% extends "common/base.html" %}
 
 {% block title %}Caretakers | Sittr{% endblock %}
@@ -11,10 +11,10 @@
   </div>
 
   <a
-    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow hover:brightness-110 text-decoration-none"
+    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow hover:brightness-110 no-underline"
     href="{% url 'caretaker_create' %}"
   >
-    <i class="bi bi-plus-circle"></i> Add caretaker
+    <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
   </a>
 </div>
 {% endblock %}
@@ -83,11 +83,11 @@
         type="submit"
         class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
       >
-        <i class="bi bi-funnel"></i> Filter
+        <svg class="icon" aria-hidden="true"><use href="#icon-funnel"></use></svg> Filter
       </button>
 
       <a
-        class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700 text-decoration-none"
+        class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700 no-underline"
         href="{% url 'caretaker_list' %}"
       >
         Reset
@@ -108,8 +108,7 @@
       <div class="group rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
         <div class="flex items-start gap-4">
 
-          <!-- Avatar: bulletproof fixed size (56x56) -->
-          <a href="{% url 'caretaker_detail' caretaker.slug %}" class="flex-none text-decoration-none">
+          <a href="{% url 'caretaker_detail' caretaker.slug %}" class="flex-none no-underline">
             {% if caretaker.profile_pic %}
               <img
                 src="{{ caretaker.profile_pic.url }}"
@@ -123,7 +122,7 @@
                 class="rounded-2xl ring-1 ring-slate-200 bg-slate-100 flex items-center justify-center text-slate-400"
                 style="width:56px; height:56px;"
               >
-                <i class="bi bi-person"></i>
+                <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
               </div>
             {% endif %}
           </a>
@@ -133,12 +132,12 @@
               <div class="min-w-0">
                 <a
                   href="{% url 'caretaker_detail' caretaker.slug %}"
-                  class="block text-sm font-semibold text-slate-900 truncate text-decoration-none group-hover:text-teal-700"
+                  class="block text-sm font-semibold text-slate-900 truncate no-underline group-hover:text-teal-700"
                 >
                   {{ caretaker.name }}
                 </a>
                 <div class="mt-1 text-xs text-slate-500 truncate">
-                  <i class="bi bi-geo-alt"></i> {{ caretaker.city }}
+                  <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}
                 </div>
               </div>
 
@@ -184,18 +183,18 @@
               <div class="text-xs text-slate-500">
                 {% with avg=caretaker.average_rating %}
                   {% if avg %}
-                    <i class="bi bi-star-fill text-teal-500"></i> {{ avg|floatformat:1 }}/10
+                    <svg class="icon text-teal-500" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10
                   {% else %}
-                    <i class="bi bi-star"></i> No reviews
+                    <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
                   {% endif %}
                 {% endwith %}
               </div>
 
               <a
-                class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-3 py-2 text-xs font-semibold text-white hover:bg-teal-700 text-decoration-none"
+                class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-3 py-2 text-xs font-semibold text-white hover:bg-teal-700 no-underline"
                 href="{% url 'caretaker_detail' caretaker.slug %}"
               >
-                View <i class="bi bi-arrow-right"></i>
+                View <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
               </a>
             </div>
           </div>
@@ -210,10 +209,10 @@
     <div class="mt-1">Add caretakers from the admin panel to see them here.</div>
     <div class="mt-4">
       <a
-        class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 text-decoration-none"
+        class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 no-underline"
         href="{% url 'caretaker_create' %}"
       >
-        <i class="bi bi-plus-circle"></i> Add caretaker
+        <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
       </a>
     </div>
   </div>
