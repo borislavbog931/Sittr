@@ -46,7 +46,7 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/Sittr.git
+git clone https://github.com/borislavbog931/Sittr.git
 cd Sittr
 ```
 
