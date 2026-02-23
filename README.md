@@ -41,3 +41,106 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 - Bootstrap Icons
 
 ---
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/your-username/Sittr.git
+cd Sittr
+```
+
+---
+
+## 2️⃣ Create & Activate Virtual Environment
+
+### Windows
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### Mac/Linux
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4️⃣ Create `.env` File
+
+Create a file named `.env` in the project root and add:
+
+```
+SECRET_KEY=your-secret-key
+
+DB_NAME=sittr_db
+DB_USER=postgres
+DB_PASSWORD=yourpassword
+DB_HOST=127.0.0.1
+DB_PORT=5432
+```
+
+The project loads environment variables using:
+
+```python
+from dotenv import load_dotenv
+load_dotenv()
+```
+
+---
+
+## 5️⃣ Setup PostgreSQL Database
+
+Create database:
+
+```sql
+CREATE DATABASE sittr_db;
+```
+
+---
+
+## 6️⃣ Apply Migrations
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## 7️⃣ Create Admin User
+
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+## 8️⃣ Build Tailwind CSS
+
+```bash
+python manage.py tailwind build
+```
+
+---
+
+## 9️⃣ Run Development Server
+
+```bash
+python manage.py runserver
+```
+
+Open in browser:
+
+http://127.0.0.1:8000/
+
+---
