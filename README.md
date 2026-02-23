@@ -37,8 +37,6 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 - Django 6.0.2
 - PostgreSQL
 - Tailwind CSS (via django-tailwind-cli)
-- Bootstrap 5
-- Bootstrap Icons
 
 ---
 # ⚙️ Installation & Setup
