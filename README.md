@@ -25,7 +25,6 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 
 - 🎨 Modern UI
   - Django + Tailwind CLI
-  - Bootstrap 5
   - Responsive layout
   - Hero section with dynamic image blending
 
