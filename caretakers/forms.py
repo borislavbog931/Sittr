@@ -30,6 +30,33 @@ class CaretakerForm(forms.ModelForm):
             'services': forms.CheckboxSelectMultiple(),
             'pet_types': forms.CheckboxSelectMultiple(),
         }
+        error_messages = {
+            "name": {
+                "required": "Please enter the caretaker's name.",
+                "max_length": "Name cannot exceed 100 characters.",
+            },
+            "email": {
+                "required": "Please enter a contact email.",
+                "invalid": "Enter a valid email address.",
+                "unique": "This email is already in use.",
+            },
+            "phone_number": {
+                "required": "Please enter a phone number.",
+                "max_length": "Phone number cannot exceed 20 characters.",
+            },
+            "city": {
+                "required": "Please enter a city.",
+                "max_length": "City cannot exceed 50 characters.",
+            },
+            "price_per_hour": {
+                "required": "Please enter an hourly price.",
+                "invalid": "Enter a valid price.",
+                "min_value": "Hourly price must be zero or higher.",
+            },
+            "profile_pic": {
+                "invalid": "Please upload a valid image file.",
+            },
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

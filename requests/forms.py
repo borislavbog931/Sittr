@@ -25,6 +25,35 @@ class HireRequestForm(forms.ModelForm):
             "end_date": forms.DateInput(attrs={"type": "date"}),
             "notes": forms.Textarea(attrs={"rows": 4}),
         }
+        error_messages = {
+            "caretaker": {
+                "required": "Please choose a caretaker.",
+            },
+            "client_name": {
+                "required": "Please enter your name.",
+                "max_length": "Name cannot exceed 80 characters.",
+            },
+            "client_email": {
+                "invalid": "Enter a valid email address.",
+            },
+            "client_phone": {
+                "max_length": "Phone number cannot exceed 20 characters.",
+            },
+            "pet_type": {
+                "required": "Please choose a pet type.",
+            },
+            "service": {
+                "required": "Please choose a service.",
+            },
+            "start_date": {
+                "required": "Please select a start date.",
+                "invalid": "Enter a valid date.",
+            },
+            "end_date": {
+                "required": "Please select an end date.",
+                "invalid": "Enter a valid date.",
+            },
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

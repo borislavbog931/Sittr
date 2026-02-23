@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 
 from caretakers.models import Caretaker
 from services.forms import ServiceForm
@@ -10,41 +12,42 @@ def service_list(request):
     context = {"services": services}
     return render(request, "services/list.html", context)
 
-def service_detail(request,pk):
-    service = get_object_or_404(Service, pk=pk)
-    caretakers =(
-        Caretaker.objects.filter(services=service, active=True).distinct().order_by("name")
-    )
-    return render(request, "services/detail.html", {"service": service, "caretakers": caretakers})
+class ServiceDetailView(TemplateView):
+    template_name = "services/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        service = get_object_or_404(Service, pk=self.kwargs["pk"])
+        caretakers = (
+            Caretaker.objects.filter(services=service, active=True)
+            .distinct()
+            .order_by("name")
+        )
+        context["service"] = service
+        context["caretakers"] = caretakers
+        return context
 
 
-def service_create(request):
-    if request.method == "POST":
-        form = ServiceForm(request.POST)
-        if form.is_valid():
-            service = form.save()
-            return redirect("service_detail", pk=service.pk)
-    else:
-        form = ServiceForm()
-    return render(request, "services/create.html", {"form": form})
+class ServiceCreateView(CreateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = "services/create.html"
+
+    def get_success_url(self):
+        return reverse("service_detail", kwargs={"pk": self.object.pk})
 
 
-def service_edit(request, pk):
-    service = get_object_or_404(Service, pk=pk)
-    if request.method == "POST":
-        form = ServiceForm(request.POST, instance=service)
-        if form.is_valid():
-            service = form.save()
-            return redirect("service_detail", pk=service.pk)
-    else:
-        form = ServiceForm(instance=service)
-    context = {"form": form, "service": service}
-    return render(request, "services/edit.html", context)
+class ServiceUpdateView(UpdateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = "services/edit.html"
 
-def service_delete(request, pk):
-    service = get_object_or_404(Service, pk=pk)
+    def get_success_url(self):
+        return reverse("service_detail", kwargs={"pk": self.object.pk})
 
-    if request.method == "POST":
-        service.delete()
-        return redirect("service_list")
-    return render(request, 'services/delete.html', {"service": service})
+class ServiceDeleteView(DeleteView):
+    model = Service
+    template_name = "services/delete.html"
+
+    def get_success_url(self):
+        return reverse("service_list")
