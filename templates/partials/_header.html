@@ -1,92 +1,67 @@
 {% load static %}
 {% with url_name=request.resolver_match.url_name %}
-
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-  <div class="flex items-center gap-6 min-h-[80px]">
-
-    <a href="{% url 'home' %}" class="flex items-center gap-3 no-underline">
-      <span class="h-14 w-14 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
-        <img
-          src="{% static 'images/logo.png' %}"
-          alt="Sittr"
-          class="h-12 w-12 rounded-full object-cover"
-        />
+<div class="container-wide">
+  <div class="header-inner">
+    <a href="{% url 'home' %}" class="brand-link">
+      <span class="brand-mark">
+        <img src="{% static 'images/logo.png' %}" alt="Sittr">
       </span>
-      <span class="text-2xl font-semibold tracking-tight text-white" style="font-size:1.35rem;">Sittr</span>
+      <span class="brand-copy">
+        <strong>Sittr</strong>
+        <span>Trusted pet care</span>
+      </span>
     </a>
 
-    <div class="flex-1"></div>
+    <nav class="site-nav primary-nav">
+      <a href="{% url 'home' %}" class="nav-link {% if url_name == 'home' %}is-active{% endif %}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-home"></use></svg> Home
+      </a>
 
-    <div class="flex items-center gap-4">
-      <nav class="primary-nav flex flex-wrap items-center gap-3 text-sm font-medium text-white">
-        <a href="{% url 'home' %}"
-           class="{% if url_name == 'home' %}text-white{% else %}hover:text-white{% endif %} no-underline">
-          Home
-        </a>
+      <div class="dropdown">
+        <button
+          type="button"
+          class="nav-button {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' or url_name == 'caretaker_edit' or url_name == 'caretaker_delete' %}is-active{% endif %}"
+          aria-expanded="false"
+        >
+          <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+        </button>
 
-        <div class="dropdown">
-          <button
-            type="button"
-            class="flex items-center gap-2 rounded-xl px-3 py-2 transition border-0 bg-transparent text-white
-                   {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' %}
-                     text-white bg-white/15
-                   {% else %}
-                     text-white/90 hover:bg-white/10 hover:text-white
-                   {% endif %}"
-
-            aria-expanded="false"
-          >
-            <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers
-            <svg class="icon text-xs opacity-75" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
-          </button>
-
-          <ul class="dd-menu rounded-2xl border border-slate-200 bg-white shadow-lg p-1">
-            <li>
-              <a class="dd-item rounded-xl px-3 py-2 text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition"
-                 href="{% url 'caretaker_list' %}">
-                <svg class="icon me-2" aria-hidden="true"><use href="#icon-list"></use></svg> All caretakers
-              </a>
-            </li>
-            <li>
-              <a class="dd-item rounded-xl px-3 py-2 text-slate-900 hover:bg-slate-50 hover:text-slate-900 transition"
-                 href="{% url 'caretaker_create' %}">
-                <svg class="icon me-2" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <a href="{% url 'service_list' %}"
-           class="{% if url_name == 'service_list' or url_name == 'service_detail' %}text-white{% else %}hover:text-white{% endif %} no-underline">
-          Services
-        </a>
-
-        <a href="{% url 'review_list' %}"
-           class="{% if url_name == 'review_list' or url_name == 'review_detail' %}text-white{% else %}hover:text-white{% endif %} no-underline">
-          Reviews
-        </a>
-
-        <a href="{% url 'hire_request_list' %}"
-           class="{% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' or url_name == 'hire_request_create_general' %}text-white{% else %}hover:text-white{% endif %} no-underline">
-          Requests
-        </a>
-
-        <a href="{% url 'about' %}"
-           class="{% if url_name == 'about' %}text-white{% else %}hover:text-white{% endif %} no-underline">
-          About
-        </a>
-      </nav>
-
-      <div class="hidden lg:flex items-center gap-2 text-xs text-white/70">
-        <span class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/10 px-3 py-1">
-          <svg class="icon text-teal-200" aria-hidden="true"><use href="#icon-shield-check"></use></svg> Verified reviews
-        </span>
-        <span class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/10 px-3 py-1">
-          <svg class="icon text-teal-200" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg> No account
-        </span>
+        <ul class="dd-menu">
+          <li>
+            <a class="dd-item" href="{% url 'caretaker_list' %}">
+              <svg class="icon" aria-hidden="true"><use href="#icon-list"></use></svg> All caretakers
+            </a>
+          </li>
+          <li>
+            <a class="dd-item" href="{% url 'caretaker_create' %}">
+              <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
 
+      <a href="{% url 'service_list' %}" class="nav-link {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}is-active{% endif %}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> Services
+      </a>
+
+      <a href="{% url 'review_list' %}" class="nav-link {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' or url_name == 'review_create_general' %}is-active{% endif %}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews
+      </a>
+
+      <a href="{% url 'hire_request_list' %}" class="nav-link {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' or url_name == 'hire_request_create_general' %}is-active{% endif %}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Requests
+      </a>
+
+      <a href="{% url 'about' %}" class="nav-link {% if url_name == 'about' %}is-active{% endif %}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About
+      </a>
+    </nav>
+
+    <div class="site-badges">
+      <span class="site-badge"><svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg> Verified reviews</span>
+      <span class="site-badge"><svg class="icon" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg> No account needed</span>
+    </div>
   </div>
 </div>
 

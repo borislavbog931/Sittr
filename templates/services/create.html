@@ -3,49 +3,47 @@
 {% block title %}Create service | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-slate-900">Create service</h1>
-    <div class="text-sm text-slate-500">Add a new type of service caretakers can offer.</div>
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Create service</span>
+    <h1 class="page-title">Add a new type of service caretakers can offer.</h1>
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
-  <section class="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-    <form method="post" class="space-y-4">
-      {% csrf_token %}
+<section class="panel form-shell">
+  <form method="post" class="form-stack">
+    {% csrf_token %}
 
-      {{ form.non_field_errors }}
+    {% if form.non_field_errors %}
+      <div class="error-box">{{ form.non_field_errors }}</div>
+    {% endif %}
 
-      <div>
-        <label class="text-xs font-semibold text-slate-600" for="{{ form.name.id_for_label }}">Name</label>
-        <div class="mt-2">{{ form.name }}</div>
-        <div class="mt-1 text-xs text-rose-600">{{ form.name.errors }}</div>
+    <div class="field">
+      <label for="{{ form.name.id_for_label }}">Name</label>
+      {{ form.name }}
+      <div class="error-text">{{ form.name.errors }}</div>
+    </div>
+
+    <div class="field">
+      <label for="{{ form.description.id_for_label }}">Description</label>
+      {{ form.description }}
+      <div class="error-text">{{ form.description.errors }}</div>
+    </div>
+
+    <div class="field">
+      <div class="toggle-row">
+        {{ form.active }}
+        <label for="{{ form.active.id_for_label }}">Active</label>
       </div>
+      <div class="error-text">{{ form.active.errors }}</div>
+    </div>
 
-      <div>
-        <label class="text-xs font-semibold text-slate-600" for="{{ form.description.id_for_label }}">Description</label>
-        <div class="mt-2">{{ form.description }}</div>
-        <div class="mt-1 text-xs text-rose-600">{{ form.description.errors }}</div>
-      </div>
-
-      <div>
-        <div class="flex items-center gap-2">
-          {{ form.active }}
-          <label class="text-sm text-slate-700" for="{{ form.active.id_for_label }}">Active</label>
-        </div>
-        <div class="mt-1 text-xs text-rose-600">{{ form.active.errors }}</div>
-      </div>
-
-      <div class="flex flex-wrap gap-2">
-        <button class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-                type="submit">
-          Create
-        </button>
-        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-           href="{% url 'service_list' %}">
-          Cancel
-        </a>
-      </div>
-    </form>
-  </section>
-  {% endblock %}
+    <div class="action-row">
+      <button class="btn btn-primary" type="submit">Create</button>
+      <a class="btn btn-secondary" href="{% url 'service_list' %}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

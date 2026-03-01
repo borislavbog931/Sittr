@@ -3,234 +3,134 @@
 
 {% block title %}Home | Sittr{% endblock %}
 
-{% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
-
 {% block page_header %}{% endblock %}
 
-{% block content_container_class %}w-full px-0{% endblock %}
+{% block content_container_class %}container-wide{% endblock %}
 
 {% block content %}
-<div class="home-landing">
-  <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+<div class="page-stack">
+  <section class="hero-card">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div>
+          <span class="eyebrow">Find trusted local sitters</span>
+          <h1 class="hero-title">Pet care that feels considered, clear, and easy to book.</h1>
+        </div>
 
-  <div class="max-w-6xl mx-auto">
-    <section class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div class="grid grid-cols-1 md:grid-cols-2">
+        <p class="lede">
+          Browse reliable caretakers, compare services and reviews, and send a hire request without extra friction.
+        </p>
 
-      <div class="relative z-10 p-6 sm:p-10">
-        <div class="max-w-xl">
-
-          <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
-            Find Trusted Caretakers
-            <span class="block sm:inline">for Your Pets</span>
-          </h1>
-
-          <p class="mt-4 text-base sm:text-lg text-slate-600">
-            Easily browse and book trusted local caretakers for your pet. Compare ratings, read reviews, and send hire requests in minutes.
-          </p>
-
-          <form method="get" action="{% url 'caretaker_list' %}" class="mt-6">
-            <div class="relative md:-mr-28 lg:-mr-40">
-              <div class="pill">
-
-                <div class="flex items-center gap-2 px-4">
-                  <svg class="icon text-slate-400" aria-hidden="true"><use href="#icon-geo-alt"></use></svg>
-                  <input
-                    type="text"
-                    name="city"
-                    value="{{ request.GET.city }}"
-                    placeholder="Enter your city"
-                    aria-label="City"
-                    class="w-40 sm:w-44 bg-transparent p-0 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                  />
-                </div>
-
-                <div class="hidden sm:block w-px bg-slate-200"></div>
-
-                <div class="flex items-center gap-2 px-4">
-                  <svg class="icon text-slate-400" aria-hidden="true"><use href="#icon-paw"></use></svg>
-                  <select
-                    name="pet_type"
-                    aria-label="Pet type"
-                    class="w-40 sm:w-44 bg-transparent p-0 text-sm text-slate-900 focus:outline-none"
-                  >
-                    <option value="">Pet type..</option>
-                    {% for p in pet_types %}
-                      <option value="{{ p.id }}" {% if request.GET.pet_type == p.id|stringformat:"s" %}selected{% endif %}>
-                        {{ p.name }}
-                      </option>
-                    {% endfor %}
-                  </select>
-                </div>
-
-                <div class="hidden md:block w-px bg-slate-200"></div>
-
-                <button
-                  type="submit"
-                  class="bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700"
-                >
-                  <span class="inline-flex items-center justify-center gap-2">
-                    <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
-                    Search
-                  </span>
-                </button>
-
-              </div>
+        <form method="get" action="{% url 'caretaker_list' %}" class="form-stack">
+          <div class="inline-pill">
+            <div class="field">
+              <label class="field-label" for="home-city">City</label>
+              <input id="home-city" class="form-input" type="text" name="city" value="{{ request.GET.city }}" placeholder="Enter your city">
             </div>
 
-            <div class="mt-3 flex items-center gap-2 text-sm text-slate-500">
-              <svg class="icon text-amber-500" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg>
-              No account needed, fast &amp; easy
+            <div class="field">
+              <label class="field-label" for="home-pet-type">Pet type</label>
+              <select id="home-pet-type" class="form-select" name="pet_type" aria-label="Pet type">
+                <option value="">All pet types</option>
+                {% for p in pet_types %}
+                  <option value="{{ p.id }}" {% if request.GET.pet_type == p.id|stringformat:"s" %}selected{% endif %}>{{ p.name }}</option>
+                {% endfor %}
+              </select>
             </div>
-          </form>
 
-        </div>
-      </div>
-
-      <div class="hero-media block">
-        <img
-          src="{% static 'images/background.png' %}"
-          alt=""
-          class="saturate-125 contrast-110"
-        />
-        
-        <div class="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent" aria-hidden="true"></div>
-      </div>
-
-      </div>
-    </section>
-  </div>
-
-  <div class="max-w-6xl mx-auto">
-    <section class="mt-8 mb-20 grid gap-4 md:grid-cols-3">
-
-    <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div class="flex items-start gap-4">
-        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-600">
-          <svg class="icon text-xl" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
-        </div>
-        <div>
-          <div class="text-sm font-semibold text-slate-900">Vetted Caretakers</div>
-          <div class="mt-1 text-sm text-slate-600">
-            All caretakers are thoroughly vetted and reviewed.
+            <button type="submit" class="btn btn-primary">
+              <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+              Search caretakers
+            </button>
           </div>
+        </form>
+
+        <div class="kicker-row">
+          <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg> No account needed</span>
+          <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg> Review-driven browsing</span>
         </div>
+      </div>
+
+      <div class="hero-media">
+        <img src="{% static 'images/background.png' %}" alt="Happy pet sitting moment">
       </div>
     </div>
-
-    <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div class="flex items-start gap-4">
-        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-600">
-          <svg class="icon text-xl" aria-hidden="true"><use href="#icon-bar-chart-line"></use></svg>
-        </div>
-        <div>
-          <div class="text-sm font-semibold text-slate-900">Compare &amp; Choose</div>
-          <div class="mt-1 text-sm text-slate-600">
-            Compare ratings, read reviews, and select the best fit.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div class="flex items-start gap-4">
-        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 text-amber-600">
-          <svg class="icon text-xl" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg>
-        </div>
-        <div>
-          <div class="text-sm font-semibold text-slate-900">Quick &amp; Easy Requests</div>
-          <div class="mt-1 text-sm text-slate-600">
-            Send hire requests in just a few clicks.
-          </div>
-        </div>
-      </div>
-    </div>
-
   </section>
 
-  <section class="mt-8">
-    <div class="text-center">
-      <h2 class="text-2xl sm:text-3xl font-semibold text-slate-900">
-        Meet Some of Our Trusted Caretakers
-      </h2>
-      <h2>
-        <span class="mt-2 inline-block text-sm text-slate-600">
+  <section class="feature-grid">
+    <article class="feature-card">
+      <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg></span>
+      <h2 class="card-title">Vetted caretakers</h2>
+      <p class="muted">See profiles with city, services, pet types, pricing, and review history in one place.</p>
+    </article>
 
-        </span>
-      </h2>
+    <article class="feature-card">
+      <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-bar-chart-line"></use></svg></span>
+      <h2 class="card-title">Compare with confidence</h2>
+      <p class="muted">Filter the directory quickly, then read reviews before choosing the best fit for your pet.</p>
+    </article>
+
+    <article class="feature-card">
+      <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+      <h2 class="card-title">Request in minutes</h2>
+      <p class="muted">Once you find the right person, sending a hire request is direct and uncomplicated.</p>
+    </article>
+  </section>
+
+  <section class="page-stack">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Featured profiles</span>
+        <h2 class="section-title">Meet some of our trusted caretakers</h2>
+      </div>
+      <a href="{% url 'caretaker_list' %}" class="btn btn-secondary">Browse all caretakers</a>
     </div>
 
     {% if featured_caretakers %}
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <div class="feature-grid-home">
         {% for caretaker in featured_caretakers %}
-          <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-
-            <a href="{% url 'caretaker_detail' caretaker.slug %}" class="block no-underline">
-              {% if caretaker.profile_pic %}
-                <img
-                  src="{{ caretaker.profile_pic.url }}"
-                  alt="{{ caretaker.name }}"
-                  class="h-32 w-full object-cover"
-                  loading="lazy"
-                />
+          <article class="media-card">
+            <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
+              {% if caretaker.profile_pic_url %}
+                <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" class="profile-photo" style="min-height: 170px;" loading="lazy">
               {% else %}
-                <div class="h-32 w-full bg-slate-100 flex items-center justify-center text-slate-400">
-                  <svg class="icon text-3xl" aria-hidden="true"><use href="#icon-person"></use></svg>
+                <div class="avatar-fallback" style="width:100%; min-height:170px; border-radius:24px;">
+                  <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
                 </div>
               {% endif %}
             </a>
 
-            <div class="p-6">
-              <div class="text-lg font-semibold text-slate-900">{{ caretaker.name }}</div>
-
-              <div class="mt-2 flex items-center gap-2 text-sm text-slate-500">
-                <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg>
-                <span>{{ caretaker.city }}</span>
+            <div class="stack" style="margin-top: 18px;">
+              <div>
+                <h3 class="card-title">{{ caretaker.name }}</h3>
+                <div class="meta-line muted">
+                  <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg>
+                  <span>{{ caretaker.city }}</span>
+                </div>
               </div>
 
-              <div class="mt-3 flex items-center gap-2 text-sm text-slate-600">
-                <svg class="icon text-amber-400" aria-hidden="true"><use href="#icon-star-fill"></use></svg>
+              <div class="rating-line muted">
+                <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg>
                 {% if caretaker.avg_rating %}
-                  <span class="font-semibold text-slate-900">{{ caretaker.avg_rating|floatformat:1 }}</span>
-                  <span>/10</span>
+                  <strong>{{ caretaker.avg_rating|floatformat:1 }}/10</strong>
                 {% else %}
-                  <span>No reviews</span>
+                  <span>No reviews yet</span>
                 {% endif %}
               </div>
 
-              <p class="mt-3 text-sm text-slate-600 min-h-[44px]">
-                {{ caretaker.bio|default:"Friendly and reliable sitter ready to help!"|truncatechars:85 }}
-              </p>
+              <p class="muted">{{ caretaker.bio|default:"Friendly and reliable sitter ready to help."|truncatechars:110 }}</p>
 
-              <a
-                href="{% url 'caretaker_detail' caretaker.slug %}"
-                class="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-teal-600 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-700 no-underline"
-              >
-                View Profile
-              </a>
+              <a href="{% url 'caretaker_detail' caretaker.slug %}" class="btn btn-primary">View profile</a>
             </div>
-          </div>
+          </article>
         {% endfor %}
       </div>
-
-      <div class="mt-8 text-center">
-        <a
-          href="{% url 'caretaker_list' %}"
-          class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700 no-underline"
-        >
-          Browse all caretakers
-        </a>
-      </div>
     {% else %}
-      <div class="mt-8 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-sm text-slate-600 text-center">
-        No caretakers yet.
+      <div class="empty-state">
+        <h3 class="card-title">No caretakers yet</h3>
+        <p class="muted">Featured caretaker profiles will appear here once they are added.</p>
       </div>
     {% endif %}
-    </section>
-  </div>
-
-  </div>
+  </section>
 </div>
 {% endblock %}

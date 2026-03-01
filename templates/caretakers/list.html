@@ -1,221 +1,139 @@
-
 {% extends "common/base.html" %}
 
 {% block title %}Caretakers | Sittr{% endblock %}
 
 {% block page_header %}
-<div class="mb-6 flex flex-wrap items-start justify-between gap-4">
+<div class="page-header">
   <div>
-    <h1 class="text-2xl font-semibold text-slate-900">Caretakers</h1>
-    <div class="text-sm text-slate-500">Browse by city, services, pet types, and price.</div>
+    <span class="eyebrow">Caretaker directory</span>
+    <h1 class="page-title">Browse by city, services, pet types, and price.</h1>
+    <p class="page-subtitle">Use the same filters and data as before, now in a calmer layout.</p>
   </div>
-
-  <a
-    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow hover:brightness-110 no-underline"
-    href="{% url 'caretaker_create' %}"
-  >
+  <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
     <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
   </a>
 </div>
 {% endblock %}
 
 {% block content %}
+<div class="page-stack">
+  <section class="panel section-block">
+    <form method="get" class="form-stack">
+      <div class="form-grid">
+        <div class="field">
+          <label for="id_city">City</label>
+          <input id="id_city" class="form-input" type="text" name="city" value="{{ filters.city }}" placeholder="e.g. Sofia">
+        </div>
 
-<section class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-  <form method="get" class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div class="field">
+          <label for="id_service">Service</label>
+          <select id="id_service" class="form-select" name="service">
+            <option value="">All</option>
+            {% for s in services %}
+              <option value="{{ s.id }}" {% if filters.service == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
 
-    <div>
-      <label class="text-xs font-semibold text-slate-600">City</label>
-      <input
-        type="text"
-        name="city"
-        value="{{ filters.city }}"
-        placeholder="e.g. Sofia"
-        class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-200"
-      >
-    </div>
+        <div class="field">
+          <label for="id_pet_type">Pet type</label>
+          <select id="id_pet_type" class="form-select" name="pet_type">
+            <option value="">All</option>
+            {% for p in pet_types %}
+              <option value="{{ p.id }}" {% if filters.pet_type == p.id|stringformat:"s" %}selected{% endif %}>{{ p.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
 
-    <div>
-      <label class="text-xs font-semibold text-slate-600">Service</label>
-      <select
-        name="service"
-        class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-200"
-      >
-        <option value="">All</option>
-        {% for s in services %}
-          <option value="{{ s.id }}" {% if filters.service == s.id|stringformat:"s" %}selected{% endif %}>
-            {{ s.name }}
-          </option>
-        {% endfor %}
-      </select>
-    </div>
+        <div class="field">
+          <label for="id_max_price">Max price</label>
+          <input id="id_max_price" class="form-input" type="number" name="max_price" value="{{ filters.max_price }}" step="0.01" min="0" placeholder="e.g. 25">
+        </div>
+      </div>
 
-    <div>
-      <label class="text-xs font-semibold text-slate-600">Pet type</label>
-      <select
-        name="pet_type"
-        class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-200"
-      >
-        <option value="">All</option>
-        {% for p in pet_types %}
-          <option value="{{ p.id }}" {% if filters.pet_type == p.id|stringformat:"s" %}selected{% endif %}>
-            {{ p.name }}
-          </option>
-        {% endfor %}
-      </select>
-    </div>
+      <div class="action-row">
+        <button type="submit" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#icon-funnel"></use></svg> Filter</button>
+        <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">Reset</a>
+      </div>
+    </form>
+  </section>
 
-    <div>
-      <label class="text-xs font-semibold text-slate-600">Max price</label>
-      <input
-        type="number"
-        name="max_price"
-        value="{{ filters.max_price }}"
-        step="0.01"
-        min="0"
-        placeholder="e.g. 25"
-        class="mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-200"
-      >
-    </div>
+  <p class="summary">Found <strong>{{ caretakers|length }}</strong> caretaker{{ caretakers|length|pluralize }}.</p>
 
-    <div class="md:col-span-2 lg:col-span-4 flex flex-wrap gap-2">
-      <button
-        type="submit"
-        class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-      >
-        <svg class="icon" aria-hidden="true"><use href="#icon-funnel"></use></svg> Filter
-      </button>
+  {% if caretakers %}
+    <div class="caretaker-grid">
+      {% for caretaker in caretakers %}
+        <article class="list-card stack">
+          <div class="section-head">
+            <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
+              {% if caretaker.profile_pic_url %}
+                <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" loading="lazy" class="avatar">
+              {% else %}
+                <div class="avatar-fallback">
+                  <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
+                </div>
+              {% endif %}
+            </a>
 
-      <a
-        class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700 no-underline"
-        href="{% url 'caretaker_list' %}"
-      >
-        Reset
-      </a>
-    </div>
-
-  </form>
-</section>
-
-<div class="mt-5 text-xs text-slate-500">
-  Found <span class="font-semibold text-slate-700">{{ caretakers|length }}</span>
-  caretaker{{ caretakers|length|pluralize }}
-</div>
-
-{% if caretakers %}
-  <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-    {% for caretaker in caretakers %}
-      <div class="group rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-        <div class="flex items-start gap-4">
-
-          <a href="{% url 'caretaker_detail' caretaker.slug %}" class="flex-none no-underline">
-            {% if caretaker.profile_pic %}
-              <img
-                src="{{ caretaker.profile_pic.url }}"
-                alt="{{ caretaker.name }}"
-                loading="lazy"
-                class="rounded-2xl ring-1 ring-slate-200 bg-slate-100"
-                style="width:56px; height:56px; object-fit:cover; display:block;"
-              >
-            {% else %}
-              <div
-                class="rounded-2xl ring-1 ring-slate-200 bg-slate-100 flex items-center justify-center text-slate-400"
-                style="width:56px; height:56px;"
-              >
-                <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
-              </div>
-            {% endif %}
-          </a>
-
-          <div class="min-w-0 flex-1">
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <a
-                  href="{% url 'caretaker_detail' caretaker.slug %}"
-                  class="block text-sm font-semibold text-slate-900 truncate no-underline group-hover:text-teal-700"
-                >
-                  {{ caretaker.name }}
-                </a>
-                <div class="mt-1 text-xs text-slate-500 truncate">
-                  <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}
+            <div class="section-copy" style="flex: 1;">
+              <div class="page-header" style="margin:0;">
+                <div>
+                  <h2 class="card-title"><a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">{{ caretaker.name }}</a></h2>
+                  <p class="meta-line muted"><svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}</p>
+                </div>
+                <div>
+                  <strong>${{ caretaker.price_per_hour }}</strong>
+                  <div class="inline-note">per hour</div>
                 </div>
               </div>
-
-              <div class="text-right shrink-0">
-                <div class="text-sm font-semibold text-slate-900">${{ caretaker.price_per_hour }}</div>
-                <div class="text-[11px] text-slate-500">per hour</div>
-              </div>
-            </div>
-
-            <p class="mt-3 text-xs text-slate-500">
-              {% if caretaker.bio %}
-                {{ caretaker.bio|truncatechars:110 }}
-              {% else %}
-                No bio provided yet.
-              {% endif %}
-            </p>
-
-            <div class="mt-3 flex flex-wrap gap-2">
-              {% for service in caretaker.services.all %}
-                <span class="rounded-full border border-teal-100 bg-teal-50 px-2.5 py-1 text-[11px] text-teal-700">
-                  {{ service.name }}
-                </span>
-              {% empty %}
-                <span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] text-slate-500">
-                  No services
-                </span>
-              {% endfor %}
-            </div>
-
-            <div class="mt-2 flex flex-wrap gap-2">
-              {% for pet in caretaker.pet_types.all %}
-                <span class="rounded-full border border-cyan-100 bg-cyan-50 px-2.5 py-1 text-[11px] text-cyan-700">
-                  {{ pet.name }}
-                </span>
-              {% empty %}
-                <span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] text-slate-500">
-                  No pet types
-                </span>
-              {% endfor %}
-            </div>
-
-            <div class="mt-4 flex items-center justify-between">
-              <div class="text-xs text-slate-500">
-                {% with avg=caretaker.average_rating %}
-                  {% if avg %}
-                    <svg class="icon text-teal-500" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10
-                  {% else %}
-                    <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
-                  {% endif %}
-                {% endwith %}
-              </div>
-
-              <a
-                class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-3 py-2 text-xs font-semibold text-white hover:bg-teal-700 no-underline"
-                href="{% url 'caretaker_detail' caretaker.slug %}"
-              >
-                View <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
-              </a>
             </div>
           </div>
 
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-{% else %}
-  <div class="mt-4 rounded-3xl border border-dashed border-teal-200 bg-teal-50/60 p-6 text-sm text-teal-700">
-    <div class="font-semibold">No caretakers yet</div>
-    <div class="mt-1">Add caretakers from the admin panel to see them here.</div>
-    <div class="mt-4">
-      <a
-        class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 no-underline"
-        href="{% url 'caretaker_create' %}"
-      >
-        <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-      </a>
-    </div>
-  </div>
-{% endif %}
+          <p class="muted">{% if caretaker.bio %}{{ caretaker.bio|truncatechars:110 }}{% else %}No bio provided yet.{% endif %}</p>
 
+          <div class="chip-row">
+            {% for service in caretaker.services.all %}
+              <span class="chip">{{ service.name }}</span>
+            {% empty %}
+              <span class="chip">No services</span>
+            {% endfor %}
+          </div>
+
+          <div class="chip-row">
+            {% for pet in caretaker.pet_types.all %}
+              <span class="metric-chip">{{ pet.name }}</span>
+            {% empty %}
+              <span class="metric-chip">No pet types</span>
+            {% endfor %}
+          </div>
+
+          <div class="page-header" style="margin:0;">
+            <div class="muted">
+              {% with avg=caretaker.average_rating %}
+                {% if avg %}
+                  <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10
+                {% else %}
+                  <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
+                {% endif %}
+              {% endwith %}
+            </div>
+            <a class="btn btn-primary" href="{% url 'caretaker_detail' caretaker.slug %}">
+              View <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h2 class="card-title">No caretakers yet</h2>
+      <p class="muted">Add caretakers from the admin panel to see them here.</p>
+      <div class="action-row">
+        <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
+        </a>
+      </div>
+    </div>
+  {% endif %}
+</div>
 {% endblock %}

@@ -1,108 +1,43 @@
 {% load static %}
 {% with url_name=request.resolver_match.url_name %}
-<a href="{% url 'home' %}" class="flex items-center gap-3 no-underline">
-  <div class="h-12 w-12 rounded-2xl bg-white/90 text-teal-700 flex items-center justify-center shadow">
-    <img
-      src="{% static 'images/logo.png' %}"
-      alt="Sittr"
-      class="h-12 w-12 rounded-xl object-cover"
-    />
-  </div>
-
-  <div class="leading-tight">
-    <div class="font-semibold text-white">Sittr</div>
-    <div class="text-xs text-white/70">Caretakers you can trust</div>
-  </div>
+<a href="{% url 'home' %}" class="brand-link">
+  <span class="brand-mark">
+    <img src="{% static 'images/logo.png' %}" alt="Sittr">
+  </span>
+  <span class="brand-copy">
+    <strong>Sittr</strong>
+    <span>Trusted pet care</span>
+  </span>
 </a>
 
-<div class="my-5 h-px bg-white/10"></div>
-
-<nav class="space-y-1 text-sm">
-  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
-            {% if url_name == 'home' %}bg-white/15 text-white{% else %}text-white/80 hover:bg-white/10 hover:text-white{% endif %}"
-     href="{% url 'home' %}">
-    <svg class="icon" aria-hidden="true"><use href="#icon-house-door"></use></svg> Home
+<div class="stack" style="margin-top: 20px;">
+  <a class="nav-link {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">
+    <svg class="icon" aria-hidden="true"><use href="#icon-home"></use></svg> Home
   </a>
 
-  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
-            {% if url_name == 'about' %}bg-white/15 text-white{% else %}text-white/80 hover:bg-white/10 hover:text-white{% endif %}"
-     href="{% url 'about' %}">
+  <a class="nav-link {% if url_name == 'about' %}is-active{% endif %}" href="{% url 'about' %}">
     <svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About
   </a>
 
-  <div class="pt-4 text-xs uppercase tracking-[0.2em] text-white/50">Browse</div>
+  <a class="nav-link {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' or url_name == 'caretaker_edit' or url_name == 'caretaker_delete' %}is-active{% endif %}" href="{% url 'caretaker_list' %}">
+    <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers
+  </a>
 
-  <div class="dropdown">
-    <button
-      type="button"
-      class="w-full text-start flex items-center justify-between gap-3 rounded-xl px-3 py-2 transition border-0 bg-transparent
-             {% if url_name == 'caretaker_list' or url_name == 'caretaker_detail' or url_name == 'caretaker_create' %}
-               bg-white/15 text-white
-             {% else %}
-               text-white/80 hover:bg-white/10 hover:text-white
-             {% endif %}"
-
-      aria-expanded="false"
-    >
-      <span class="flex items-center gap-3">
-        <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers
-      </span>
-      <svg class="icon text-xs opacity-75" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
-    </button>
-
-    <ul class="dd-menu rounded-2xl border border-white/10 bg-[#121238] shadow-lg p-1">
-      <li>
-        <a class="dd-item rounded-xl px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition"
-           href="{% url 'caretaker_list' %}">
-          <svg class="icon me-2" aria-hidden="true"><use href="#icon-list"></use></svg> All caretakers
-        </a>
-      </li>
-      <li>
-        <a class="dd-item rounded-xl px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition"
-           href="{% url 'caretaker_create' %}">
-          <svg class="icon me-2" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
-            {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}
-              bg-white/15 text-white
-            {% else %}
-              text-white/80 hover:bg-white/10 hover:text-white
-            {% endif %}"
-     href="{% url 'service_list' %}">
+  <a class="nav-link {% if url_name == 'service_list' or url_name == 'service_detail' or url_name == 'service_create' or url_name == 'service_edit' or url_name == 'service_delete' %}is-active{% endif %}" href="{% url 'service_list' %}">
     <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> Services
   </a>
 
-  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
-            {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' %}
-              bg-white/15 text-white
-            {% else %}
-              text-white/80 hover:bg-white/10 hover:text-white
-            {% endif %}"
-     href="{% url 'hire_request_list' %}">
+  <a class="nav-link {% if url_name == 'hire_request_list' or url_name == 'hire_request_detail' or url_name == 'hire_request_create' or url_name == 'hire_request_create_general' %}is-active{% endif %}" href="{% url 'hire_request_list' %}">
     <svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Requests
   </a>
 
-  <a class="flex items-center gap-3 rounded-xl px-3 py-2 transition
-            {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' %}
-              bg-white/15 text-white
-            {% else %}
-              text-white/80 hover:bg-white/10 hover:text-white
-            {% endif %}"
-     href="{% url 'review_list' %}">
+  <a class="nav-link {% if url_name == 'review_list' or url_name == 'review_detail' or url_name == 'review_create' or url_name == 'review_create_general' %}is-active{% endif %}" href="{% url 'review_list' %}">
     <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews
   </a>
-</nav>
+</div>
 
-<div class="my-5 h-px bg-white/10"></div>
-
-<div class="rounded-2xl bg-white/10 p-4 text-sm">
-  <div class="font-semibold text-white"><svg class="icon" aria-hidden="true"><use href="#icon-lightbulb"></use></svg> Tip</div>
-  <div class="mt-2 text-white/70">
-    Start with <span class="text-white">Caretakers</span>, then filter by service, pet type and price.
-  </div>
+<div class="feature-card" style="margin-top: 20px;">
+  <span class="eyebrow">Tip</span>
+  <p class="muted">Start with caretakers, then narrow the list using service, pet type, and price.</p>
 </div>
 {% endwith %}

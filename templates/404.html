@@ -3,78 +3,60 @@
 {% block title %}Page not found | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-slate-900">404 - Page not found</h1>
-    <div class="text-sm text-slate-500">We couldn't find what you were looking for.</div>
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">Page not found</span>
+      <h1 class="page-title">404</h1>
+      <p class="page-subtitle">We could not find what you were looking for.</p>
+    </div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <div class="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-    <section class="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-      <div class="text-xs uppercase tracking-[0.2em] text-slate-400">Error code</div>
-      <div class="mt-2 text-5xl font-semibold text-slate-900">404</div>
-      <p class="mt-4 text-sm text-slate-600">
-        The link may be broken, the page may have moved, or it might never have existed.
-      </p>
+  <div class="split-layout">
+    <section class="panel section-block stack">
+      <span class="eyebrow">Error code</span>
+      <h2 class="section-title">The page may have moved, broken, or never existed.</h2>
+      <p class="muted">Use one of the main sections below to get back into the product.</p>
 
-      <div class="mt-6 flex flex-wrap gap-2">
-        <a class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-           href="{% url 'home' %}">
+      <div class="action-row">
+        <a class="btn btn-primary" href="{% url 'home' %}">
           <svg class="icon" aria-hidden="true"><use href="#icon-home"></use></svg> Go home
         </a>
-        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-           href="{% url 'caretaker_list' %}">
+        <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">
           <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Browse caretakers
         </a>
-        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-           href="{% url 'service_list' %}">
+        <a class="btn btn-secondary" href="{% url 'service_list' %}">
           <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> Services
         </a>
       </div>
-
-      <div class="mt-4 text-xs text-slate-500">
-        Tip: Use the left menu to navigate back to safety.
-      </div>
     </section>
 
-    <aside class="rounded-3xl bg-gradient-to-br from-teal-600 to-cyan-700 p-6 text-white shadow">
-      <div class="flex items-center gap-3">
-        <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
-          <svg class="icon text-2xl" aria-hidden="true"><use href="#icon-compass"></use></svg>
-        </span>
-        <div>
-          <div class="text-sm font-semibold">Lost?</div>
-          <div class="text-xs text-white/70">Try one of these popular pages</div>
+    <aside class="feature-card stack">
+      <div class="section-head">
+        <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-compass"></use></svg></span>
+        <div class="section-copy">
+          <h3>Try a popular page</h3>
+          <p>These links usually get people back on track quickly.</p>
         </div>
       </div>
 
-      <div class="mt-5 space-y-2 text-sm">
-        <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
-           href="{% url 'caretaker_list' %}">
-          <span><svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers</span>
-          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
-        </a>
-        <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
-           href="{% url 'hire_request_list' %}">
-          <span><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Requests</span>
-          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
-        </a>
-        <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
-           href="{% url 'review_list' %}">
-          <span><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews</span>
-          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
-        </a>
-        <a class="flex items-center justify-between rounded-2xl bg-white/10 px-3 py-2 hover:bg-white/15"
-           href="{% url 'about' %}">
-          <span><svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About</span>
-          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
-        </a>
-      </div>
-
-      <div class="mt-4 text-xs text-white/70">
-        If you believe this is a bug, double-check the URL.
-      </div>
+      <a class="list-item-link" href="{% url 'caretaker_list' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+      <a class="list-item-link" href="{% url 'hire_request_list' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Requests</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+      <a class="list-item-link" href="{% url 'review_list' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+      <a class="list-item-link" href="{% url 'about' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
     </aside>
   </div>
 {% endblock %}

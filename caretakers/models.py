@@ -54,3 +54,19 @@ class Caretaker(models.Model):
     def average_rating(self):
         return self.reviews.aggregate(avg=Avg('rating'))['avg']
 
+    @property
+    def has_profile_pic(self):
+        if not self.profile_pic:
+            return False
+
+        try:
+            return bool(self.profile_pic.name and self.profile_pic.storage.exists(self.profile_pic.name))
+        except Exception:
+            return False
+
+    @property
+    def profile_pic_url(self):
+        if self.has_profile_pic:
+            return self.profile_pic.url
+        return ""
+

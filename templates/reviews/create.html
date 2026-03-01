@@ -3,107 +3,85 @@
 {% block title %}Leave a review | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-slate-900">Leave a review</h1>
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Leave a review</span>
+    <h1 class="page-title">Share feedback about a caretaker.</h1>
     {% if caretaker %}
-      <div class="text-sm text-slate-500">For {{ caretaker.name }} - {{ caretaker.city }}</div>
-    {% else %}
-      <div class="text-sm text-slate-500">Share feedback about a caretaker</div>
+      <p class="page-subtitle">For {{ caretaker.name }} in {{ caretaker.city }}</p>
     {% endif %}
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
-  <section class="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-    {% if form.non_field_errors %}
-      <div class="mb-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-        <div class="font-semibold">Please fix the errors below.</div>
-        <div>{{ form.non_field_errors }}</div>
-      </div>
-    {% endif %}
+<section class="panel form-shell">
+  {% if form.non_field_errors %}
+    <div class="error-box">
+      <div><strong>Please fix the errors below.</strong></div>
+      <div>{{ form.non_field_errors }}</div>
+    </div>
+  {% endif %}
 
-    <form method="post" novalidate class="space-y-6">
-      {% csrf_token %}
+  <form method="post" novalidate class="form-stack">
+    {% csrf_token %}
 
-      <div class="space-y-4">
-        <div class="flex items-center gap-3">
-          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
-          </span>
-          <div>
-            <div class="text-sm font-semibold text-slate-900">Caretaker</div>
-            {% if caretaker %}
-              <div class="text-xs text-slate-500">You're reviewing the caretaker below.</div>
-            {% else %}
-              <div class="text-xs text-slate-500">Choose the caretaker you want to review.</div>
-            {% endif %}
-          </div>
-        </div>
-
-        <div>
-          <label class="text-xs font-semibold text-slate-600" for="{{ form.caretaker.id_for_label }}">Caretaker</label>
-          <div class="mt-2">{{ form.caretaker }}</div>
-          {% if form.caretaker.errors %}
-            <div class="mt-1 text-xs text-rose-600">{{ form.caretaker.errors|striptags }}</div>
-          {% endif %}
+    <div class="form-section">
+      <div class="section-head">
+        <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg></span>
+        <div class="section-copy">
+          <h2>Caretaker</h2>
+          <p>{% if caretaker %}You are reviewing the caretaker below.{% else %}Choose the caretaker you want to review.{% endif %}</p>
         </div>
       </div>
 
-      <div class="border-t border-slate-100 pt-6 space-y-4">
-        <div class="flex items-center gap-3">
-          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-            <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-          </span>
-          <div>
-            <div class="text-sm font-semibold text-slate-900">Your review</div>
-            <div class="text-xs text-slate-500">Share your experience in a few words.</div>
-          </div>
-        </div>
+      <div class="field">
+        <label for="{{ form.caretaker.id_for_label }}">Caretaker</label>
+        {{ form.caretaker }}
+        {% if form.caretaker.errors %}<div class="error-text">{{ form.caretaker.errors|striptags }}</div>{% endif %}
+      </div>
+    </div>
 
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="md:col-span-2">
-            <label class="text-xs font-semibold text-slate-600" for="{{ form.reviewer_name.id_for_label }}">Your name</label>
-            <div class="mt-2">{{ form.reviewer_name }}</div>
-            {% if form.reviewer_name.errors %}
-              <div class="mt-1 text-xs text-rose-600">{{ form.reviewer_name.errors|striptags }}</div>
-            {% endif %}
-          </div>
-
-          <div>
-            <label class="text-xs font-semibold text-slate-600" for="{{ form.rating.id_for_label }}">Rating (1-10)</label>
-            <div class="mt-2">{{ form.rating }}</div>
-            {% if form.rating.errors %}
-              <div class="mt-1 text-xs text-rose-600">{{ form.rating.errors|striptags }}</div>
-            {% endif %}
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="text-xs font-semibold text-slate-600" for="{{ form.comment.id_for_label }}">Comment</label>
-            <div class="mt-2">{{ form.comment }}</div>
-            {% if form.comment.errors %}
-              <div class="mt-1 text-xs text-rose-600">{{ form.comment.errors|striptags }}</div>
-            {% endif %}
-          </div>
+    <div class="form-section">
+      <div class="section-head">
+        <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg></span>
+        <div class="section-copy">
+          <h2>Your review</h2>
+          <p>Share your experience in a few words.</p>
         </div>
       </div>
 
-      <div class="flex flex-wrap gap-2">
-        <button class="inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-                type="submit">
-          <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Submit review
-        </button>
-        {% if caretaker %}
-          <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-             href="{% url 'caretaker_detail' caretaker.slug %}">
-            Cancel
-          </a>
-        {% else %}
-          <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-             href="{% url 'review_list' %}">
-            Cancel
-          </a>
-        {% endif %}
+      <div class="form-grid">
+        <div class="field field-span-2">
+          <label for="{{ form.reviewer_name.id_for_label }}">Your name</label>
+          {{ form.reviewer_name }}
+          {% if form.reviewer_name.errors %}<div class="error-text">{{ form.reviewer_name.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.rating.id_for_label }}">Rating (1-10)</label>
+          {{ form.rating }}
+          {% if form.rating.errors %}<div class="error-text">{{ form.rating.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field field-span-2">
+          <label for="{{ form.comment.id_for_label }}">Comment</label>
+          {{ form.comment }}
+          {% if form.comment.errors %}<div class="error-text">{{ form.comment.errors|striptags }}</div>{% endif %}
+        </div>
       </div>
-    </form>
-  </section>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" type="submit">
+        <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Submit review
+      </button>
+      {% if caretaker %}
+        <a class="btn btn-secondary" href="{% url 'caretaker_detail' caretaker.slug %}">Cancel</a>
+      {% else %}
+        <a class="btn btn-secondary" href="{% url 'review_list' %}">Cancel</a>
+      {% endif %}
+    </div>
+  </form>
+</section>
 {% endblock %}

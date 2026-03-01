@@ -3,100 +3,87 @@
 {% block title %}About | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-slate-900">About</h1>
-    <div class="text-sm text-slate-500">Founded in 2023 - Built for pet owners</div>
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">About Sittr</span>
+      <h1 class="page-title">Designed to make pet care choices feel simple and trustworthy.</h1>
+      <p class="page-subtitle">Founded in 2023 and built around clarity for pet owners.</p>
+    </div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <div class="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-    <section class="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-      <p class="text-lg text-slate-600">
-        Sittr helps you find reliable, caring people for your best friend - quickly, clearly, and without unnecessary friction.
+  <div class="split-layout">
+    <section class="panel section-block stack">
+      <p class="lede">
+        Sittr helps you find reliable, caring people for your best friend quickly, clearly, and without unnecessary friction.
       </p>
 
-      <div class="mt-6 grid gap-3 sm:grid-cols-3">
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <div class="text-sm font-semibold text-slate-900">Goal</div>
-          <div class="text-xs text-slate-500">Help owners choose with confidence.</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h2 class="card-title">Goal</h2>
+          <p class="muted">Help owners choose with confidence.</p>
         </div>
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <div class="text-sm font-semibold text-slate-900">Trust</div>
-          <div class="text-xs text-slate-500">Clarity through reviews and info.</div>
+        <div class="stat-card">
+          <h2 class="card-title">Trust</h2>
+          <p class="muted">Clarity through profiles, services, and reviews.</p>
         </div>
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-          <div class="text-sm font-semibold text-slate-900">Speed</div>
-          <div class="text-xs text-slate-500">Request a caretaker in minutes.</div>
+        <div class="stat-card">
+          <h2 class="card-title">Speed</h2>
+          <p class="muted">Request a caretaker in minutes.</p>
         </div>
       </div>
 
-      <div class="mt-8 space-y-6 text-sm text-slate-600">
+      <div class="stack">
         <div>
-          <h2 class="text-base font-semibold text-slate-900">Our purpose</h2>
-          <p class="mt-2">
-            Pets are family. When life gets busy, you don't just need someone available - you need someone you can trust.
-            Sittr makes it easy to compare caretakers by what matters most: <strong>services</strong>, <strong>pet types</strong>,
-            <strong>location</strong>, <strong>price</strong>, and <strong>reviews</strong>.
-          </p>
+          <h2 class="card-title">Our purpose</h2>
+          <p class="muted">Pets are family. Sittr makes it easy to compare caretakers by what matters most: services, pet types, location, price, and reviews.</p>
         </div>
         <div>
-          <h2 class="text-base font-semibold text-slate-900">Mission</h2>
-          <p class="mt-2">
-            To make finding a caretaker simple - with enough transparency that you feel confident leaving your best friend in good hands.
-          </p>
+          <h2 class="card-title">Mission</h2>
+          <p class="muted">Make finding a caretaker feel simple while giving owners enough transparency to trust their choice.</p>
         </div>
         <div>
-          <h2 class="text-base font-semibold text-slate-900">Motivation</h2>
-          <p class="mt-2">
-            Sittr was founded in <strong>2023</strong> after hearing the same story again and again:
-            "I can find someone online, but I can't tell if they're right for my pet."
-            Our goal is to remove that uncertainty and help you choose based on clear information and real feedback.
-          </p>
+          <h2 class="card-title">Motivation</h2>
+          <p class="muted">Sittr was founded in <strong>2023</strong> to reduce the uncertainty pet owners feel when they can find someone online but cannot tell who is genuinely right for their pet.</p>
         </div>
       </div>
     </section>
 
-    <aside class="space-y-4">
-      <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div class="text-sm font-semibold text-slate-900">What you can do</div>
-        <div class="mt-4 space-y-4 text-sm">
-          <div class="flex gap-3">
-            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-              <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
-            </span>
-            <div>
-              <div class="font-semibold text-slate-900">Browse & filter</div>
-              <div class="text-xs text-slate-500">By city, service, pet type, and price.</div>
-            </div>
-          </div>
-          <div class="flex gap-3">
-            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-              <svg class="icon" aria-hidden="true"><use href="#icon-star-half"></use></svg>
-            </span>
-            <div>
-              <div class="font-semibold text-slate-900">Read reviews</div>
-              <div class="text-xs text-slate-500">Ratings are 1-10 and will be shown as stars.</div>
-            </div>
-          </div>
-          <div class="flex gap-3">
-            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-              <svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg>
-            </span>
-            <div>
-              <div class="font-semibold text-slate-900">Send a request</div>
-              <div class="text-xs text-slate-500">No account required.</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <aside class="sidebar-stack">
+      <section class="panel section-block stack">
+        <h2 class="card-title">What you can do</h2>
 
-      <div class="rounded-3xl border border-teal-100 bg-gradient-to-br from-teal-50 to-cyan-50 p-6 text-sm text-teal-800">
-        <div class="font-semibold">Best friends first</div>
-        <div class="mt-2 text-teal-700/80">
-          Sittr is built around one idea: your pet deserves care you can trust.
+        <div class="section-head">
+          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg></span>
+          <div class="section-copy">
+            <h3>Browse and filter</h3>
+            <p>Search by city, service, pet type, and price.</p>
+          </div>
         </div>
-      </div>
+
+        <div class="section-head">
+          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star-half"></use></svg></span>
+          <div class="section-copy">
+            <h3>Read reviews</h3>
+            <p>Ratings are still 1 to 10, shown with a more polished presentation.</p>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+          <div class="section-copy">
+            <h3>Send a request</h3>
+            <p>Reach out to a caretaker without needing an account first.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-card">
+        <span class="eyebrow">Best friends first</span>
+        <h2 class="card-title">Care you can trust should be easy to recognize.</h2>
+        <p class="muted">That principle drives the browsing experience, the profile detail pages, and the way requests and reviews work throughout Sittr.</p>
+      </section>
     </aside>
   </div>
 {% endblock %}

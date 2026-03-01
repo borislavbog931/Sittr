@@ -3,28 +3,24 @@
 {% block title %}Delete {{ service.name }} | Sittr{% endblock %}
 
 {% block page_header %}
-  <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-slate-900">Delete service</h1>
-    <div class="text-sm text-slate-500">{{ service.name }}</div>
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Delete service</span>
+    <h1 class="page-title">{{ service.name }}</h1>
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
-  <section class="rounded-3xl border border-rose-200 bg-rose-50/70 p-6 sm:p-8">
-    <p class="text-sm text-rose-700">
-      Are you sure you want to delete <strong>{{ service.name }}</strong>? This action cannot be undone.
-    </p>
+<section class="danger-card">
+  <p class="muted">Are you sure you want to delete <strong>{{ service.name }}</strong>? This action cannot be undone.</p>
 
-    <form method="post" class="mt-5 flex flex-wrap gap-2">
-      {% csrf_token %}
-      <button class="inline-flex items-center gap-2 rounded-xl bg-rose-600 px-5 py-2 text-sm font-semibold text-white hover:bg-rose-700"
-              type="submit">
-        <svg class="icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete
-      </button>
-      <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 hover:border-teal-200 hover:text-teal-700"
-         href="{% url 'service_detail' service.pk %}">
-        Cancel
-      </a>
-    </form>
-  </section>
+  <form method="post" class="action-row" style="margin-top:18px;">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">
+      <svg class="icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete
+    </button>
+    <a class="btn btn-secondary" href="{% url 'service_detail' service.pk %}">Cancel</a>
+  </form>
+</section>
 {% endblock %}

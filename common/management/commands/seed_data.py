@@ -1,5 +1,4 @@
 import random
-from datetime import timedelta
 from django.core.management.base import BaseCommand
 from services.models import Service, PetType
 from caretakers.models import Caretaker
@@ -7,6 +6,20 @@ from requests.models import HireRequest
 from reviews.models import Review
 from decimal import Decimal
 from faker import Faker
+
+
+DEMO_CARETAKER_IMAGES = (
+    "caretakers/woman1.png",
+    "caretakers/man1.png",
+    "caretakers/woman2.png",
+    "caretakers/man2.png",
+    "caretakers/woman3.png",
+    "caretakers/man3.png",
+    "caretakers/man4.png",
+    "caretakers/man5.png",
+    "caretakers/man6.png",
+)
+
 
 class Command(BaseCommand):
     help = 'Seeds the database with realistic data.'
@@ -44,7 +57,7 @@ class Command(BaseCommand):
         # Create Caretakers
         all_caretakers = []
         num_caretakers = 10
-        for _ in range(num_caretakers):
+        for index in range(num_caretakers):
             name = fake.name()
             intro_sentences = [
                 "A lifelong animal lover, I've been caring for pets for over 10 years.",
@@ -72,7 +85,8 @@ class Command(BaseCommand):
                 city=fake.city(),
                 bio=f"{bio_intro} {bio_main} {bio_outro}",
                 price_per_hour=Decimal(random.randint(20, 50)),
-                active=fake.boolean(chance_of_getting_true=80)
+                active=fake.boolean(chance_of_getting_true=80),
+                profile_pic=DEMO_CARETAKER_IMAGES[index % len(DEMO_CARETAKER_IMAGES)],
             )
             # Assign random pet types
             num_pet_types = random.randint(1, len(pet_types))

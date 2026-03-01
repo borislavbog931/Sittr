@@ -1,5 +1,4 @@
 {% load static %}
-{% load tailwind_cli %}
 
 <!doctype html>
 <html lang="en">
@@ -10,85 +9,23 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
-  
-
-  {% tailwind_css %}
-  
-  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
   <link rel="stylesheet" href="{% static 'css/forms.css' %}">
-
-  <style>
-    /* Dropdowns */
-    .dropdown { position: relative; }
-    .dd-menu {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 50;
-      display: none;
-      min-width: 15rem;
-    }
-    .dd-menu.show { display: block; }
-    .dd-menu .dd-item { text-decoration: none; }
-
-    /* Ensure header nav links stay white */
-    .primary-nav a,
-    .primary-nav button {
-      color: #ffffff !important;
-      text-decoration: none !important;
-    }
-    .primary-nav a:hover,
-    .primary-nav button:hover {
-      color: #ffffff !important;
-      text-decoration: none !important;
-    }
-
-    /* Ensure header dropdown menu items are dark on light background */
-    .primary-nav .dd-menu {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      min-width: 17rem;
-      padding: 0.65rem;
-    }
-    .primary-nav .dd-menu .dd-item {
-      color: #0f172a !important;
-      text-decoration: none !important;
-      padding: 0.75rem 1rem !important;
-      font-size: 1rem !important;
-    }
-    .primary-nav .dd-menu .dd-item:hover {
-      color: #0f172a !important;
-      background: #f8fafc !important;
-    }
-
-    .icon {
-      width: 1em;
-      height: 1em;
-      display: inline-block;
-      vertical-align: -0.125em;
-      fill: currentColor;
-      stroke: currentColor;
-      stroke-width: 2;
-    }
-
-    .no-underline { text-decoration: none; }
-  </style>
 
   {% block extra_head %}{% endblock %}
 </head>
 
-<body class="bg-slate-50 text-slate-900 font-['Poppins']">
+<body>
   <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
     <symbol id="icon-generic" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"></circle>
     </symbol>
     <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 11l9-7 9 7" fill="none"></path>
+      <path d="M5 10v9h14v-9" fill="none"></path>
+    </symbol>
+    <symbol id="icon-house-door" viewBox="0 0 24 24">
       <path d="M3 11l9-7 9 7" fill="none"></path>
       <path d="M5 10v9h14v-9" fill="none"></path>
     </symbol>
@@ -144,6 +81,9 @@
       <rect x="3" y="6" width="18" height="12" rx="2" fill="none"></rect>
       <path d="M3 7l9 6 9-6" fill="none"></path>
     </symbol>
+    <symbol id="icon-telephone" viewBox="0 0 24 24">
+      <path d="M6 4h4l2 5-2.5 2.5a16 16 0 006 6L18 15l5 2v4c0 1-1 2-2 2C11.1 23 1 12.9 1 3c0-1 1-2 2-2h3z" fill="none"></path>
+    </symbol>
     <symbol id="icon-envelope-paper" viewBox="0 0 24 24">
       <rect x="3" y="5" width="18" height="14" rx="2" fill="none"></rect>
       <path d="M3 6l9 6 9-6" fill="none"></path>
@@ -178,6 +118,10 @@
     <symbol id="icon-arrow-right" viewBox="0 0 24 24">
       <path d="M5 12h14" fill="none"></path>
       <path d="M13 6l6 6-6 6" fill="none"></path>
+    </symbol>
+    <symbol id="icon-check2-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none"></circle>
+      <path d="M8 12.5l2.5 2.5 5.5-6" fill="none"></path>
     </symbol>
     <symbol id="icon-funnel" viewBox="0 0 24 24">
       <path d="M3 5h18l-7 8v6l-4 2v-8L3 5z" fill="none"></path>
@@ -226,19 +170,18 @@
       <path d="M12 21c-3.5 0-6-2.2-6-4.6 0-1.9 1.6-3.4 3.6-3.4h4.8c2 0 3.6 1.5 3.6 3.4 0 2.4-2.5 4.6-6 4.6z" fill="none"></path>
     </symbol>
   </svg>
-  <div class="min-h-screen flex flex-col">
-
-    <header class="sticky top-0 z-30 border-b border-white/10 text-white" style="background: linear-gradient(90deg, #0f766e 0%, #0d9488 55%, #0891b2 100%);">
+  <div class="site-shell">
+    <header class="site-header">
       {% include "partials/_header.html" %}
     </header>
 
-    <main class="flex-1">
-      <div class="py-6 {% block content_container_class %}max-w-6xl mx-auto px-4 sm:px-6 lg:px-8{% endblock %}">
+    <main class="site-main">
+      <div class="{% block content_container_class %}container{% endblock %}">
 
           {% if messages %}
-            <div class="space-y-2 mb-4">
+            <div class="stack" style="margin-bottom: 18px;">
               {% for message in messages %}
-                <div class="rounded-xl border border-teal-100 bg-teal-50/80 px-4 py-3 text-sm text-teal-900">
+                <div class="notice section-block">
                   {{ message }}
                 </div>
               {% endfor %}
@@ -250,7 +193,7 @@
         </div>
       </main>
 
-    <footer class="border-t border-slate-200/70 bg-white/90">
+    <footer class="site-footer">
       {% include "partials/_footer.html" %}
     </footer>
 
