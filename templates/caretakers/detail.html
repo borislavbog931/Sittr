@@ -53,12 +53,14 @@
         <a href="{% url 'hire_request_create' caretaker.slug %}" class="btn btn-plum">
           <svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg> Send hire request
         </a>
-        <a href="{% url 'caretaker_edit' caretaker.slug %}" class="btn btn-gold">
-          <svg class="icon" aria-hidden="true"><use href="#icon-pencil-square"></use></svg> Edit caretaker
-        </a>
-        <a href="{% url 'caretaker_delete' caretaker.slug %}" class="btn btn-danger">
-          <svg class="icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete caretaker
-        </a>
+        {% if request.user.is_staff %}
+          <a href="{% url 'caretaker_edit' caretaker.slug %}" class="btn btn-gold">
+            <svg class="icon" aria-hidden="true"><use href="#icon-pencil-square"></use></svg> Edit caretaker
+          </a>
+          <a href="{% url 'caretaker_delete' caretaker.slug %}" class="btn btn-danger">
+            <svg class="icon" aria-hidden="true"><use href="#icon-trash"></use></svg> Delete caretaker
+          </a>
+        {% endif %}
         <a href="{% url 'review_create' caretaker.slug %}" class="btn btn-secondary">
           <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Leave a review
         </a>

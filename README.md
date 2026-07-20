@@ -24,7 +24,6 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 - 🛠 Admin panel (Unfold Admin UI)
 
 - 🎨 Modern UI
-  - Django + Tailwind CLI
   - Responsive layout
   - Hero section with dynamic image blending
 
@@ -35,7 +34,6 @@ Users can search, compare ratings, read reviews, and send hire requests in minut
 - Python 3.13
 - Django 6.0.2
 - PostgreSQL
-- Tailwind CSS (via django-tailwind-cli)
 
 ---
 # ⚙️ Installation & Setup
@@ -122,15 +120,8 @@ python manage.py createsuperuser
 
 ---
 
-## 8️⃣ Build Tailwind CSS
 
-```bash
-python manage.py tailwind build
-```
-
----
-
-## 9️⃣ Run Development Server
+## 8?????? Run Development Server
 
 ```bash
 python manage.py runserver

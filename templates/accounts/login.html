@@ -1,0 +1,51 @@
+{% extends "common/base.html" %}
+
+{% block title %}Log in | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Log in</span>
+    <h1 class="page-title">Welcome back.</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="panel form-shell">
+  {% if form.non_field_errors %}
+    <div class="error-box">
+      <div><strong>Please fix the errors below.</strong></div>
+      <div>{{ form.non_field_errors }}</div>
+    </div>
+  {% endif %}
+
+  <form method="post" novalidate class="form-stack">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="field field-span-2">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}<div class="error-text">{{ form.username.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field field-span-2">
+          <label for="{{ form.password.id_for_label }}">Password</label>
+          {{ form.password }}
+          {% if form.password.errors %}<div class="error-text">{{ form.password.errors|striptags }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" type="submit">
+        <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Log in
+      </button>
+      <a class="btn btn-secondary" href="{% url 'signup_choice' %}">Sign up instead</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

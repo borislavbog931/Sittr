@@ -1,0 +1,34 @@
+{% extends "common/base.html" %}
+
+{% block title %}How it works for pet owners | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">For pet owners</span>
+    <h1 class="page-title">How it works for pet owners.</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="feature-grid">
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg></span>
+    <h2 class="card-title">1. Browse and filter</h2>
+    <p class="muted">Search Sittrs by city, service, pet type, and price &mdash; no account needed to look around.</p>
+  </article>
+
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-star-half"></use></svg></span>
+    <h2 class="card-title">2. Compare with confidence</h2>
+    <p class="muted">Read reviews and ratings from other owners before deciding who's the right fit for your pet.</p>
+  </article>
+
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+    <h2 class="card-title">3. Send a request</h2>
+    <p class="muted">Create a free account and send a hire request with your dates and notes. Track it from "My requests."</p>
+  </article>
+</section>
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 from caretakers.forms import CaretakerForm
 from caretakers.models import Caretaker
@@ -62,19 +64,36 @@ def caretaker_list(request):
     }
     return render(request, "caretakers/list.html", context)
 
+@login_required
 def caretaker_create(request):
+    existing = getattr(request.user, "caretaker_profile", None)
+    if existing:
+        messages.info(request, "You already have a caretaker profile.")
+        return redirect("caretaker_edit", slug=existing.slug)
+
+    profile = getattr(request.user, "profile", None)
+    if profile and not profile.is_caretaker:
+        messages.error(request, "Only caretaker accounts can create a caretaker profile.")
+        return redirect("home")
+
     if request.method == "POST":
         form = CaretakerForm(request.POST, request.FILES)
         if form.is_valid():
-            caretaker = form.save()
+            caretaker = form.save(commit=False)
+            caretaker.user = request.user
+            caretaker.save()
+            form.save_m2m()
             messages.success(request, "Caretaker created successfully.")
             return redirect('caretaker_detail', slug = caretaker.slug)
     else:
         form = CaretakerForm()
     return render(request, 'caretakers/create.html', {'form': form})
 
+@login_required
 def caretaker_edit(request, slug):
     caretaker = get_object_or_404(Caretaker, slug=slug)
+    if caretaker.user_id != request.user.id and not request.user.is_staff:
+        raise PermissionDenied
     if request.method == "POST":
         form = CaretakerForm(request.POST, request.FILES, instance=caretaker)
         if form.is_valid():
@@ -86,8 +105,11 @@ def caretaker_edit(request, slug):
     context = {'caretaker': caretaker, 'form': form}
     return render(request, 'caretakers/edit.html', {'form': form, 'caretaker': caretaker})
 
+@login_required
 def caretaker_delete(request, slug):
     caretaker = get_object_or_404(Caretaker, slug=slug)
+    if caretaker.user_id != request.user.id and not request.user.is_staff:
+        raise PermissionDenied
     if request.method == "POST":
         caretaker.delete()
         return redirect('caretaker_list')

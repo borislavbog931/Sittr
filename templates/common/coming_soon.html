@@ -1,0 +1,28 @@
+{% extends "common/base.html" %}
+
+{% block title %}Coming soon | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Coming soon</span>
+    <h1 class="page-title">This part of Sittr is still being designed.</h1>
+    <p class="page-subtitle">We're working on it &mdash; check back soon.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="empty-state">
+  <h2 class="card-title">Not quite ready yet</h2>
+  <p class="muted">This flow is still evolving. In the meantime, you can browse Sittrs or head back home.</p>
+  <div class="action-row">
+    <a class="btn btn-primary" href="{% url 'home' %}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-home"></use></svg> Go home
+    </a>
+    <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Browse Sittrs
+    </a>
+  </div>
+</div>
+{% endblock %}

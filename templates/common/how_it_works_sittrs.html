@@ -1,0 +1,34 @@
+{% extends "common/base.html" %}
+
+{% block title %}How it works for Sittrs | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">For Sittrs</span>
+    <h1 class="page-title">How it works for Sittrs.</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="feature-grid">
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg></span>
+    <h2 class="card-title">1. Sign up</h2>
+    <p class="muted">Create a Sittr account and set up your listing: bio, services, pet types, city, and hourly rate.</p>
+  </article>
+
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+    <h2 class="card-title">2. Receive requests</h2>
+    <p class="muted">Owners find your profile and send hire requests directly. Track them all from "My requests."</p>
+  </article>
+
+  <article class="feature-card">
+    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg></span>
+    <h2 class="card-title">3. Build your reputation</h2>
+    <p class="muted">Every completed stay is a chance to earn a review, helping future owners choose you with confidence.</p>
+  </article>
+</section>
+{% endblock %}

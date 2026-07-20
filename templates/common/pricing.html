@@ -1,0 +1,41 @@
+{% extends "common/base.html" %}
+
+{% block title %}Pricing | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Pricing</span>
+    <h1 class="page-title">Simple, transparent pricing.</h1>
+    <p class="page-subtitle">No subscriptions, no hidden fees &mdash; just each Sittr's own hourly rate.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-stack">
+  <section class="panel section-block stack">
+    <p class="lede">Every Sittr sets their own hourly rate, shown right on their profile. Browsing, filtering, and creating an account are all free.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h2 class="card-title">Browsing</h2>
+        <p class="muted">Always free, no account required.</p>
+      </div>
+      <div class="stat-card">
+        <h2 class="card-title">Accounts</h2>
+        <p class="muted">Free for owners and Sittrs alike.</p>
+      </div>
+      <div class="stat-card">
+        <h2 class="card-title">Sittr rates</h2>
+        <p class="muted">Set by each Sittr, shown up front on their profile.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="feature-card stack">
+    <span class="eyebrow">A note on payments</span>
+    <h2 class="card-title">Sittr does not process payments on your behalf yet.</h2>
+    <p class="muted">Rates shown on profiles are informational. Payment between owners and Sittrs is arranged directly for now &mdash; this page will be updated if that changes.</p>
+  </aside>
+</div>
+{% endblock %}

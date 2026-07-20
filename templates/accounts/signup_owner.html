@@ -1,0 +1,70 @@
+{% extends "common/base.html" %}
+
+{% block title %}Sign up as an owner | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Sign up as an owner</span>
+    <h1 class="page-title">Create your account.</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="panel form-shell">
+  {% if form.non_field_errors %}
+    <div class="error-box">
+      <div><strong>Please fix the errors below.</strong></div>
+      <div>{{ form.non_field_errors }}</div>
+    </div>
+  {% endif %}
+
+  <form method="post" novalidate class="form-stack">
+    {% csrf_token %}
+
+    <div class="form-section">
+      <div class="section-head">
+        <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg></span>
+        <div class="section-copy">
+          <h2>Account details</h2>
+          <p>You'll use these to log in and track your hire requests.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field field-span-2">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}<div class="error-text">{{ form.username.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field field-span-2">
+          <label for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email }}
+          {% if form.email.errors %}<div class="error-text">{{ form.email.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.password1.id_for_label }}">Password</label>
+          {{ form.password1 }}
+          {% if form.password1.errors %}<div class="error-text">{{ form.password1.errors|striptags }}</div>{% endif %}
+        </div>
+
+        <div class="field">
+          <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+          {{ form.password2 }}
+          {% if form.password2.errors %}<div class="error-text">{{ form.password2.errors|striptags }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" type="submit">
+        <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Create account
+      </button>
+      <a class="btn btn-secondary" href="{% url 'signup_choice' %}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

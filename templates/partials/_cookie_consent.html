@@ -1,0 +1,9 @@
+<div id="cookie-consent-banner" class="cookie-consent" hidden>
+  <div class="container-wide cookie-consent-inner">
+    <p class="muted">
+      {{ t.cookie_banner_text }}
+      <a href="{% url 'cookie_policy' %}">{{ t.cookie_banner_link }}</a>
+    </p>
+    <button type="button" id="cookie-consent-dismiss" class="btn btn-primary">{{ t.cookie_banner_ack }}</button>
+  </div>
+</div>

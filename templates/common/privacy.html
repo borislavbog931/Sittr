@@ -1,0 +1,78 @@
+{% extends "common/base.html" %}
+
+{% block title %}Privacy Policy | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Legal</span>
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="page-subtitle">Last updated: {% now "F Y" %}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-stack">
+  {% include "partials/_legal_draft_notice.html" %}
+
+  <section class="panel section-block stack">
+    <div>
+      <h2 class="card-title">1. Who we are</h2>
+      <p class="muted">Sittr ("we", "us") is the data controller for the personal data described in this policy. Contact: <em>[insert a real contact/DPO email before launch]</em>.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">2. What we collect</h2>
+      <p class="muted">We collect only what's needed to run the service:</p>
+      <ul class="muted">
+        <li><strong>Account data:</strong> username, email address, and a securely hashed password (we never store passwords in plain text).</li>
+        <li><strong>Sittr listing data</strong> (if you register as a Sittr): name, contact email, phone number, city, bio, hourly rate, services, pet types, and an optional profile photo.</li>
+        <li><strong>Hire request data:</strong> the dates, pet type, service, and notes you submit when contacting a Sittr, linked to your account.</li>
+        <li><strong>Reviews:</strong> your rating and comment, linked to your account.</li>
+        <li><strong>Session data:</strong> a single session cookie that keeps you logged in and remembers your language preference. See our <a href="{% url 'cookie_policy' %}">Cookie Policy</a> for details.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="card-title">3. Why we process it</h2>
+      <p class="muted">Account, listing, and request data are processed to perform our contract with you (providing the marketplace service). Session data is processed on the basis of legitimate interest in keeping the site functional and secure.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">4. Sharing with third parties</h2>
+      <p class="muted">We do not currently share your personal data with third parties, and we do not run advertising or analytics tracking. This policy will be updated if that changes (for example, if we introduce email delivery, analytics, or payment processing).</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">5. International transfers</h2>
+      <p class="muted">Data is stored with our hosting provider. <em>[Confirm and state the exact hosting region/provider here before launch.]</em></p>
+    </div>
+
+    <div>
+      <h2 class="card-title">6. How long we keep it</h2>
+      <p class="muted">We keep your data for as long as your account is active. If you'd like your account and associated data deleted, contact us and we will process the request &mdash; a self-service deletion option is planned but not available yet.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">7. Your rights</h2>
+      <p class="muted">Under GDPR and similar laws, you have the right to access, correct, delete, restrict, or export your personal data, and to object to certain processing. To exercise any of these rights, contact us using the details above. You also have the right to lodge a complaint with your local data protection authority.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">8. Children</h2>
+      <p class="muted">Sittr is not directed at children under 16. We do not currently verify age at signup &mdash; this is a known gap to close before launch.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">9. Security</h2>
+      <p class="muted">Passwords are hashed, never stored in plain text. In production, connections are enforced over HTTPS.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">10. Changes to this policy</h2>
+      <p class="muted">We'll update this page if how we handle your data changes, and update the "last updated" date above.</p>
+    </div>
+  </section>
+</div>
+{% endblock %}

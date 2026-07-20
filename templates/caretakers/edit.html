@@ -132,13 +132,6 @@
     </div>
 
     <div class="form-section">
-      <div class="toggle-row">
-        {{ form.active }}
-        <label for="{{ form.active.id_for_label }}">Active</label>
-      </div>
-      <div class="inline-note">Inactive profiles will not show up in search.</div>
-      {% if form.active.errors %}<div class="error-text">{{ form.active.errors|striptags }}</div>{% endif %}
-
       <div class="action-row">
         <button class="btn btn-primary" type="submit">
           <svg class="icon" aria-hidden="true"><use href="#icon-check2-circle"></use></svg> Save changes

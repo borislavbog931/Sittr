@@ -1,9 +1,23 @@
 <div class="container">
+  <div class="footer-links">
+    <a href="{% url 'help' %}">{{ t.footer_help }}</a>
+    <a href="{% url 'how_it_works_sittrs' %}">{{ t.footer_how_sittrs }}</a>
+    <a href="{% url 'how_it_works_owners' %}">{{ t.footer_how_owners }}</a>
+    <a href="{% url 'pricing' %}">{{ t.footer_pricing }}</a>
+    <a href="{% url 'cookie_policy' %}">{{ t.footer_cookies }}</a>
+    <a href="{% url 'about' %}">{{ t.footer_about }}</a>
+  </div>
+
   <div class="footer-inner">
-    <div>(c) {% now "Y" %} Sittr. Founded 2023 for thoughtful pet care.</div>
+    <div>(c) {% now "Y" %} Sittr. {{ t.footer_copyright }}</div>
     <div class="footer-tech">
-      <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-code-slash"></use></svg> Django powered</span>
-      <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg> Human-first UX</span>
+      <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-code-slash"></use></svg> {{ t.footer_django }}</span>
+      <span class="metric-chip"><svg class="icon" aria-hidden="true"><use href="#icon-heart"></use></svg> {{ t.footer_human }}</span>
     </div>
+  </div>
+
+  <div class="footer-legal">
+    <a href="{% url 'terms' %}">{{ t.footer_terms }}</a>
+    <a href="{% url 'privacy' %}">{{ t.footer_privacy }}</a>
   </div>
 </div>

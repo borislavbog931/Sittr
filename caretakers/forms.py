@@ -23,7 +23,6 @@ class CaretakerForm(forms.ModelForm):
             'services',
             'pet_types',
             'profile_pic',
-            'active',
         ]
         widgets = {
             "bio": forms.Textarea(attrs={"rows": 4}),

@@ -52,12 +52,6 @@
       </div>
 
       <div class="form-grid">
-        <div class="field field-span-2">
-          <label for="{{ form.reviewer_name.id_for_label }}">Your name</label>
-          {{ form.reviewer_name }}
-          {% if form.reviewer_name.errors %}<div class="error-text">{{ form.reviewer_name.errors|striptags }}</div>{% endif %}
-        </div>
-
         <div class="field">
           <label for="{{ form.rating.id_for_label }}">Rating (1-10)</label>
           {{ form.rating }}

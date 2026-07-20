@@ -1,0 +1,81 @@
+{% extends "common/base.html" %}
+
+{% block title %}Terms and Conditions | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Legal</span>
+    <h1 class="page-title">Terms and Conditions</h1>
+    <p class="page-subtitle">Last updated: {% now "F Y" %}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-stack">
+  {% include "partials/_legal_draft_notice.html" %}
+
+  <section class="panel section-block stack">
+    <div>
+      <h2 class="card-title">1. Acceptance of these terms</h2>
+      <p class="muted">By creating an account or using Sittr, you agree to these terms. If you don't agree, please don't use the service.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">2. Eligibility</h2>
+      <p class="muted">You must be at least 18 years old to create an account on Sittr.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">3. Your account</h2>
+      <p class="muted">You're responsible for the accuracy of the information you provide and for keeping your login credentials secure. Each person may hold one account.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">4. Owners and Sittrs</h2>
+      <p class="muted">Sittr connects two kinds of accounts: <strong>owners</strong>, who browse listings and send hire requests, and <strong>Sittrs</strong>, who publish a listing and respond to requests. Each role has access to features scoped to that role.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">5. No vetting guarantee</h2>
+      <p class="muted">Sittr does not currently run background checks or formal vetting on Sittr listings. Reviews are provided by other users in good faith, but we cannot guarantee the accuracy of any profile or review. Use your own judgment when arranging care for your pet.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">6. Payments</h2>
+      <p class="muted">Sittr does not process payments between owners and Sittrs. Hourly rates shown on listings are informational; any payment is arranged directly between the parties.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">7. Acceptable use</h2>
+      <p class="muted">Don't post false information, impersonate someone else, or use the service for anything unlawful. We may remove content or suspend accounts that violate these terms.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">8. Your content</h2>
+      <p class="muted">You retain ownership of the listings, requests, and reviews you submit, and grant Sittr a license to display them as part of operating the service.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">9. Limitation of liability</h2>
+      <p class="muted">Sittr is a platform connecting owners and Sittrs. We are not a party to any care arrangement made between users and are not liable for the conduct of any user, on or off the platform.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">10. Termination</h2>
+      <p class="muted">We may suspend or terminate an account that violates these terms.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">11. Governing law</h2>
+      <p class="muted"><em>[To be finalized based on the operating entity's registered jurisdiction before launch.]</em></p>
+    </div>
+
+    <div>
+      <h2 class="card-title">12. Changes to these terms</h2>
+      <p class="muted">We'll update this page if these terms change, and update the "last updated" date above.</p>
+    </div>
+  </section>
+</div>
+{% endblock %}

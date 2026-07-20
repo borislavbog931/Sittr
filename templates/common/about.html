@@ -5,85 +5,147 @@
 {% block page_header %}
   <div class="page-header">
     <div>
-      <span class="eyebrow">About Sittr</span>
-      <h1 class="page-title">Designed to make pet care choices feel simple and trustworthy.</h1>
-      <p class="page-subtitle">Founded in 2023 and built around clarity for pet owners.</p>
+      <span class="eyebrow">{{ t.about_eyebrow }}</span>
+      <h1 class="page-title">{{ t.about_title }}</h1>
+      <p class="page-subtitle">{{ t.about_subtitle }}</p>
     </div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <div class="split-layout">
-    <section class="panel section-block stack">
-      <p class="lede">
-        Sittr helps you find reliable, caring people for your best friend quickly, clearly, and without unnecessary friction.
-      </p>
+  <div class="page-stack">
+    <div class="split-layout">
+      <section class="panel section-block stack">
+        <p class="lede">
+          {{ t.about_lede }}
+        </p>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h2 class="card-title">Goal</h2>
-          <p class="muted">Help owners choose with confidence.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h2 class="card-title">Goal</h2>
+            <p class="muted">Help owners choose with confidence.</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="card-title">Trust</h2>
+            <p class="muted">Clarity through profiles, services, and reviews.</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="card-title">Speed</h2>
+            <p class="muted">Request a caretaker in minutes.</p>
+          </div>
+          <div class="stat-card">
+            <h2 class="card-title">Fair</h2>
+            <p class="muted">Transparent hourly pricing, no hidden fees.</p>
+          </div>
         </div>
-        <div class="stat-card">
-          <h2 class="card-title">Trust</h2>
-          <p class="muted">Clarity through profiles, services, and reviews.</p>
+
+        <div class="stack">
+          <div>
+            <h2 class="card-title">Our purpose</h2>
+            <p class="muted">Pets are family. Sittr makes it easy to compare caretakers by what matters most: services, pet types, location, price, and reviews.</p>
+          </div>
+          <div>
+            <h2 class="card-title">Mission</h2>
+            <p class="muted">Make finding a caretaker feel simple while giving owners enough transparency to trust their choice.</p>
+          </div>
+          <div>
+            <h2 class="card-title">Motivation</h2>
+            <p class="muted">Sittr was founded in <strong>2023</strong> to reduce the uncertainty pet owners feel when they can find someone online but cannot tell who is genuinely right for their pet.</p>
+          </div>
         </div>
-        <div class="stat-card">
-          <h2 class="card-title">Speed</h2>
-          <p class="muted">Request a caretaker in minutes.</p>
+      </section>
+
+      <aside class="sidebar-stack">
+        <section class="panel section-block stack">
+          <h2 class="card-title">What you can do</h2>
+
+          <div class="section-head">
+            <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg></span>
+            <div class="section-copy">
+              <h3>Browse and filter</h3>
+              <p>Search by city, service, pet type, and price.</p>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star-half"></use></svg></span>
+            <div class="section-copy">
+              <h3>Read reviews</h3>
+              <p>Ratings are still 1 to 10, shown with a more polished presentation.</p>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+            <div class="section-copy">
+              <h3>Send a request</h3>
+              <p>Create a free account and reach out to a caretaker in minutes.</p>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg></span>
+            <div class="section-copy">
+              <h3>Become a Sittr</h3>
+              <p>Sign up, publish your listing, and manage requests from your own dashboard.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-card">
+          <span class="eyebrow">Best friends first</span>
+          <h2 class="card-title">Care you can trust should be easy to recognize.</h2>
+          <p class="muted">That principle drives the browsing experience, the profile detail pages, and the way requests and reviews work throughout Sittr.</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="page-stack">
+      <div class="page-header">
+        <div>
+          <span class="eyebrow">{{ t.about_why_eyebrow }}</span>
+          <h2 class="section-title">{{ t.about_why_title }}</h2>
+          <p class="page-subtitle">{{ t.about_why_subtitle }}</p>
         </div>
       </div>
 
-      <div class="stack">
-        <div>
-          <h2 class="card-title">Our purpose</h2>
-          <p class="muted">Pets are family. Sittr makes it easy to compare caretakers by what matters most: services, pet types, location, price, and reviews.</p>
-        </div>
-        <div>
-          <h2 class="card-title">Mission</h2>
-          <p class="muted">Make finding a caretaker feel simple while giving owners enough transparency to trust their choice.</p>
-        </div>
-        <div>
-          <h2 class="card-title">Motivation</h2>
-          <p class="muted">Sittr was founded in <strong>2023</strong> to reduce the uncertainty pet owners feel when they can find someone online but cannot tell who is genuinely right for their pet.</p>
-        </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-wallet2"></use></svg></span>
+          <h3 class="card-title">Transparent pricing</h3>
+          <p class="muted">Every caretaker lists a clear hourly rate up front, no points systems and no hidden add-on fees.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg></span>
+          <h3 class="card-title">Real reviews</h3>
+          <p class="muted">Ratings come from signed-in accounts, not anonymous, unverifiable comments.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg></span>
+          <h3 class="card-title">Built for two roles</h3>
+          <p class="muted">Owners and caretakers each get a dashboard tailored to them, not a one-size-fits-all account.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg></span>
+          <h3 class="card-title">Fast to join</h3>
+          <p class="muted">Create an account and either publish a listing or send your first request in minutes.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-compass"></use></svg></span>
+          <h3 class="card-title">Local-first discovery</h3>
+          <p class="muted">Filter by city, service, and pet type to find someone who actually fits your day-to-day needs.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-paw"></use></svg></span>
+          <h3 class="card-title">Pet-first profiles</h3>
+          <p class="muted">Every listing highlights the exact pet types and services a caretaker supports, so you are never guessing.</p>
+        </article>
       </div>
     </section>
-
-    <aside class="sidebar-stack">
-      <section class="panel section-block stack">
-        <h2 class="card-title">What you can do</h2>
-
-        <div class="section-head">
-          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg></span>
-          <div class="section-copy">
-            <h3>Browse and filter</h3>
-            <p>Search by city, service, pet type, and price.</p>
-          </div>
-        </div>
-
-        <div class="section-head">
-          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-star-half"></use></svg></span>
-          <div class="section-copy">
-            <h3>Read reviews</h3>
-            <p>Ratings are still 1 to 10, shown with a more polished presentation.</p>
-          </div>
-        </div>
-
-        <div class="section-head">
-          <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
-          <div class="section-copy">
-            <h3>Send a request</h3>
-            <p>Reach out to a caretaker without needing an account first.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="feature-card">
-        <span class="eyebrow">Best friends first</span>
-        <h2 class="card-title">Care you can trust should be easy to recognize.</h2>
-        <p class="muted">That principle drives the browsing experience, the profile detail pages, and the way requests and reviews work throughout Sittr.</p>
-      </section>
-    </aside>
   </div>
 {% endblock %}

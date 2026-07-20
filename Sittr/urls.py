@@ -23,6 +23,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('common.urls')),
+    path('accounts/', include('accounts.urls')),
     path('caretakers/', include('caretakers.urls')),
     path('requests/', include('requests.urls')),
     path('services/', include('services.urls')),
@@ -30,6 +31,7 @@ urlpatterns = [
 ]
 
 handler404 = "common.views.custom_404"
+handler403 = "common.views.custom_403"
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()

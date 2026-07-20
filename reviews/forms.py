@@ -7,7 +7,7 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ["caretaker", "reviewer_name", "rating", "comment"]
+        fields = ["caretaker", "rating", "comment"]
         widgets = {
             "comment": forms.Textarea(attrs={"rows": 4}),
             "rating": forms.NumberInput(attrs={"min": 1, "max": 10}),
@@ -17,7 +17,6 @@ class ReviewForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields["caretaker"].queryset = Caretaker.objects.filter(active=True).order_by("name", "city")
-        self.fields["reviewer_name"].widget.attrs.setdefault("placeholder", "e.g. Jordan Lee")
 
         for field_name, field in self.fields.items():
             widget = field.widget

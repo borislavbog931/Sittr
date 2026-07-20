@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from caretakers.models import Caretaker
@@ -22,6 +23,14 @@ class HireRequest(models.Model):
         Caretaker,
         on_delete=models.CASCADE,
         related_name="hire_requests",
+    )
+
+    requested_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="hire_requests_made",
     )
 
     client_name = models.CharField(

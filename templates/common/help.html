@@ -1,0 +1,38 @@
+{% extends "common/base.html" %}
+
+{% block title %}Help | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Help</span>
+    <h1 class="page-title">Need a hand?</h1>
+    <p class="page-subtitle">A few quick answers while our full help center is being built.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="split-layout">
+  <section class="panel section-block stack">
+    <div>
+      <h2 class="card-title">Getting started</h2>
+      <p class="muted">Create an account as an owner if you're looking for a Sittr, or as a Sittr if you'd like to list your services. Browsing Sittrs and reading reviews doesn't require an account.</p>
+    </div>
+    <div>
+      <h2 class="card-title">Sending a request</h2>
+      <p class="muted">Once you find a Sittr you like, open their profile and send a hire request with your dates and notes. You can track its status from "My requests" once logged in.</p>
+    </div>
+    <div>
+      <h2 class="card-title">Managing your listing</h2>
+      <p class="muted">Sittrs can edit their own listing, pricing, and services at any time from "My profile" in the header.</p>
+    </div>
+  </section>
+
+  <aside class="feature-card stack">
+    <span class="eyebrow">Still stuck?</span>
+    <h2 class="card-title">A full help center is on the way.</h2>
+    <p class="muted">For now, learn more about how Sittr works on our <a href="{% url 'about' %}">About page</a>.</p>
+  </aside>
+</div>
+{% endblock %}

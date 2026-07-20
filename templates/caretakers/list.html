@@ -9,9 +9,15 @@
     <h1 class="page-title">Browse by city, services, pet types, and price.</h1>
     <p class="page-subtitle">Use the same filters and data as before, now in a calmer layout.</p>
   </div>
-  <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
-    <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-  </a>
+  {% if not request.user.is_authenticated %}
+    <a class="btn btn-primary" href="{% url 'signup_caretaker' %}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Become a caretaker
+    </a>
+  {% elif not request.user.caretaker_profile and request.user.profile.role == 'caretaker' %}
+    <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
+    </a>
+  {% endif %}
 </div>
 {% endblock %}
 
@@ -129,9 +135,15 @@
       <h2 class="card-title">No caretakers yet</h2>
       <p class="muted">Add caretakers from the admin panel to see them here.</p>
       <div class="action-row">
-        <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
-          <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-        </a>
+        {% if not request.user.is_authenticated %}
+          <a class="btn btn-primary" href="{% url 'signup_caretaker' %}">
+            <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Become a caretaker
+          </a>
+        {% elif not request.user.caretaker_profile and request.user.profile.role == 'caretaker' %}
+          <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
+            <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
+          </a>
+        {% endif %}
       </div>
     </div>
   {% endif %}

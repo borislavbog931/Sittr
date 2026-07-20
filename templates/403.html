@@ -1,0 +1,58 @@
+{% extends "common/base.html" %}
+
+{% block title %}Access denied | Sittr{% endblock %}
+
+{% block page_header %}
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">Access denied</span>
+      <h1 class="page-title">403</h1>
+      <p class="page-subtitle">You don't have permission to view this page.</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="split-layout">
+    <section class="panel section-block stack">
+      <span class="eyebrow">Error code</span>
+      <h2 class="section-title">This page belongs to someone else's account.</h2>
+      <p class="muted">Use one of the main sections below to get back into the product.</p>
+
+      <div class="action-row">
+        <a class="btn btn-primary" href="{% url 'home' %}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-home"></use></svg> Go home
+        </a>
+        <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Browse caretakers
+        </a>
+        <a class="btn btn-secondary" href="{% url 'service_list' %}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> Services
+        </a>
+      </div>
+    </section>
+
+    <aside class="feature-card stack">
+      <div class="section-head">
+        <span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-compass"></use></svg></span>
+        <div class="section-copy">
+          <h3>Try a popular page</h3>
+          <p>These links usually get people back on track quickly.</p>
+        </div>
+      </div>
+
+      <a class="list-item-link" href="{% url 'caretaker_list' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-people"></use></svg> Caretakers</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+      <a class="list-item-link" href="{% url 'review_list' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> Reviews</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+      <a class="list-item-link" href="{% url 'about' %}">
+        <span><svg class="icon" aria-hidden="true"><use href="#icon-info-circle"></use></svg> About</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+    </aside>
+  </div>
+{% endblock %}

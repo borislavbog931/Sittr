@@ -1,0 +1,46 @@
+{% extends "common/base.html" %}
+
+{% block title %}Cookie Policy | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">Legal</span>
+    <h1 class="page-title">Cookie Policy</h1>
+    <p class="page-subtitle">Last updated: {% now "F Y" %}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-stack">
+  {% include "partials/_legal_draft_notice.html" %}
+
+  <section class="panel section-block stack">
+    <div>
+      <h2 class="card-title">What are cookies?</h2>
+      <p class="muted">Cookies are small pieces of data stored in your browser that let a site remember information between visits.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">What Sittr uses today</h2>
+      <p class="muted">Sittr currently sets a single essential cookie: a session cookie that keeps you logged in and remembers your chosen language (English/Bulgarian). Without it, login and the language switch wouldn't work, so it can't be turned off within the site.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">What Sittr does not use</h2>
+      <p class="muted">We do not currently use advertising, analytics, or tracking cookies of any kind.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">Managing cookies in your browser</h2>
+      <p class="muted">You can block or delete cookies through your browser's settings, but doing so will prevent you from staying logged in to Sittr.</p>
+    </div>
+
+    <div>
+      <h2 class="card-title">If this changes</h2>
+      <p class="muted">If we introduce analytics or advertising cookies in the future, we'll update this policy and add a proper consent choice before any non-essential cookie is set.</p>
+    </div>
+  </section>
+</div>
+{% endblock %}

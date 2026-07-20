@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
@@ -5,6 +7,16 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from caretakers.models import Caretaker
 from services.forms import ServiceForm
 from services.models import Service
+
+
+class StaffOnlyMixin(LoginRequiredMixin, UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            return super().handle_no_permission()
+        raise PermissionDenied
 
 
 def service_list(request):
@@ -28,7 +40,7 @@ class ServiceDetailView(TemplateView):
         return context
 
 
-class ServiceCreateView(CreateView):
+class ServiceCreateView(StaffOnlyMixin, CreateView):
     model = Service
     form_class = ServiceForm
     template_name = "services/create.html"
@@ -37,7 +49,7 @@ class ServiceCreateView(CreateView):
         return reverse("service_detail", kwargs={"pk": self.object.pk})
 
 
-class ServiceUpdateView(UpdateView):
+class ServiceUpdateView(StaffOnlyMixin, UpdateView):
     model = Service
     form_class = ServiceForm
     template_name = "services/edit.html"
@@ -45,7 +57,7 @@ class ServiceUpdateView(UpdateView):
     def get_success_url(self):
         return reverse("service_detail", kwargs={"pk": self.object.pk})
 
-class ServiceDeleteView(DeleteView):
+class ServiceDeleteView(StaffOnlyMixin, DeleteView):
     model = Service
     template_name = "services/delete.html"
 
