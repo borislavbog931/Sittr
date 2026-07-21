@@ -2,8 +2,8 @@
   color-scheme: light;
   --ink: #1a1a1a;
   --muted: #5d5d6d;
-  --accent: #d1495b;
-  --accent-dark: #2d1e2f;
+  --accent: #f23359;
+  --accent-dark: #4a1148;
   --surface: #ffffff;
   --surface-alt: #f8f2eb;
   --line: #f2e7dc;
@@ -28,7 +28,7 @@
   --radius-image: 0;
 
   /* the only shadow in the system, reserved for one or two hero elements */
-  --shadow-hero: 0 20px 30px rgba(45, 30, 47, 0.15);
+  --shadow-hero: 0 20px 30px rgba(74, 17, 72, 0.18);
 
   /* transitions */
   --ease-button: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,6 +43,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -53,7 +54,15 @@ body {
   line-height: 1.5;
   letter-spacing: normal;
   color: var(--ink);
-  background: radial-gradient(1200px 800px at 15% -10%, #f5e2c6 0%, #fff3e2 42%, #f3f0f7 100%);
+  background: radial-gradient(1200px 800px at 15% -10%, #fdf3e2 0%, #fffaf4 42%, #f8f6fb 100%);
+}
+
+/* Space Grotesk/DM Serif Display have no Cyrillic glyphs, so BG falls back to
+   system fonts; Literata is a Cyrillic-supporting serif with a smooth, warm
+   character close to DM Serif Display, used for BG body copy instead.
+   English body font is untouched. */
+html[lang="bg"] body {
+  font-family: "Literata", "Segoe UI", serif;
 }
 
 a {
@@ -99,12 +108,8 @@ textarea {
 
 .container,
 .container-wide {
-  width: min(1320px, calc(100% - 28px));
-  margin: 0 auto;
-}
-
-.container-wide {
-  width: min(1460px, calc(100% - 28px));
+  width: min(1520px, calc(100% - 24px));
+  margin-inline: auto;
 }
 
 .header-inner {
@@ -112,14 +117,14 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 18px 0;
+  padding: 16px 0;
   transition: padding var(--ease-nav);
 }
 
 .brand-link {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   text-decoration: none;
 }
 
@@ -135,7 +140,7 @@ textarea {
 .brand-mark img {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   object-fit: cover;
 }
 
@@ -146,15 +151,15 @@ textarea {
 
 .brand-copy strong {
   font-family: "DM Serif Display", "Times New Roman", serif;
-  font-size: 1.75rem;
+  font-size: 24px;
   color: var(--accent-dark);
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .brand-copy span {
   margin-top: 4px;
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: normal;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -162,7 +167,7 @@ textarea {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-start;
   flex: 1;
@@ -173,11 +178,12 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 11px 15px;
+  padding: 12px 16px;
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
   background: transparent;
   color: var(--muted);
+  font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: background var(--ease-nav), color var(--ease-nav), border-color var(--ease-nav);
@@ -203,12 +209,12 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 14px;
-  border-radius: 999px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(242, 231, 220, 0.9);
   color: var(--accent-dark);
-  font-size: 0.82rem;
+  font-size: 12px;
   text-decoration: none;
 }
 
@@ -226,15 +232,15 @@ textarea {
   display: inline-flex;
   align-items: center;
   border: 1px solid rgba(242, 231, 220, 0.9);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .lang-button {
   padding: 8px 12px;
-  font-size: 0.78rem;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: normal;
   color: var(--muted);
   text-decoration: none;
 }
@@ -250,8 +256,8 @@ textarea {
 
 .dd-menu {
   list-style: none;
-  margin: 10px 0 0;
-  padding: 10px;
+  margin: 8px 0 0;
+  padding: 12px;
   position: absolute;
   top: 100%;
   left: 0;
@@ -259,7 +265,7 @@ textarea {
   display: none;
   min-width: 240px;
   border-radius: var(--radius-card);
-  border: 1px solid var(--line-strong);
+  border: 2px solid var(--line-strong);
   background: #ffffff;
 }
 
@@ -270,9 +276,9 @@ textarea {
 .dd-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 16px;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-card);
   color: var(--accent-dark);
   text-decoration: none;
 }
@@ -283,7 +289,7 @@ textarea {
 
 .site-main {
   flex: 1;
-  padding: 38px 0 80px;
+  padding: 40px 0 80px;
 }
 
 .page-stack,
@@ -307,7 +313,7 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   text-align: center;
 }
 
@@ -336,8 +342,8 @@ textarea {
 
 .eyebrow {
   display: inline-block;
-  margin-bottom: 10px;
-  font-size: 0.82rem;
+  margin-bottom: 8px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: normal;
   color: var(--accent);
@@ -354,8 +360,8 @@ textarea {
 }
 
 .page-title {
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  line-height: 1.25;
+  font-size: 36px;
+  line-height: 45px;
   font-weight: 600;
   text-align: center;
 }
@@ -368,25 +374,17 @@ textarea {
 }
 
 .section-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.25;
+  font-size: 32px;
+  line-height: 40px;
   font-weight: 600;
   text-align: center;
   margin-bottom: var(--space-7);
 }
 
 .card-title {
-  font-size: 1.5rem;
-  line-height: 1.33;
+  font-size: 24px;
+  line-height: 32px;
   font-weight: 600;
-}
-
-.section-title {
-  font-size: 2rem;
-}
-
-.card-title {
-  font-size: 1.45rem;
 }
 
 .page-subtitle,
@@ -411,7 +409,7 @@ textarea {
 .notice,
 .danger-card {
   background: #ffffff;
-  border: 1px solid var(--line-strong);
+  border: 2px solid var(--line-strong);
   border-radius: var(--radius-card);
 }
 
@@ -441,7 +439,7 @@ textarea {
 .empty-state,
 .form-shell,
 .danger-card {
-  padding: 28px;
+  padding: 24px;
 }
 
 .hero-grid,
@@ -452,11 +450,69 @@ textarea {
 .form-grid,
 .stats-grid {
   display: grid;
-  gap: 22px;
+  gap: 24px;
 }
 
 .feature-grid {
   gap: var(--space-5);
+}
+
+.pet-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.pet-tile {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 220px;
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--ease-nav);
+}
+
+.pet-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(74, 17, 72, 0) 40%, rgba(74, 17, 72, 0.78) 100%);
+}
+
+.pet-tile:hover {
+  transform: scale(1.02);
+}
+
+.pet-tile--dog {
+  background-color: var(--accent);
+}
+
+.pet-tile--cat {
+  background-color: var(--accent-dark);
+}
+
+.pet-tile--calculator {
+  background-color: var(--muted);
+}
+
+.pet-tile-label {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-4);
+  color: #ffffff;
+  font-family: "DM Serif Display", "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .pet-tile-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-grid {
@@ -475,7 +531,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 .hero-copy h2.section-title,
@@ -486,7 +542,7 @@ textarea {
 .hero-media {
   position: relative;
   min-height: 420px;
-  margin: -28px -28px -28px 0;
+  margin: -24px -24px -24px 0;
   border-radius: var(--radius-image);
   overflow: hidden;
   background: radial-gradient(circle at top left, #f3d8ba 0%, #ead9eb 100%);
@@ -497,8 +553,8 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 250, 244, 1) 0%, rgba(255, 250, 244, 0.9) 16%, rgba(255, 250, 244, 0.56) 36%, rgba(255, 250, 244, 0.16) 58%, rgba(45, 30, 47, 0.16) 100%),
-    linear-gradient(135deg, rgba(255, 236, 214, 0.18), rgba(45, 30, 47, 0.18));
+    linear-gradient(90deg, rgba(255, 250, 244, 1) 0%, rgba(255, 250, 244, 0.9) 16%, rgba(255, 250, 244, 0.56) 36%, rgba(255, 250, 244, 0.16) 58%, rgba(74, 17, 72, 0.16) 100%),
+    linear-gradient(135deg, rgba(255, 236, 214, 0.18), rgba(74, 17, 72, 0.18));
 }
 
 .hero-media img {
@@ -512,8 +568,8 @@ textarea {
   align-items: flex-end; /* Changed to align items to the bottom */
   gap: 12px;
   flex-wrap: wrap;
-  padding: 10px;
-  border-radius: 22px;
+  padding: 12px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--line);
   background: rgba(255, 253, 249, 0.96);
 }
@@ -528,7 +584,8 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 13px 20px;
+  height: 56px;
+  padding: 0 24px;
   border: 1px solid transparent;
   border-radius: var(--radius-button);
   background: transparent;
@@ -570,7 +627,7 @@ textarea {
 .chip-row,
 .action-row {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -585,12 +642,12 @@ textarea {
   border-radius: var(--radius-sm);
   background: var(--surface-alt);
   color: var(--accent-dark);
-  font-size: 0.88rem;
+  font-size: 14px;
 }
 
 .metric-chip {
   background: rgba(255, 255, 255, 0.74);
-  border: 1px solid rgba(242, 231, 220, 0.9);
+  border: 2px solid rgba(242, 231, 220, 0.9);
 }
 
 .feature-grid,
@@ -600,7 +657,7 @@ textarea {
 
 .caretaker-grid {
   display: grid;
-  gap: 22px;
+  gap: 24px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -610,7 +667,7 @@ textarea {
 
 .carousel-track {
   display: flex;
-  gap: 22px;
+  gap: 24px;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -622,14 +679,14 @@ textarea {
 .carousel-nav {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 18px;
 }
 
 .carousel-dot {
   width: 8px;
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   border: none;
   padding: 0;
   cursor: pointer;
@@ -643,7 +700,7 @@ textarea {
 .services-grid,
 .reviews-grid {
   display: grid;
-  gap: 22px;
+  gap: 24px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -654,29 +711,41 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
+  border-radius: var(--radius-card);
   background: var(--surface-alt);
   color: var(--accent);
 }
 
-.illustration-bubble {
-  width: 120px;
-  height: 120px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border-radius: 50%;
-  background: var(--surface-alt);
-  color: var(--accent);
+.travel-banner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 8px;
+  margin-bottom: 28px;
 }
 
-.illustration-bubble .icon {
-  width: 2.5rem;
-  height: 2.5rem;
+.travel-banner .section-title {
+  margin-bottom: 0;
+}
+
+.feature-plain {
+  text-align: center;
+}
+
+.feature-plain-icon {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+  margin: 0 auto 12px;
 }
 
 .pet-picker-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background: var(--accent-dark);
   border-radius: var(--radius-card);
   padding: var(--space-7) var(--space-6);
@@ -806,20 +875,20 @@ textarea {
 .section-head {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
 }
 
 .section-copy h2,
 .section-copy h3 {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 16px;
   color: var(--accent-dark);
 }
 
 .section-copy p {
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 16px;
 }
 
 .split-layout {
@@ -866,7 +935,7 @@ textarea {
 .meta-line {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -881,7 +950,7 @@ textarea {
 .form-section {
   display: grid;
   gap: 16px;
-  padding-top: 22px;
+  padding-top: 24px;
   border-top: 1px solid var(--line);
 }
 
@@ -897,9 +966,9 @@ textarea {
 
 .field label,
 .field-label {
-  font-size: 0.82rem;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: normal;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -907,7 +976,7 @@ textarea {
 .field-help,
 .error-text,
 .inline-note {
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .field-help,
@@ -921,9 +990,9 @@ textarea {
 }
 
 .error-box {
-  padding: 16px 18px;
-  border-radius: 18px;
-  border: 1px solid rgba(190, 63, 83, 0.22);
+  padding: 16px;
+  border-radius: var(--radius-card);
+  border: 2px solid rgba(190, 63, 83, 0.22);
   background: rgba(255, 240, 242, 0.95);
 }
 
@@ -934,9 +1003,9 @@ textarea {
 .price-input {
   width: 100%;
   min-width: 0;
-  padding: 14px 16px;
+  padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--radius-card);
   background: #fffdf9;
   color: var(--ink);
 }
@@ -965,11 +1034,54 @@ textarea {
 .price-field {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 0 16px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--radius-card);
   background: #fffdf9;
+}
+
+.pricing-calculator {
+  display: grid;
+  gap: 24px;
+}
+
+.pricing-calculator-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pricing-calculator-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  border-radius: var(--radius-card);
+  border: 2px solid var(--line-strong);
+  background: var(--surface-alt);
+}
+
+.pricing-calculator-result-label {
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+
+.pricing-calculator-result-value {
+  font-family: "DM Serif Display", "Times New Roman", serif;
+  font-size: 32px;
+  color: var(--accent-dark);
+}
+
+.pricing-calculator-note {
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .pricing-calculator-fields {
+    grid-template-columns: 1fr;
+  }
 }
 
 .price-field span {
@@ -990,7 +1102,7 @@ textarea {
 .toggle-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .table-shell {
@@ -1004,14 +1116,14 @@ textarea {
 
 .data-table th,
 .data-table td {
-  padding: 16px 18px;
+  padding: 16px;
   text-align: left;
   border-bottom: 1px solid var(--line);
 }
 
 .data-table th {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: normal;
   text-transform: uppercase;
   color: var(--muted);
   background: rgba(248, 242, 235, 0.78);
@@ -1029,7 +1141,7 @@ textarea {
 .list-item-link {
   display: flex;
   justify-content: space-between;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
   text-decoration: none;
 }
@@ -1041,8 +1153,8 @@ textarea {
 
 .footer-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
+  flex-direction: column;
+  gap: 12px;
   padding: 28px 0 20px;
   border-bottom: 1px solid rgba(242, 231, 220, 0.9);
 }
@@ -1050,7 +1162,7 @@ textarea {
 .footer-links a {
   color: var(--accent-dark);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -1064,9 +1176,9 @@ textarea {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  padding: 20px 0;
+  padding: 16px 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .footer-tech {
@@ -1077,7 +1189,7 @@ textarea {
 
 .footer-legal {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
   padding: 0 0 28px;
   border-top: 1px solid rgba(242, 231, 220, 0.9);
@@ -1086,7 +1198,7 @@ textarea {
 
 .footer-legal a {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 14px;
   text-decoration: underline;
 }
 
@@ -1112,7 +1224,7 @@ textarea {
 .cookie-consent-inner p {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
-  font-size: 0.88rem;
+  font-size: 14px;
 }
 
 .cookie-consent-inner a {
@@ -1122,7 +1234,7 @@ textarea {
 
 .two-col-list {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .two-col-list strong {
@@ -1160,6 +1272,10 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .pet-tile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .carousel-slide {
     flex: 0 0 calc((100% - 22px) / 2);
   }
@@ -1176,7 +1292,7 @@ textarea {
 @media (max-width: 720px) {
   .container,
   .container-wide {
-    width: min(100% - 20px, 1460px);
+    width: min(100% - 20px, 1312px);
   }
 
   .header-inner,
@@ -1199,12 +1315,12 @@ textarea {
   .empty-state,
   .form-shell,
   .danger-card {
-    padding: 22px;
+    padding: 24px;
   }
 
   .hero-media {
     min-height: 280px;
-    margin: 0 -22px -22px;
+    margin: 0 -24px -24px;
     border-radius: var(--radius-image);
   }
 

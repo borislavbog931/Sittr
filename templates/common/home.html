@@ -69,37 +69,27 @@
   <section class="reveal-on-scroll page-stack section-band">
 
 
-    <div class="hero-card">
-      <div class="single-column-grid">
-                <div class="hero-copy" style="align-items: center; text-align: center; gap: 10px;">
-                  <span class="eyebrow">{{ t.travel_eyebrow }}</span>
-                  <h2 class="section-title">{{ t.travel_title }}</h2>
-                  <p class="lede" style="font-size: 1.1rem;">{{ t.travel_banner_stat }}</p>
-                </div>
-                <img src="{% static 'images/airplane.png' %}" alt="Airplane icon" style="max-width: 250px; margin-top: 20px;">      </div>
+    <div class="travel-banner">
+      <span class="eyebrow">{{ t.travel_eyebrow }}</span>
+      <h2 class="section-title">{{ t.travel_title }}</h2>
+      <p class="lede" style="font-size: 1.1rem;">{{ t.travel_banner_stat }}</p>
     </div>
 
     <div class="feature-grid">
-      <article class="feature-card">
-        <span class="illustration-bubble">
-          <img src="{% static 'images/parents.png' %}" alt="Pet parents icon" style="width: 100%; height: 100%; object-fit: contain;">
-        </span>
+      <article class="feature-plain">
+        <img class="feature-plain-icon" src="{% static 'images/parents.png' %}" alt="Pet parents icon">
         <h2 class="card-title">{{ t.travel_parents_title }}</h2>
         <p class="muted">{{ t.travel_parents_body }}</p>
       </article>
 
-      <article class="feature-card">
-        <span class="illustration-bubble">
-          <img src="{% static 'images/dog.png' %}" alt="Pets icon" style="width: 100%; height: 100%; object-fit: contain;">
-        </span>
+      <article class="feature-plain">
+        <img class="feature-plain-icon" src="{% static 'images/dog.png' %}" alt="Pets icon">
         <h2 class="card-title">{{ t.travel_pets_title }}</h2>
         <p class="muted">{{ t.travel_pets_body }}</p>
       </article>
 
-      <article class="feature-card">
-        <span class="illustration-bubble">
-          <img src="{% static 'images/walking.png' %}" alt="Sitters icon" style="width: 100%; height: 100%; object-fit: contain;">
-        </span>
+      <article class="feature-plain">
+        <img class="feature-plain-icon" src="{% static 'images/walking.png' %}" alt="Sitters icon">
         <h2 class="card-title">{{ t.travel_sitters_title }}</h2>
         <p class="muted">{{ t.travel_sitters_body }}</p>
       </article>
@@ -132,22 +122,22 @@
       </label>
       <label class="pet-picker-pill">
         <input type="checkbox" name="pet_choice" value="cats">
-        <span class="pet-picker-pill-icon"><svg class="icon" aria-hidden="true"><use href="#icon-cat"></use></svg></span>
+        <span class="pet-picker-pill-icon"><img src="{% static 'images/kitty.png' %}" alt="Cat icon" style="width: 50px; height: 50px;"></span>
         <span class="pet-picker-pill-label">{{ t.pet_picker_cats }}</span>
       </label>
       <label class="pet-picker-pill">
         <input type="checkbox" name="pet_choice" value="birds">
-        <span class="pet-picker-pill-icon"><svg class="icon" aria-hidden="true"><use href="#icon-bird"></use></svg></span>
+        <span class="pet-picker-pill-icon"><img src="{% static 'images/birdy.png' %}" alt="Bird icon" style="width: 50px; height: 50px;"></span>
         <span class="pet-picker-pill-label">{{ t.pet_picker_birds }}</span>
       </label>
       <label class="pet-picker-pill">
         <input type="checkbox" name="pet_choice" value="fish">
-        <span class="pet-picker-pill-icon"><svg class="icon" aria-hidden="true"><use href="#icon-fish"></use></svg></span>
+        <span class="pet-picker-pill-icon"><img src="{% static 'images/fish.png' %}" alt="Fish icon" style="width: 50px; height: 50px;"></span>
         <span class="pet-picker-pill-label">{{ t.pet_picker_fish }}</span>
       </label>
       <label class="pet-picker-pill">
         <input type="checkbox" name="pet_choice" value="small_pets">
-        <span class="pet-picker-pill-icon"><svg class="icon" aria-hidden="true"><use href="#icon-rabbit"></use></svg></span>
+        <span class="pet-picker-pill-icon"><img src="{% static 'images/bunny.png' %}" alt="Small pet icon" style="width: 50px; height: 50px;"></span>
         <span class="pet-picker-pill-label">{{ t.pet_picker_small }}</span>
       </label>
     </div>
@@ -156,6 +146,31 @@
       <a href="{% url 'coming_soon' %}" class="btn-cta">
         {{ t.cta_find_sittr }}
         <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll page-stack">
+    <div class="page-header-center">
+      <div>
+        <span class="eyebrow">{{ t.pet_tiles_eyebrow }}</span>
+        <h2 class="section-title">{{ t.pet_tiles_title }}</h2>
+      </div>
+    </div>
+
+    <div class="pet-tile-grid">
+      {% if dog_pet_type %}
+        <a href="{% url 'caretaker_list' %}?pet_type={{ dog_pet_type.id }}" class="pet-tile pet-tile--dog" style="background-image: url('{% static 'images/dogsittr.png' %}');">
+          <span class="pet-tile-label">{{ t.pet_tile_dogs }}</span>
+        </a>
+      {% endif %}
+      {% if cat_pet_type %}
+        <a href="{% url 'caretaker_list' %}?pet_type={{ cat_pet_type.id }}" class="pet-tile pet-tile--cat" style="background-image: url('{% static 'images/catsittr.png' %}');">
+          <span class="pet-tile-label">{{ t.pet_tile_cats }}</span>
+        </a>
+      {% endif %}
+      <a href="{% url 'calculator' %}" class="pet-tile pet-tile--calculator" style="background-image: url('{% static 'images/calculator.png' %}');">
+        <span class="pet-tile-label">{{ t.pet_tile_calculator }}</span>
       </a>
     </div>
   </section>
@@ -225,7 +240,7 @@
     {% endif %}
   </section>
 
-  <section class="reveal-on-scroll page-stack section-band">
+  <section class="reveal-on-scroll page-stack">
     <div class="page-header-center">
       <div>
         <span class="eyebrow">{{ t.postings_eyebrow }}</span>

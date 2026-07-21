@@ -1,0 +1,137 @@
+{% extends "common/base.html" %}
+
+{% block title %}Pricing Calculator | Sittr{% endblock %}
+
+{% block page_header %}
+<div class="page-header">
+  <div>
+    <span class="eyebrow">{{ t.calc_eyebrow }}</span>
+    <h1 class="page-title">{{ t.calc_title }}</h1>
+    <p class="page-subtitle">{{ t.calc_subtitle }}</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{{ pricing_data_json|json_script:"full-calculator-data" }}
+
+<div class="page-stack">
+  <section class="panel section-block stack">
+    <div class="form-grid">
+      <div class="field">
+        <label class="field-label" for="calc-caretaker">{{ t.calc_sittr_label }}</label>
+        <select id="calc-caretaker" class="form-select">
+          <option value="">{{ t.calc_any_sittr }}</option>
+          {% for c in caretakers %}
+            <option value="{{ c.id }}">{{ c.name }} &mdash; {{ c.city }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="calc-pet-type">{{ t.calc_pet_type_label }}</label>
+        <select id="calc-pet-type" class="form-select">
+          <option value="">{{ t.calc_any_pet }}</option>
+          {% for p in pet_types %}
+            <option value="{{ p.id }}">{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="calc-days">{{ t.calc_days_label }}</label>
+        <input type="number" id="calc-days" class="form-input" min="1" step="1" value="1">
+      </div>
+
+      <div class="field field-span-2">
+        <label class="field-label">{{ t.calc_services_label }}</label>
+        <ul class="sittr-checklist">
+          {% for s in services %}
+            <li>
+              <label>
+                <input type="checkbox" class="form-checkbox" data-calc-service value="{{ s.id }}">
+                {{ s.name }}
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="pricing-calculator-result">
+      <span class="pricing-calculator-result-label">{{ t.calc_estimate_label }}</span>
+      <span class="pricing-calculator-result-value" id="full-calc-result">&mdash;</span>
+    </div>
+
+    <p class="muted pricing-calculator-note">{{ t.calc_full_note }}</p>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const dataEl = document.getElementById("full-calculator-data");
+  if (!dataEl) return;
+  const data = JSON.parse(dataEl.textContent);
+
+  const caretakerSelect = document.getElementById("calc-caretaker");
+  const petTypeSelect = document.getElementById("calc-pet-type");
+  const daysInput = document.getElementById("calc-days");
+  const serviceCheckboxes = document.querySelectorAll("[data-calc-service]");
+  const resultEl = document.getElementById("full-calc-result");
+
+  const HOURS_PER_DAY = 24;
+
+  function selectedServiceRates() {
+    const rates = [];
+    serviceCheckboxes.forEach((box) => {
+      if (box.checked && data.by_service[box.value] !== undefined) {
+        rates.push(data.by_service[box.value]);
+      }
+    });
+    return rates;
+  }
+
+  function average(values) {
+    if (!values.length) return null;
+    return values.reduce((sum, v) => sum + v, 0) / values.length;
+  }
+
+  function update() {
+    const days = Math.max(1, parseInt(daysInput.value, 10) || 1);
+    const caretakerId = caretakerSelect.value;
+    const petTypeId = petTypeSelect.value;
+
+    let rate = null;
+
+    if (caretakerId && data.caretakers[caretakerId] !== undefined) {
+      rate = data.caretakers[caretakerId].rate;
+    } else {
+      const candidates = [];
+      if (petTypeId && data.by_pet_type[petTypeId] !== undefined) {
+        candidates.push(data.by_pet_type[petTypeId]);
+      }
+      const serviceRates = selectedServiceRates();
+      if (serviceRates.length) {
+        candidates.push(average(serviceRates));
+      }
+      rate = candidates.length ? average(candidates) : data.overall;
+    }
+
+    if (rate === null || rate === undefined) {
+      resultEl.textContent = "—";
+      return;
+    }
+
+    resultEl.textContent = "$" + (rate * HOURS_PER_DAY * days).toFixed(2);
+  }
+
+  caretakerSelect.addEventListener("change", update);
+  petTypeSelect.addEventListener("change", update);
+  daysInput.addEventListener("input", update);
+  serviceCheckboxes.forEach((box) => box.addEventListener("change", update));
+  update();
+})();
+</script>
+{% endblock %}

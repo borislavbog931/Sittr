@@ -37,5 +37,15 @@
     <h2 class="card-title">Sittr does not process payments on your behalf yet.</h2>
     <p class="muted">Rates shown on profiles are informational. Payment between owners and Sittrs is arranged directly for now &mdash; this page will be updated if that changes.</p>
   </aside>
+
+  <section class="panel section-block stack" id="calculator">
+    <div>
+      <span class="eyebrow">{{ t.calc_eyebrow }}</span>
+      <h2 class="card-title">{{ t.calc_title }}</h2>
+      <p class="muted">{{ t.calc_subtitle }}</p>
+    </div>
+
+    {% include "partials/_pricing_calculator.html" %}
+  </section>
 </div>
 {% endblock %}

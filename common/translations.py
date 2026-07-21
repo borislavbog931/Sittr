@@ -18,7 +18,7 @@ TRANSLATIONS = {
 
         # home hero
         "home_eyebrow": "Find trusted local Sittrs",
-        "home_hero_title": "Find the right person to take care of your furry one.",
+        "home_hero_title": "Find the right person to take care of your furry friend.",
         "home_hero_lede": "Browse reliable Sittrs, compare services and reviews, and send a hire request without extra friction.",
         "home_city_label": "City",
         "home_city_placeholder": "Enter your city",
@@ -35,12 +35,12 @@ TRANSLATIONS = {
         "travel_title": "The ability to travel stress free",
         "travel_banner_eyebrow": "Freedom to travel",
         "travel_banner_stat": "Real care, from real people you can review and trust.",
-        "travel_parents_title": "Better for pet parents",
-        "travel_parents_body": "Pet parents get real peace of mind knowing their pets (and home) are cared for while they’re away.",
-        "travel_pets_title": "Better for pets",
-        "travel_pets_body": "Pets stay happy at home with a sitter who gives them loving care and companionship.",
-        "travel_sitters_title": "Better for sitters",
-        "travel_sitters_body": "Sitters exchange their time, care and expertise for interesting homestays and unique travel experiences.",
+        "travel_parents_title": "Calm owners",
+        "travel_parents_body": "Go away, don’t worry. Your pets (and your home) are in good hands the whole time.",
+        "travel_pets_title": "Safer pets",
+        "travel_pets_body": "No more stressful hotels. Pets stay right at home, wrapped in love and company from a sitter who treats them like their own.",
+        "travel_sitters_title": "Grateful sitters",
+        "travel_sitters_body": "Sitters give their time and care, and in return get more than a place to stay: a wagging welcome and a home to step into for a while.",
 
         # home pet-type picker
         "pet_picker_eyebrow": "Tell us about your pet",
@@ -51,6 +51,13 @@ TRANSLATIONS = {
         "pet_picker_birds": "Birds",
         "pet_picker_fish": "Fish",
         "pet_picker_small": "Small pets",
+
+        # home pet-type photo tiles
+        "pet_tiles_eyebrow": "Browse by pet",
+        "pet_tiles_title": "Looking for something specific?",
+        "pet_tile_dogs": "Dog Sittrs",
+        "pet_tile_cats": "Cat Sittrs",
+        "pet_tile_calculator": "Pricing Calculator",
 
         # home featured carousel
         "home_top_eyebrow": "Top Sittrs",
@@ -97,6 +104,22 @@ TRANSLATIONS = {
         "cookie_banner_text": "We only use essential cookies to keep you logged in and remember your language.",
         "cookie_banner_link": "Learn more",
         "cookie_banner_ack": "Got it",
+
+        # pricing calculator
+        "calc_eyebrow": "Pricing calculator",
+        "calc_title": "Estimate your cost",
+        "calc_subtitle": "Based on real hourly rates from active Sittrs.",
+        "calc_pet_type_label": "Pet type",
+        "calc_any_pet": "Any pet type",
+        "calc_hours_label": "Hours needed",
+        "calc_estimate_label": "Estimated total",
+        "calc_note": "Estimate only, based on the average hourly rate of matching Sittrs. Actual rates vary by Sittr.",
+        "calc_cta": "See full calculator",
+        "calc_sittr_label": "Sittr",
+        "calc_any_sittr": "Any Sittr",
+        "calc_days_label": "Days needed",
+        "calc_services_label": "Services",
+        "calc_full_note": "Estimate assumes 24 hours of care per day. If you pick a specific Sittr, their real hourly rate is used; otherwise we use the average rate of matching Sittrs. Actual rates vary by Sittr.",
     },
     "bg": {
         # header / nav
@@ -131,12 +154,12 @@ TRANSLATIONS = {
         "travel_title": "Възможността да пътувате спокойно",
         "travel_banner_eyebrow": "Свобода да пътувате",
         "travel_banner_stat": "Истинска грижа от истински хора, които можете да оцените и на които да се доверите.",
-        "travel_parents_title": "По-добре за собствениците",
-        "travel_parents_body": "Собствениците получават истинско спокойствие, знаейки че любимецът им (и домът им) са добре гледани, докато пътуват.",
-        "travel_pets_title": "По-добре за любимците",
-        "travel_pets_body": "Любимците остават щастливи у дома с Sittr, който им дава грижа и компания.",
-        "travel_sitters_title": "По-добре за Sittr-ите",
-        "travel_sitters_body": "Sittr-ите обменят времето, грижата и опита си за интересни престои и уникални пътувания.",
+        "travel_parents_title": "Спокойни собственици",
+        "travel_parents_body": "Заминете спокойно, без притеснения. Любимците ви (и домът ви) са в добри ръце през цялото време.",
+        "travel_pets_title": "По-сигурни любимци",
+        "travel_pets_body": "Край на стресиращите хотели. Любимците остават у дома, обградени с грижа и внимание от Sittr, който се отнася към тях като към свои.",
+        "travel_sitters_title": "Благодарни Sittr-и",
+        "travel_sitters_body": "Sittr-ите дават времето и грижата си, а в замяна получават повече от място за престой: топло посрещане с размахана опашка и дом, в който да се потопят за известно време.",
 
         # home pet-type picker
         "pet_picker_eyebrow": "Разкажете ни за любимеца си",
@@ -147,6 +170,13 @@ TRANSLATIONS = {
         "pet_picker_birds": "Птици",
         "pet_picker_fish": "Риби",
         "pet_picker_small": "Малки любимци",
+
+        # home pet-type photo tiles
+        "pet_tiles_eyebrow": "Разгледай по любимец",
+        "pet_tiles_title": "Търсите нещо конкретно?",
+        "pet_tile_dogs": "Sittr-и за кучета",
+        "pet_tile_cats": "Sittr-и за котки",
+        "pet_tile_calculator": "Калкулатор на цени",
 
         # home featured carousel
         "home_top_eyebrow": "Топ Sittr-и",
@@ -193,6 +223,22 @@ TRANSLATIONS = {
         "cookie_banner_text": "Използваме само основни бисквитки, за да ви поддържаме влезли и да запомним езика ви.",
         "cookie_banner_link": "Научете повече",
         "cookie_banner_ack": "Разбрах",
+
+        # pricing calculator
+        "calc_eyebrow": "Калкулатор на цени",
+        "calc_title": "Изчислете разхода си",
+        "calc_subtitle": "Базирано на реални часови ставки на активни Sittr-и.",
+        "calc_pet_type_label": "Вид домашен любимец",
+        "calc_any_pet": "Всеки вид любимец",
+        "calc_hours_label": "Нужни часове",
+        "calc_estimate_label": "Приблизителна обща сума",
+        "calc_note": "Само прогнозна стойност, базирана на средната часова ставка на подходящите Sittr-и. Реалните цени варират според Sittr-а.",
+        "calc_cta": "Виж пълния калкулатор",
+        "calc_sittr_label": "Sittr",
+        "calc_any_sittr": "Всеки Sittr",
+        "calc_days_label": "Нужни дни",
+        "calc_services_label": "Услуги",
+        "calc_full_note": "Оценката приема 24 часа грижа на ден. Ако изберете конкретен Sittr, се използва неговата реална часова ставка; в противен случай използваме средната ставка на подходящите Sittr-и. Реалните цени варират според Sittr-а.",
     },
 }
 

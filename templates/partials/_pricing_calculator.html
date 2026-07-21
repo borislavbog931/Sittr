@@ -1,0 +1,61 @@
+{{ pricing_data_json|json_script:"pricing-calculator-data" }}
+
+<div class="pricing-calculator" data-pricing-calculator>
+  <div class="pricing-calculator-fields">
+    <div class="field">
+      <label class="field-label">{{ t.calc_pet_type_label }}</label>
+      <select class="form-select" data-calc-pet-type>
+        <option value="">{{ t.calc_any_pet }}</option>
+        {% for p in pet_types %}
+          <option value="{{ p.id }}">{{ p.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{ t.calc_hours_label }}</label>
+      <input type="number" class="form-input" data-calc-hours min="1" step="1" value="4">
+    </div>
+  </div>
+
+  <div class="pricing-calculator-result">
+    <span class="pricing-calculator-result-label">{{ t.calc_estimate_label }}</span>
+    <span class="pricing-calculator-result-value" data-calc-result>&mdash;</span>
+  </div>
+
+  <p class="muted pricing-calculator-note">{{ t.calc_note }}</p>
+</div>
+
+<script>
+  (function () {
+    const dataEl = document.getElementById("pricing-calculator-data");
+    if (!dataEl) return;
+    const pricingData = JSON.parse(dataEl.textContent);
+
+    function initCalculator(calc) {
+      const petTypeSelect = calc.querySelector("[data-calc-pet-type]");
+      const hoursInput = calc.querySelector("[data-calc-hours]");
+      const resultEl = calc.querySelector("[data-calc-result]");
+
+      function update() {
+        const hours = Math.max(1, parseInt(hoursInput.value, 10) || 1);
+        const petTypeId = petTypeSelect.value;
+        let rate = pricingData.overall;
+        if (petTypeId && pricingData.by_pet_type[petTypeId] !== undefined) {
+          rate = pricingData.by_pet_type[petTypeId];
+        }
+        if (rate === null || rate === undefined) {
+          resultEl.textContent = "—";
+          return;
+        }
+        resultEl.textContent = "$" + (rate * hours).toFixed(2);
+      }
+
+      petTypeSelect.addEventListener("change", update);
+      hoursInput.addEventListener("input", update);
+      update();
+    }
+
+    document.querySelectorAll("[data-pricing-calculator]").forEach(initCalculator);
+  })();
+</script>
