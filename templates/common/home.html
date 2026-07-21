@@ -191,43 +191,7 @@
       <div class="carousel">
         <div class="carousel-track">
           {% for caretaker in featured_caretakers %}
-            <article class="carousel-slide media-card">
-              <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
-                {% if caretaker.profile_pic_url %}
-                  <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" class="profile-photo" style="width: 100%; aspect-ratio: 1 / 1; min-height: 0; object-fit: contain;" loading="lazy">
-                {% else %}
-                  <div class="avatar-fallback" style="width:100%; aspect-ratio: 1 / 1; border-radius:24px;">
-                    <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
-                  </div>
-                {% endif %}
-              </a>
-
-              <div class="stack" style="margin-top: 18px;">
-                <div>
-                  <h3 class="card-title">{{ caretaker.name }}</h3>
-                  <div class="meta-line muted">
-                    <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg>
-                    <span>{{ caretaker.city }}</span>
-                  </div>
-                </div>
-
-                <div class="rating-line muted">
-                  <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg>
-                  {% if caretaker.avg_rating %}
-                    <strong>{{ caretaker.avg_rating|floatformat:1 }}/10</strong>
-                  {% else %}
-                    <span>{{ t.home_no_reviews }}</span>
-                  {% endif %}
-                </div>
-
-                <p class="muted">{{ caretaker.bio|default:"Friendly and reliable sitter ready to help."|truncatechars:110 }}</p>
-
-                <a href="{% url 'caretaker_detail' caretaker.slug %}" class="btn btn-primary">
-                  {{ t.home_view_profile }}
-                  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
-                </a>
-              </div>
-            </article>
+            {% include "partials/_caretaker_card.html" with extra_class="carousel-slide" %}
           {% endfor %}
         </div>
         <div class="carousel-nav"></div>
@@ -238,6 +202,30 @@
         <p class="muted">{{ t.home_no_sittrs_body }}</p>
       </div>
     {% endif %}
+  </section>
+
+  <section class="reveal-on-scroll hero-grid hero-grid--reverse" style="align-items: center;">
+    <div class="hero-copy" style="align-items: center; text-align: center;">
+      <div>
+        <span class="eyebrow">{{ t.become_sittr_eyebrow }}</span>
+        <h2 class="section-title">{{ t.become_sittr_title }}</h2>
+      </div>
+
+      <p class="lede">{{ t.become_sittr_subtext }}</p>
+
+      <div class="action-row">
+        <a href="{% url 'how_it_works_sittrs' %}" class="btn-cta">
+          {{ t.become_sittr_cta }}
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="wood-photo-frame">
+      <div class="wood-photo-frame-inner">
+        <img src="{% static 'images/dog in park.png' %}" alt="Dog enjoying a walk in the park">
+      </div>
+    </div>
   </section>
 
   <section class="reveal-on-scroll page-stack">
@@ -351,6 +339,26 @@
   }
 
   document.querySelectorAll('.carousel').forEach(initCarousel);
+})();
+</script>
+<script>
+(function () {
+  const media = document.querySelector('.hero-media');
+  const img = media && media.querySelector('img');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  if (!media || !img || reduceMotion || coarsePointer) return;
+
+  media.addEventListener('mousemove', (event) => {
+    const rect = media.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    img.style.transform = `scale(1.06) translate(${x * -16}px, ${y * -16}px)`;
+  });
+
+  media.addEventListener('mouseleave', () => {
+    img.style.transform = '';
+  });
 })();
 </script>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.db.models import Avg
 
 from services.models import Service, PetType
+from caretakers.geocoding import geocode_city
 
 
 class Caretaker(models.Model):
@@ -26,6 +27,7 @@ class Caretaker(models.Model):
         validators=[MinValueValidator(0)],
     )
     active = models.BooleanField(default=True)
+    verified = models.BooleanField(default=False)
     services = models.ManyToManyField(
         Service,
         related_name='caretakers',
@@ -46,11 +48,26 @@ class Caretaker(models.Model):
         blank=True,
         null=True,
     )
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(f'{self.name}-{self.city}')
+
+        city_changed = True
+        if self.pk:
+            previous_city = (
+                Caretaker.objects.filter(pk=self.pk).values_list("city", flat=True).first()
+            )
+            city_changed = previous_city != self.city
+
+        if self.city and (city_changed or self.latitude is None or self.longitude is None):
+            coords = geocode_city(self.city)
+            if coords:
+                self.latitude, self.longitude = coords
+
         super().save(*args, **kwargs)
 
     class Meta:

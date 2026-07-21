@@ -243,6 +243,10 @@
 
   {% include "partials/_cookie_consent.html" %}
 
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">
+    <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+  </button>
+
   <script>
     document.addEventListener("click", (event) => {
       const trigger = event.target.closest(".dropdown > button");
@@ -293,6 +297,21 @@
 
       updateHeader();
       window.addEventListener("scroll", updateHeader, { passive: true });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("back-to-top");
+      if (!btn) return;
+
+      function updateVisibility() {
+        btn.classList.toggle("is-visible", window.scrollY > 480);
+      }
+
+      updateVisibility();
+      window.addEventListener("scroll", updateVisibility, { passive: true });
+      btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     })();
   </script>
 

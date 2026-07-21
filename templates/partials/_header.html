@@ -22,7 +22,7 @@
       </a>
 
       {% if not request.user.is_authenticated %}
-        <a href="{% url 'signup_caretaker' %}" class="nav-link {% if url_name == 'signup_caretaker' %}is-active{% endif %}">
+        <a href="{% url 'how_it_works_sittrs' %}" class="nav-link {% if url_name == 'how_it_works_sittrs' %}is-active{% endif %}">
           <svg class="icon" aria-hidden="true"><use href="#icon-briefcase"></use></svg> {{ t.nav_become }}
         </a>
       {% elif not request.user.caretaker_profile and request.user.profile.role == 'caretaker' %}

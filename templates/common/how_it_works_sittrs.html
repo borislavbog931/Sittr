@@ -1,34 +1,135 @@
 {% extends "common/base.html" %}
+{% load static %}
 
 {% block title %}How it works for Sittrs | Sittr{% endblock %}
 
-{% block page_header %}
-<div class="page-header">
-  <div>
-    <span class="eyebrow">For Sittrs</span>
-    <h1 class="page-title">How it works for Sittrs.</h1>
-  </div>
-</div>
-{% endblock %}
+{% block page_header %}{% endblock %}
+
+{% block content_container_class %}container-wide{% endblock %}
 
 {% block content %}
-<section class="feature-grid">
-  <article class="feature-card">
-    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg></span>
-    <h2 class="card-title">1. Sign up</h2>
-    <p class="muted">Create a Sittr account and set up your listing: bio, services, pet types, city, and hourly rate.</p>
-  </article>
+<div class="page-stack">
+  <section class="hero-grid hero-grid--reverse" style="align-items: center; padding: 24px 0 8px;">
+    <div class="hero-copy">
+      <div>
+        <span class="eyebrow">{{ t.sittrs_hero_eyebrow }}</span>
+        <h1 class="hero-title">{{ t.sittrs_hero_title }}</h1>
+      </div>
 
-  <article class="feature-card">
-    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
-    <h2 class="card-title">2. Receive requests</h2>
-    <p class="muted">Owners find your profile and send hire requests directly. Track them all from "My requests."</p>
-  </article>
+      <p class="lede">{{ t.sittrs_hero_lede }}</p>
 
-  <article class="feature-card">
-    <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg></span>
-    <h2 class="card-title">3. Build your reputation</h2>
-    <p class="muted">Every completed stay is a chance to earn a review, helping future owners choose you with confidence.</p>
-  </article>
-</section>
+      <div class="action-row" style="justify-content: flex-start;">
+        <a href="{% url 'signup_caretaker' %}" class="btn btn-primary">
+          {{ t.sittrs_hero_cta }}
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="tilted-photo-card">
+      <img src="{% static 'images/girl_with_dog.png' %}" alt="A Sittr caring for a dog outdoors">
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll page-stack">
+    <div class="page-header-center">
+      <div>
+        <span class="eyebrow">{{ t.sittrs_why_eyebrow }}</span>
+        <h2 class="section-title">{{ t.sittrs_why_title }}</h2>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-calendar4-week"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_why_flexible_title }}</h3>
+        <p class="muted">{{ t.sittrs_why_flexible_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-wallet2"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_why_rate_title }}</h3>
+        <p class="muted">{{ t.sittrs_why_rate_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-envelope-paper"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_why_requests_title }}</h3>
+        <p class="muted">{{ t.sittrs_why_requests_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_why_reputation_title }}</h3>
+        <p class="muted">{{ t.sittrs_why_reputation_body }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll page-stack section-band">
+    <div class="page-header-center">
+      <div>
+        <span class="eyebrow">{{ t.sittrs_how_eyebrow }}</span>
+        <h2 class="section-title">{{ t.sittrs_how_title }}</h2>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-pencil-square"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_how_profile_title }}</h3>
+        <p class="muted">{{ t.sittrs_how_profile_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-list"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_how_services_title }}</h3>
+        <p class="muted">{{ t.sittrs_how_services_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-compass"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_how_discovered_title }}</h3>
+        <p class="muted">{{ t.sittrs_how_discovered_body }}</p>
+      </article>
+
+      <article class="feature-card">
+        <span class="icon-bubble"><svg class="icon" aria-hidden="true"><use href="#icon-lightning-charge"></use></svg></span>
+        <h3 class="card-title">{{ t.sittrs_how_earning_title }}</h3>
+        <p class="muted">{{ t.sittrs_how_earning_body }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll page-stack">
+    <div class="page-header-center">
+      <div>
+        <span class="eyebrow">{{ t.sittrs_earnings_eyebrow }}</span>
+        <h2 class="section-title">{{ t.sittrs_earnings_title }}</h2>
+        <p class="page-subtitle">{{ t.sittrs_earnings_subtitle }}</p>
+      </div>
+    </div>
+
+    <div class="panel section-block" style="max-width: 640px; margin-inline: auto; width: 100%;">
+      {% include "partials/_earnings_calculator.html" %}
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll pet-picker-section">
+    <div class="page-header-center">
+      <div>
+        <span class="eyebrow">{{ t.sittrs_final_eyebrow }}</span>
+        <h2 class="section-title">{{ t.sittrs_final_title }}</h2>
+        <p class="page-subtitle">{{ t.sittrs_final_subtitle }}</p>
+      </div>
+    </div>
+
+    <div class="action-row" style="justify-content: center; margin-top: 16px;">
+      <a href="{% url 'signup_caretaker' %}" class="btn-cta">
+        {{ t.sittrs_hero_cta }}
+        <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+      </a>
+    </div>
+  </section>
+</div>
 {% endblock %}

@@ -2,6 +2,8 @@
 
 {% block title %}Caretakers | Sittr{% endblock %}
 
+{% block content_container_class %}container-wide{% endblock %}
+
 {% block page_header %}
 <div class="page-header">
   <div>
@@ -23,129 +25,137 @@
 
 {% block content %}
 <div class="page-stack">
-  <section class="panel section-block">
-    <form method="get" class="form-stack">
-      <div class="form-grid">
-        <div class="field">
-          <label for="id_city">City</label>
-          <input id="id_city" class="form-input" type="text" name="city" value="{{ filters.city }}" placeholder="e.g. Sofia">
-        </div>
-
-        <div class="field">
-          <label for="id_service">Service</label>
-          <select id="id_service" class="form-select" name="service">
-            <option value="">All</option>
-            {% for s in services %}
-              <option value="{{ s.id }}" {% if filters.service == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="id_pet_type">Pet type</label>
-          <select id="id_pet_type" class="form-select" name="pet_type">
-            <option value="">All</option>
-            {% for p in pet_types %}
-              <option value="{{ p.id }}" {% if filters.pet_type == p.id|stringformat:"s" %}selected{% endif %}>{{ p.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="id_max_price">Max price</label>
-          <input id="id_max_price" class="form-input" type="number" name="max_price" value="{{ filters.max_price }}" step="0.01" min="0" placeholder="e.g. 25">
-        </div>
-      </div>
-
-      <div class="action-row">
-        <button type="submit" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#icon-funnel"></use></svg> Filter</button>
-        <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">Reset</a>
-      </div>
-    </form>
-  </section>
-
-  <p class="summary">Found <strong>{{ caretakers|length }}</strong> caretaker{{ caretakers|length|pluralize }}.</p>
-
-  {% if caretakers %}
-    <div class="caretaker-grid">
-      {% for caretaker in caretakers %}
-        <article class="list-card stack">
-          <div class="section-head">
-            <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
-              {% if caretaker.profile_pic_url %}
-                <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" loading="lazy" class="avatar">
-              {% else %}
-                <div class="avatar-fallback">
-                  <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
-                </div>
-              {% endif %}
-            </a>
-
-            <div class="section-copy" style="flex: 1;">
-              <div class="page-header" style="margin:0;">
-                <div>
-                  <h2 class="card-title"><a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">{{ caretaker.name }}</a></h2>
-                  <p class="meta-line muted"><svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}</p>
-                </div>
-                <div>
-                  <strong>${{ caretaker.price_per_hour }}</strong>
-                  <div class="inline-note">per hour</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p class="muted">{% if caretaker.bio %}{{ caretaker.bio|truncatechars:110 }}{% else %}No bio provided yet.{% endif %}</p>
-
-          <div class="chip-row">
-            {% for service in caretaker.services.all %}
-              <span class="chip">{{ service.name }}</span>
-            {% empty %}
-              <span class="chip">No services</span>
-            {% endfor %}
-          </div>
-
-          <div class="chip-row">
-            {% for pet in caretaker.pet_types.all %}
-              <span class="metric-chip">{{ pet.name }}</span>
-            {% empty %}
-              <span class="metric-chip">No pet types</span>
-            {% endfor %}
-          </div>
-
-          <div class="page-header" style="margin:0;">
-            <div class="muted">
-              {% with avg=caretaker.average_rating %}
-                {% if avg %}
-                  <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10
-                {% else %}
-                  <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
-                {% endif %}
-              {% endwith %}
-            </div>
-            <a class="btn btn-primary" href="{% url 'caretaker_detail' caretaker.slug %}">
-              View <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
-            </a>
-          </div>
-        </article>
-      {% endfor %}
+  <form method="get" class="search-bar">
+    <div class="field">
+      <label for="id_city">City</label>
+      <input id="id_city" class="form-input" type="text" name="city" value="{{ filters.city }}" placeholder="e.g. Sofia">
     </div>
-  {% else %}
-    <div class="empty-state">
-      <h2 class="card-title">No caretakers yet</h2>
-      <p class="muted">Add caretakers from the admin panel to see them here.</p>
-      <div class="action-row">
-        {% if not request.user.is_authenticated %}
-          <a class="btn btn-primary" href="{% url 'signup_caretaker' %}">
-            <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Become a caretaker
-          </a>
-        {% elif not request.user.caretaker_profile and request.user.profile.role == 'caretaker' %}
-          <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
-            <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
-          </a>
-        {% endif %}
-      </div>
+
+    <div class="field">
+      <label for="id_service">Service</label>
+      <select id="id_service" class="form-select" name="service">
+        <option value="">All</option>
+        {% for s in services %}
+          <option value="{{ s.id }}" {% if filters.service == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
     </div>
-  {% endif %}
+
+    <div class="field">
+      <label for="id_pet_type">Pet type</label>
+      <select id="id_pet_type" class="form-select" name="pet_type">
+        <option value="">All</option>
+        {% for p in pet_types %}
+          <option value="{{ p.id }}" {% if filters.pet_type == p.id|stringformat:"s" %}selected{% endif %}>{{ p.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="id_max_price">Max price</label>
+      <input id="id_max_price" class="form-input" type="number" name="max_price" value="{{ filters.max_price }}" step="0.01" min="0" placeholder="e.g. 25">
+    </div>
+
+    <div class="action-row">
+      <button type="submit" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#icon-funnel"></use></svg> Filter</button>
+      <a class="btn btn-secondary" href="{% url 'caretaker_list' %}">Reset</a>
+    </div>
+  </form>
+
+  <div class="split-layout caretaker-split-layout">
+    <div class="stack">
+      <p class="summary">Found <strong>{{ caretakers|length }}</strong> caretaker{{ caretakers|length|pluralize }}.</p>
+
+      {% if caretakers %}
+        <div class="caretaker-grid">
+          {% for caretaker in caretakers %}
+            {% include "partials/_caretaker_card.html" with extra_class="caretaker-card--row" %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <h2 class="card-title">No caretakers yet</h2>
+          <p class="muted">Add caretakers from the admin panel to see them here.</p>
+          <div class="action-row">
+            {% if not request.user.is_authenticated %}
+              <a class="btn btn-primary" href="{% url 'signup_caretaker' %}">
+                <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Become a caretaker
+              </a>
+            {% elif not request.user.caretaker_profile and request.user.profile.role == 'caretaker' %}
+              <a class="btn btn-primary" href="{% url 'caretaker_create' %}">
+                <svg class="icon" aria-hidden="true"><use href="#icon-plus-circle"></use></svg> Add caretaker
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="caretaker-map-panel">
+      {% if google_maps_api_key %}
+        {{ markers|json_script:"caretaker-markers-data" }}
+        <div id="caretaker-map" class="caretaker-map"></div>
+      {% else %}
+        <div class="caretaker-map caretaker-map--placeholder">
+          <svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg>
+          <p class="muted">Map unavailable &mdash; no Google Maps API key configured.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+{% if google_maps_api_key %}
+<script>
+  function initSittrMap() {
+    const dataEl = document.getElementById("caretaker-markers-data");
+    const mapEl = document.getElementById("caretaker-map");
+    if (!dataEl || !mapEl) return;
+
+    const markers = JSON.parse(dataEl.textContent);
+    const defaultCenter = { lat: 42.6977, lng: 23.3219 }; // Sofia, Bulgaria
+
+    const map = new google.maps.Map(mapEl, {
+      center: defaultCenter,
+      zoom: 7,
+    });
+
+    if (!markers.length) return;
+
+    const bounds = new google.maps.LatLngBounds();
+    const infoWindow = new google.maps.InfoWindow();
+
+    markers.forEach((entry) => {
+      const position = { lat: entry.lat, lng: entry.lng };
+      const marker = new google.maps.Marker({
+        position,
+        map,
+        title: entry.name,
+      });
+
+      marker.addListener("click", () => {
+        infoWindow.setContent(
+          `<div style="font-family: 'Space Grotesk', sans-serif; padding: 2px;">
+             <strong>${entry.name}</strong><br>
+             ${entry.city} &middot; $${entry.price}/hr<br>
+             <a href="${entry.detail_url}">View profile</a>
+           </div>`
+        );
+        infoWindow.open(map, marker);
+      });
+
+      bounds.extend(position);
+    });
+
+    map.fitBounds(bounds);
+    if (markers.length === 1) {
+      google.maps.event.addListenerOnce(map, "bounds_changed", () => map.setZoom(12));
+    }
+  }
+  window.initSittrMap = initSittrMap;
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initSittrMap" async defer></script>
+{% endif %}
 {% endblock %}

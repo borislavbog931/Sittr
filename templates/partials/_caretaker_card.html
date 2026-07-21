@@ -1,0 +1,123 @@
+{% if extra_class == "caretaker-card--row" %}
+<article class="list-card caretaker-card--row">
+  <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
+    {% if caretaker.profile_pic_url %}
+      <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" loading="lazy" class="avatar caretaker-card--row-avatar">
+    {% else %}
+      <div class="avatar-fallback caretaker-card--row-avatar">
+        <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
+      </div>
+    {% endif %}
+  </a>
+
+  <div class="caretaker-card--row-body">
+    <div class="caretaker-card--row-line">
+      <span class="caretaker-card--row-name">
+        <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">{{ caretaker.name }}</a>
+        {% if caretaker.verified %}
+          <span class="caretaker-verified-badge caretaker-verified-badge--sm" title="Verified Sittr">
+            <svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
+          </span>
+        {% endif %}
+      </span>
+      <span class="caretaker-card--row-price"><strong>${{ caretaker.price_per_hour }}</strong>/hr</span>
+    </div>
+
+    {% with first_service=caretaker.services.all|first %}
+      {% if first_service %}
+        <p class="muted caretaker-card--row-service">{{ first_service.name }}</p>
+      {% endif %}
+    {% endwith %}
+
+    <div class="caretaker-card--row-line">
+      <span class="muted caretaker-card--row-rating">
+        {% with avg=caretaker.average_rating %}
+          {% if avg %}
+            <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10 ({{ caretaker.reviews.count }})
+          {% else %}
+            <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
+          {% endif %}
+        {% endwith %}
+      </span>
+      <span class="muted caretaker-card--row-city"><svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}</span>
+    </div>
+  </div>
+</article>
+{% else %}
+<article class="list-card stack {{ extra_class }}">
+  <div class="caretaker-card-top">
+    <a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">
+      {% if caretaker.profile_pic_url %}
+        <img src="{{ caretaker.profile_pic_url }}" alt="{{ caretaker.name }}" loading="lazy" class="avatar">
+      {% else %}
+        <div class="avatar-fallback">
+          <svg class="icon" aria-hidden="true"><use href="#icon-person"></use></svg>
+        </div>
+      {% endif %}
+    </a>
+
+    {% if caretaker.verified %}
+      <span class="caretaker-verified-badge" title="Verified Sittr">
+        <svg class="icon" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="page-header" style="margin: 0;">
+    <div>
+      <h2 class="card-title"><a href="{% url 'caretaker_detail' caretaker.slug %}" class="no-underline">{{ caretaker.name }}</a></h2>
+      {% if caretaker.user %}
+        <p class="muted" style="margin: 2px 0 0; font-size: 13px;">@{{ caretaker.user.username }}</p>
+      {% elif caretaker.slug %}
+        <p class="muted" style="margin: 2px 0 0; font-size: 13px;">@{{ caretaker.slug }}</p>
+      {% endif %}
+    </div>
+    <div style="text-align: right;">
+      <strong>${{ caretaker.price_per_hour }}</strong>
+      <div class="inline-note">per hour</div>
+    </div>
+  </div>
+
+  <div class="chip-row" style="justify-content: flex-start;">
+    {# services don't have an icon/color field yet, so cycle a fixed set of 4 icon+color pairs #}
+    {% for service in caretaker.services.all|slice:":4" %}
+      {% if forloop.counter0 == 0 %}
+        <span class="service-icon service-icon--orange" title="{{ service.name }}"><svg class="icon" aria-hidden="true"><use href="#icon-lightbulb"></use></svg></span>
+      {% elif forloop.counter0 == 1 %}
+        <span class="service-icon service-icon--teal" title="{{ service.name }}"><svg class="icon" aria-hidden="true"><use href="#icon-house-door"></use></svg></span>
+      {% elif forloop.counter0 == 2 %}
+        <span class="service-icon service-icon--green" title="{{ service.name }}"><svg class="icon" aria-hidden="true"><use href="#icon-wind"></use></svg></span>
+      {% else %}
+        <span class="service-icon service-icon--blue" title="{{ service.name }}"><svg class="icon" aria-hidden="true"><use href="#icon-calendar4-week"></use></svg></span>
+      {% endif %}
+    {% empty %}
+      <span class="muted" style="font-size: 13px;">No services listed</span>
+    {% endfor %}
+  </div>
+
+  <p class="muted">{% if caretaker.bio %}{{ caretaker.bio|truncatechars:110 }}{% else %}No bio provided yet.{% endif %}</p>
+
+  <hr class="divider">
+
+  <div class="page-header" style="margin: 0;">
+    <span class="meta-line muted"><svg class="icon" aria-hidden="true"><use href="#icon-geo-alt"></use></svg> {{ caretaker.city }}</span>
+    {# TODO: real distance needs the visitor's location + caretaker coordinates, neither of which exist on the model yet — placeholder only #}
+    <span class="muted" style="font-size: 13px;">&mdash;</span>
+  </div>
+
+  <div class="page-header" style="margin: 0;">
+    <div class="muted">
+      {% with avg=caretaker.average_rating %}
+        {% if avg %}
+          <svg class="icon" aria-hidden="true"><use href="#icon-star-fill"></use></svg> {{ avg|floatformat:1 }}/10
+        {% else %}
+          <svg class="icon" aria-hidden="true"><use href="#icon-star"></use></svg> No reviews
+        {% endif %}
+      {% endwith %}
+    </div>
+    <a class="btn btn-primary" href="{% url 'caretaker_detail' caretaker.slug %}">
+      View <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+    </a>
+  </div>
+</article>
+{% endif %}

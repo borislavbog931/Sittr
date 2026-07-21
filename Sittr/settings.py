@@ -41,6 +41,8 @@ CSRF_TRUSTED_ORIGINS = [
     origin for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if origin
 ]
 
+GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY', '')
+
 PROJECT_APPS = ['common', 'accounts', 'caretakers', 'requests', 'reviews', 'services']
 # Application definition
 

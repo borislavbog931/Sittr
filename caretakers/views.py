@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.urls import reverse
 
 from caretakers.forms import CaretakerForm
 from caretakers.models import Caretaker
@@ -26,7 +28,7 @@ def caretaker_detail(request, slug):
 def caretaker_list(request):
     caretakers = (
         Caretaker.objects.filter(active=True)
-        .prefetch_related("services", "pet_types")
+        .prefetch_related("services", "pet_types", "reviews")
     )
 
     city = (request.GET.get("city") or "").strip()
@@ -51,6 +53,20 @@ def caretaker_list(request):
 
     caretakers = caretakers.distinct().order_by("name", "city")
 
+    markers = [
+        {
+            "id": caretaker.id,
+            "name": caretaker.name,
+            "city": caretaker.city,
+            "lat": caretaker.latitude,
+            "lng": caretaker.longitude,
+            "price": str(caretaker.price_per_hour),
+            "detail_url": reverse("caretaker_detail", args=[caretaker.slug]),
+        }
+        for caretaker in caretakers
+        if caretaker.latitude is not None and caretaker.longitude is not None
+    ]
+
     context = {
         "caretakers": caretakers,
         "services": Service.objects.filter(active=True).order_by("name"),
@@ -61,6 +77,8 @@ def caretaker_list(request):
             "pet_type": pet_type_id,
             "max_price": max_price,
         },
+        "markers": markers,
+        "google_maps_api_key": settings.GOOGLE_MAPS_API_KEY,
     }
     return render(request, "caretakers/list.html", context)
 

@@ -30,6 +30,54 @@ TRANSLATIONS = {
         "cta_find_sittr": "Find a Sittr",
         "cta_find_pet": "Find a pet to take care of",
 
+        # home "become a Sittr" promo
+        "become_sittr_eyebrow": "Turn spare time into income",
+        "become_sittr_title": "Become a Sittr",
+        "become_sittr_subtext": "See how much you can earn with us.",
+        "become_sittr_cta": "Start Earning",
+
+        # how it works for Sittrs (landing page)
+        "sittrs_hero_eyebrow": "For Sittrs",
+        "sittrs_hero_title": "Post your profile once. Get booked for months.",
+        "sittrs_hero_lede": "Set your own hours and hourly rate, then let pet parents come to you. No cold outreach, no monthly fees — just a listing that keeps working for you.",
+        "sittrs_hero_cta": "Create your profile now",
+
+        "sittrs_why_eyebrow": "Why join Sittr",
+        "sittrs_why_title": "Built around your schedule, not ours",
+
+        "sittrs_why_flexible_title": "Flexible Schedule",
+        "sittrs_why_flexible_body": "Accept the requests that fit your life. There are no shifts, no quotas, and no minimum hours.",
+        "sittrs_why_rate_title": "Set Your Own Rate",
+        "sittrs_why_rate_body": "List one clear hourly rate on your profile. No commissions and no hidden cuts from us.",
+        "sittrs_why_requests_title": "Requests, Not Cold Outreach",
+        "sittrs_why_requests_body": "Pet parents find your listing and reach out to you directly, ready to book.",
+        "sittrs_why_reputation_title": "Build Real Reputation",
+        "sittrs_why_reputation_body": "Every completed stay is a chance to earn a review that helps you win the next one.",
+
+        "sittrs_how_eyebrow": "How it works",
+        "sittrs_how_title": "From sign-up to your first booking",
+
+        "sittrs_how_profile_title": "1. Create Your Profile",
+        "sittrs_how_profile_body": "Add your bio, photo, city, and the pet types you're happy to care for.",
+        "sittrs_how_services_title": "2. Set Your Services & Rate",
+        "sittrs_how_services_body": "Choose which services you offer and set the hourly rate that works for you.",
+        "sittrs_how_discovered_title": "3. Get Discovered",
+        "sittrs_how_discovered_body": "Your listing shows up when local pet parents search for a Sittr like you.",
+        "sittrs_how_earning_title": "4. Start Earning",
+        "sittrs_how_earning_body": "Accept requests, care for pets you'll love, and get paid for it.",
+
+        "sittrs_earnings_eyebrow": "See the potential",
+        "sittrs_earnings_title": "What could you earn?",
+        "sittrs_earnings_subtitle": "Try the numbers yourself — starts from the average Sittr rate on the platform.",
+        "sittrs_calc_rate_label": "Your hourly rate",
+        "sittrs_calc_hours_label": "Hours per week",
+        "sittrs_calc_result_label": "Estimated weekly earnings",
+        "sittrs_calc_note": "Estimate only. Your actual earnings depend on your rate, services, and availability.",
+
+        "sittrs_final_eyebrow": "Ready when you are",
+        "sittrs_final_title": "Ready to start earning?",
+        "sittrs_final_subtitle": "Create your profile in minutes and start receiving requests from pet parents near you.",
+
         # home "freedom to travel" section
         "travel_eyebrow": "Peace of mind",
         "travel_title": "The ability to travel stress free",
@@ -148,6 +196,54 @@ TRANSLATIONS = {
         "home_chip_free": "Безплатна регистрация",
         "cta_find_sittr": "Намери Sittr",
         "cta_find_pet": "Намери любимец за гледане",
+
+        # home "become a Sittr" promo
+        "become_sittr_eyebrow": "Превърнете свободното време в доход",
+        "become_sittr_title": "Стани Sittr",
+        "become_sittr_subtext": "Разберете колко можете да печелите с нас.",
+        "become_sittr_cta": "Започни да печелиш",
+
+        # how it works for Sittrs (landing page)
+        "sittrs_hero_eyebrow": "За Sittr-и",
+        "sittrs_hero_title": "Публикувайте профила си веднъж. Получавайте резервации с месеци.",
+        "sittrs_hero_lede": "Задайте свои часове и часова ставка, а собствениците сами ще ви намират. Без студени обаждания, без месечни такси — само профил, който работи за вас.",
+        "sittrs_hero_cta": "Създай своя профил сега",
+
+        "sittrs_why_eyebrow": "Защо да се присъедините към Sittr",
+        "sittrs_why_title": "Изграден около вашия график, не нашия",
+
+        "sittrs_why_flexible_title": "Гъвкав график",
+        "sittrs_why_flexible_body": "Приемайте заявките, които пасват на живота ви. Няма смени, няма квоти и няма минимален брой часове.",
+        "sittrs_why_rate_title": "Задайте своя ставка",
+        "sittrs_why_rate_body": "Посочете една ясна часова ставка в профила си. Без комисиони и без скрити удръжки от наша страна.",
+        "sittrs_why_requests_title": "Заявки, не студени обаждания",
+        "sittrs_why_requests_body": "Собствениците намират профила ви и се свързват директно с вас, готови да резервират.",
+        "sittrs_why_reputation_title": "Изградете истинска репутация",
+        "sittrs_why_reputation_body": "Всеки завършен престой е шанс да спечелите отзив, който ви помага да спечелите следващия.",
+
+        "sittrs_how_eyebrow": "Как работи",
+        "sittrs_how_title": "От регистрация до първата резервация",
+
+        "sittrs_how_profile_title": "1. Създайте своя профил",
+        "sittrs_how_profile_body": "Добавете биография, снимка, град и видовете любимци, за които се грижите с удоволствие.",
+        "sittrs_how_services_title": "2. Задайте услуги и ставка",
+        "sittrs_how_services_body": "Изберете кои услуги предлагате и задайте часовата ставка, която ви устройва.",
+        "sittrs_how_discovered_title": "3. Бъдете открити",
+        "sittrs_how_discovered_body": "Профилът ви се показва, когато местни собственици търсят Sittr като вас.",
+        "sittrs_how_earning_title": "4. Започнете да печелите",
+        "sittrs_how_earning_body": "Приемайте заявки, грижете се за любимци, които ще обикнете, и получавайте заплащане за това.",
+
+        "sittrs_earnings_eyebrow": "Вижте потенциала",
+        "sittrs_earnings_title": "Колко бихте могли да печелите?",
+        "sittrs_earnings_subtitle": "Опитайте сами с числата — тръгва от средната ставка на Sittr-ите в платформата.",
+        "sittrs_calc_rate_label": "Вашата часова ставка",
+        "sittrs_calc_hours_label": "Часове седмично",
+        "sittrs_calc_result_label": "Прогнозен седмичен доход",
+        "sittrs_calc_note": "Само прогнозна стойност. Реалните ви приходи зависят от вашата ставка, услуги и наличност.",
+
+        "sittrs_final_eyebrow": "Готови сме, когато вие сте",
+        "sittrs_final_title": "Готови ли сте да започнете да печелите?",
+        "sittrs_final_subtitle": "Създайте профила си за минути и започнете да получавате заявки от собственици близо до вас.",
 
         # home "freedom to travel" section
         "travel_eyebrow": "Спокойствие",

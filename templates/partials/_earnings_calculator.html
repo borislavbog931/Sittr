@@ -1,0 +1,42 @@
+<div class="pricing-calculator" data-earnings-calculator>
+  <div class="pricing-calculator-fields">
+    <div class="field">
+      <label class="field-label">{{ t.sittrs_calc_rate_label }}</label>
+      <input type="number" class="form-input" data-earnings-rate min="0" step="0.5" value="{{ pricing_data_json.overall|default:18|floatformat:2 }}">
+    </div>
+
+    <div class="field">
+      <label class="field-label">{{ t.sittrs_calc_hours_label }}</label>
+      <input type="number" class="form-input" data-earnings-hours min="1" step="1" value="15">
+    </div>
+  </div>
+
+  <div class="pricing-calculator-result">
+    <span class="pricing-calculator-result-label">{{ t.sittrs_calc_result_label }}</span>
+    <span class="pricing-calculator-result-value" data-earnings-result>&mdash;</span>
+  </div>
+
+  <p class="muted pricing-calculator-note">{{ t.sittrs_calc_note }}</p>
+</div>
+
+<script>
+  (function () {
+    function initCalculator(calc) {
+      const rateInput = calc.querySelector("[data-earnings-rate]");
+      const hoursInput = calc.querySelector("[data-earnings-hours]");
+      const resultEl = calc.querySelector("[data-earnings-result]");
+
+      function update() {
+        const rate = Math.max(0, parseFloat(rateInput.value) || 0);
+        const hours = Math.max(1, parseInt(hoursInput.value, 10) || 1);
+        resultEl.textContent = "$" + (rate * hours).toFixed(2);
+      }
+
+      rateInput.addEventListener("input", update);
+      hoursInput.addEventListener("input", update);
+      update();
+    }
+
+    document.querySelectorAll("[data-earnings-calculator]").forEach(initCalculator);
+  })();
+</script>

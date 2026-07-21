@@ -145,7 +145,9 @@ def calculator_page(request):
     })
 
 def how_it_works_sittrs_page(request):
-    return render(request, "common/how_it_works_sittrs.html")
+    return render(request, "common/how_it_works_sittrs.html", {
+        "pricing_data_json": get_pricing_snapshot(),
+    })
 
 def how_it_works_owners_page(request):
     return render(request, "common/how_it_works_owners.html")
